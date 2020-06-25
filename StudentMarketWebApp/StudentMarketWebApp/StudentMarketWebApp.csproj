@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{28076755-36B2-4567-B764-5F176471B531}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StudentMarketWebApp</RootNamespace>
+    <AssemblyName>StudentMarketWebApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="DashboardFile\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="DashboardFile\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="DashboardFile\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="DashboardFile\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="DashboardFile\Login\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.eot" />
+    <Content Include="DashboardFile\Login\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.ttf" />
+    <Content Include="DashboardFile\Login\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff" />
+    <Content Include="DashboardFile\Login\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.woff2" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-Black.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-BlackItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-Bold.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-BoldItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-ExtraBold.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-ExtraLight.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-ExtraLightItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-Italic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-Light.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-LightItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-Medium.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-MediumItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-Regular.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-SemiBold.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-Thin.ttf" />
+    <Content Include="DashboardFile\Login\fonts\poppins\Poppins-ThinItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\ubuntu\Ubuntu-Bold.ttf" />
+    <Content Include="DashboardFile\Login\fonts\ubuntu\Ubuntu-BoldItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\ubuntu\Ubuntu-Italic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\ubuntu\Ubuntu-Light.ttf" />
+    <Content Include="DashboardFile\Login\fonts\ubuntu\Ubuntu-LightItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\ubuntu\Ubuntu-Medium.ttf" />
+    <Content Include="DashboardFile\Login\fonts\ubuntu\Ubuntu-MediumItalic.ttf" />
+    <Content Include="DashboardFile\Login\fonts\ubuntu\Ubuntu-Regular.ttf" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="DashboardFile\Signup\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
+    <Content Include="DashboardFile\Signup\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
+    <Content Include="DashboardFile\Signup\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
+    <Content Include="DashboardFile\Signup\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff2" />
+    <Content Include="DashboardFile\Signup\vendor\font-awesome-4.7\fonts\FontAwesome.otf" />
+    <Content Include="DashboardFile\Signup\vendor\mdi-font\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="DashboardFile\Signup\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="DashboardFile\Signup\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="DashboardFile\Signup\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DashboardFile\AutoComplete-jquery-ui.css" />
+    <Content Include="DashboardFile\Custom\FontAwesome.js" />
+    <Content Include="DashboardFile\Custom\sweet-alert.css" />
+    <Content Include="DashboardFile\Custom\sweetalert2%409.js" />
+    <Content Include="DashboardFile\Custom\sweetalert2.all.min.js" />
+    <Content Include="DashboardFile\Date-jquery-1.12.4.js" />
+    <Content Include="DashboardFile\Date-jquery-ui.js" />
+    <Content Include="DashboardFile\images\photo_dummy.png" />
+    <Content Include="DashboardFile\Login\css\main.css" />
+    <Content Include="DashboardFile\Login\css\util.css" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="DashboardFile\Login\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="DashboardFile\Login\fonts\iconic\css\material-design-iconic-font.css" />
+    <Content Include="DashboardFile\Login\fonts\iconic\css\material-design-iconic-font.min.css" />
+    <Content Include="DashboardFile\Login\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="DashboardFile\Login\fonts\Linearicons-Free-v1.0.0\icon-font.min.css" />
+    <Content Include="DashboardFile\Login\fonts\Linearicons-Free-v1.0.0\WebFont\Linearicons-Free.svg" />
+    <Content Include="DashboardFile\Login\fonts\ubuntu\UFL.txt" />
+    <Content Include="DashboardFile\Login\images\bg-01.jpg" />
+    <Content Include="DashboardFile\Login\images\icons\favicon.ico" />
+    <Content Include="DashboardFile\Login\js\main.js" />
+    <Content Include="DashboardFile\Login\vendor\animate\animate.css" />
+    <Content Include="DashboardFile\Login\vendor\animsition\css\animsition.css" />
+    <Content Include="DashboardFile\Login\vendor\animsition\css\animsition.min.css" />
+    <Content Include="DashboardFile\Login\vendor\animsition\js\animsition.js" />
+    <Content Include="DashboardFile\Login\vendor\animsition\js\animsition.min.js" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\js\popper.js" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="DashboardFile\Login\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="DashboardFile\Login\vendor\countdowntime\countdowntime.js" />
+    <Content Include="DashboardFile\Login\vendor\css-hamburgers\hamburgers.css" />
+    <Content Include="DashboardFile\Login\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="DashboardFile\Login\vendor\daterangepicker\daterangepicker.css" />
+    <Content Include="DashboardFile\Login\vendor\daterangepicker\daterangepicker.js" />
+    <Content Include="DashboardFile\Login\vendor\daterangepicker\moment.js" />
+    <Content Include="DashboardFile\Login\vendor\daterangepicker\moment.min.js" />
+    <Content Include="DashboardFile\Login\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="DashboardFile\Login\vendor\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="DashboardFile\Login\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="DashboardFile\Login\vendor\select2\select2.css" />
+    <Content Include="DashboardFile\Login\vendor\select2\select2.js" />
+    <Content Include="DashboardFile\Login\vendor\select2\select2.min.css" />
+    <Content Include="DashboardFile\Login\vendor\select2\select2.min.js" />
+    <Content Include="DashboardFile\Signup\css\main.css" />
+    <Content Include="DashboardFile\Signup\js\global.js" />
+    <Content Include="DashboardFile\Signup\vendor\datepicker\daterangepicker.css" />
+    <Content Include="DashboardFile\Signup\vendor\datepicker\daterangepicker.js" />
+    <Content Include="DashboardFile\Signup\vendor\datepicker\moment.min.js" />
+    <Content Include="DashboardFile\Signup\vendor\font-awesome-4.7\css\font-awesome.css" />
+    <Content Include="DashboardFile\Signup\vendor\font-awesome-4.7\css\font-awesome.min.css" />
+    <Content Include="DashboardFile\Signup\vendor\font-awesome-4.7\fonts\fontawesome-webfont.svg" />
+    <Content Include="DashboardFile\Signup\vendor\font-awesome-4.7\HELP-US-OUT.txt" />
+    <Content Include="DashboardFile\Signup\vendor\jquery\jquery.js" />
+    <Content Include="DashboardFile\Signup\vendor\jquery\jquery.min.js" />
+    <Content Include="DashboardFile\Signup\vendor\mdi-font\css\material-design-iconic-font.css" />
+    <Content Include="DashboardFile\Signup\vendor\mdi-font\css\material-design-iconic-font.min.css" />
+    <Content Include="DashboardFile\Signup\vendor\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="DashboardFile\Signup\vendor\select2\select2.min.css" />
+    <Content Include="DashboardFile\Signup\vendor\select2\select2.min.js" />
+    <Content Include="DashboardFile\style.css" />
+    <Content Include="scripts\ai.0.22.9-build00167.js" />
+    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web\login.aspx" />
+    <Content Include="Web\sign-up.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\Gateway\UserListGateway.cs" />
+    <Compile Include="DAL\Model\UserListModel.cs" />
+    <Compile Include="Master_Class\Alert.cs" />
+    <Compile Include="Master_Class\BaseClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\sign-up.aspx.cs">
+      <DependentUpon>sign-up.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\sign-up.aspx.designer.cs">
+      <DependentUpon>sign-up.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Admin\" />
+    <Folder Include="Buyer\" />
+    <Folder Include="Photos\" />
+    <Folder Include="Seller\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63290</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63290/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
