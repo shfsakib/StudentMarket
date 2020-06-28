@@ -4,9 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BitSoftware;
-using StudentMarketWebApp.DAL.Gateway;
-using StudentMarketWebApp.DAL.Model;
+using BitsSoftware;
 
 namespace StudentMarketWebApp.Web
 {
@@ -31,7 +29,18 @@ namespace StudentMarketWebApp.Web
                 HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
                 if (cookies != null)
                 {
-                    Response.Redirect("http://www.microsoft.com/gohere/look.htm");
+                    if (cookies["Type"].ToString() == "Buyer")
+                    {
+                        Response.Redirect("/Buyer/profile.aspx");
+                    }
+                    else if (cookies["Type"].ToString() == "Seller")
+                    {
+                        Response.Redirect("/Seller/profile.aspx");
+                    }
+                    else if (cookies["Type"].ToString() == "Admin" || cookies["Type"].ToString() == "Super Admin")
+                    {
+                        Response.Redirect("/Admin/add-category.aspx");
+                    }
                 }
                 else
                 {
@@ -51,14 +60,28 @@ namespace StudentMarketWebApp.Web
                 string password =
                     func.IsExist(
                         $"SELECT Password FROM UserList WHERE Email='{txtEmail.Value}' AND Password='{txtPassword.Value}' AND Status='A' COLLATE Latin1_General_CS_AI");
-                if (password==txtPassword.Value)
+                if (password == txtPassword.Value)
                 {
-                    cookie["Name"]= func.IsExist($"SELECT Name FROM UserList WHERE Email='{txtEmail.Value}'");
-                    cookie["Type"]= func.IsExist($"SELECT Type FROM UserList WHERE Email='{txtEmail.Value}'");
-                    cookie["UserId"]= func.IsExist($"SELECT UserId FROM UserList WHERE Email='{txtEmail.Value}'");
+                    cookie["Name"] = func.IsExist($"SELECT Name FROM UserList WHERE Email='{txtEmail.Value}'");
+                    cookie["Type"] = func.IsExist($"SELECT Type FROM UserList WHERE Email='{txtEmail.Value}'");
+                    cookie["UserId"] = func.IsExist($"SELECT UserId FROM UserList WHERE Email='{txtEmail.Value}'");
+                    cookie["Picture"] = func.IsExist($"SELECT Picture FROM UserList WHERE Email='{txtEmail.Value}'");
+                    cookie["Mobile"] = func.IsExist($"SELECT MobileNo FROM UserList WHERE Email='{txtEmail.Value}'");
+                    cookie["Email"] = func.IsExist($"SELECT Email FROM UserList WHERE Email='{txtEmail.Value}'");
                     cookie.Expires = DateTime.Now.AddDays(30);
                     Response.Cookies.Add(cookie);
-                    Response.Redirect("http://www.microsoft.com/gohere/look.htm");
+                    if (cookie["Type"].ToString() == "Buyer")
+                    {
+                        Response.Redirect("/Buyer/view-ads.aspx");
+                    }
+                    else if (cookie["Type"].ToString() == "Seller")
+                    {
+                        Response.Redirect("/Seller/view-ads.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("/Admin/add-category.aspx");
+                    }
 
                 }
                 else

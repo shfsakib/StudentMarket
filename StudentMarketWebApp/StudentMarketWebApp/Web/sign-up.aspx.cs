@@ -4,9 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BitSoftware;
-using StudentMarketWebApp.DAL.Gateway;
-using StudentMarketWebApp.DAL.Model;
+using BitsSoftware;
 
 namespace StudentMarketWebApp.Web
 {
@@ -80,6 +78,12 @@ namespace StudentMarketWebApp.Web
                 func.Alert(Page, "Mobile no already exist", "e", true);
             else if (txtPassword.Text == "")
                 func.Alert(Page, "Password is required", "e", true);
+            else if (txtBCert.Value == "")
+                func.Alert(Page, "Birth certicate no is required", "e", true);
+            else if (txtGNid.Value == "")
+                func.Alert(Page, "Guardian Nid no is required", "e", true);
+            else if (txtAbout.Value == "")
+                func.Alert(Page, "About is required", "e", true);
             else
             {
                 userListModel.UserId = Convert.ToInt32(func.GenerateId("SELECT MAX(UserId) FROM UserList"));
@@ -92,8 +96,12 @@ namespace StudentMarketWebApp.Web
                 userListModel.District = Convert.ToInt32(ddlDistrict.SelectedValue);
                 userListModel.Password = txtPassword.Text;
                 userListModel.Type = ddlType.Text;
-                userListModel.Status = "A";
+                userListModel.Status = "W";
+                userListModel.NidNo = txtNid.Value;
+                userListModel.BCertNo = txtBCert.Value;
+                userListModel.GNidNo = txtGNid.Value;
                 userListModel.Address = txtAddress.Text;
+                userListModel.About = txtAbout.Value;
                 if (filePicture.HasFile)
                 {
                     string imagePath = Server.MapPath("/Photos/") + userListModel.UserId + ".png";
@@ -108,7 +116,7 @@ namespace StudentMarketWebApp.Web
                 bool result = userListGateway.SaveUser(userListModel);
                 if (result)
                 {
-                    func.Alert(Page, "Signed up successfully", "s", false);
+                    func.Alert(Page, "Signed up successfully, You will be contacted soon.", "s", false);
                     Refresh();
                 }
                 else

@@ -10,7 +10,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-namespace BitSoftware
+namespace BitsSoftware
 {
     public class BaseClass
     {
@@ -209,6 +209,26 @@ namespace BitSoftware
                 if (con.State != ConnectionState.Closed) con.Close();
             }
         }
+        public void LoadRepeater(Repeater ob, string query)
+        {
+            DataTable table = new DataTable();
+            SqlConnection con = new SqlConnection(Connection);
+            try
+            {
+                ob.Visible = true;
+                if (con.State != ConnectionState.Open) con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(table);
+                ob.DataSource = table;
+                ob.DataBind();
+                if (con.State != ConnectionState.Closed) con.Close();
+            }
+            catch (Exception ex)
+            {
+                if (con.State != ConnectionState.Closed) con.Close();
+            }
+        }
         public bool MobileNoValidation(string mobileNo)
         {
             try
@@ -292,7 +312,6 @@ namespace BitSoftware
 
         public void CheckCookies()
         {
-            HttpCookie cookie = new HttpCookie("Stu");
             HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
             if (cookies == null)
             {
@@ -300,11 +319,46 @@ namespace BitSoftware
             }
         }
 
+        public void Logout()
+        {
+            HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
+            cookies.Expires = DateTime.Now.AddDays(-1);
+            HttpContext.Current.Response.Cookies.Add(cookies);
+            HttpContext.Current.Response.Redirect("/Web/login.aspx");
+        }
         public string UserId()
         {
             HttpCookie cookie = new HttpCookie("Stu");
             HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
             return cookies["UserId"];
+        }
+        public string Name()
+        {
+            HttpCookie cookie = new HttpCookie("Stu");
+            HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
+            return cookies["Name"];
+        }
+        public string Mobile()
+        {
+            HttpCookie cookie = new HttpCookie("Stu");
+            HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
+            return cookies["Mobile"];
+        }
+        public string Email()
+        {
+            HttpCookie cookie = new HttpCookie("Stu");
+            HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
+            return cookies["Email"];
+        }
+
+        public void Type(Page page, string type)
+        {
+            HttpCookie cookie = new HttpCookie("Stu");
+            HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
+            if (cookies["Type"] != type)
+            {
+                HttpContext.Current.Response.Redirect("/Web/login.aspx");
+            }
         }
         public string SchoolId()
         {

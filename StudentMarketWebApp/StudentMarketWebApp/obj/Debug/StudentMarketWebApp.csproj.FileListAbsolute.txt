@@ -28,6 +28,6 @@ D:\Projects\Git\StudentMarket\StudentMarketWebApp\StudentMarketWebApp\bin\Micros
 D:\Projects\Git\StudentMarket\StudentMarketWebApp\StudentMarketWebApp\bin\Microsoft.AI.WindowsServer.xml
 D:\Projects\Git\StudentMarket\StudentMarketWebApp\StudentMarketWebApp\bin\Microsoft.ApplicationInsights.xml
 D:\Projects\Git\StudentMarket\StudentMarketWebApp\StudentMarketWebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Projects\Git\StudentMarket\StudentMarketWebApp\StudentMarketWebApp\obj\Debug\StudentMarketWebApp.csprojResolveAssemblyReference.cache
 D:\Projects\Git\StudentMarket\StudentMarketWebApp\StudentMarketWebApp\obj\Debug\StudentMarketWebApp.dll
 D:\Projects\Git\StudentMarket\StudentMarketWebApp\StudentMarketWebApp\obj\Debug\StudentMarketWebApp.pdb
+D:\Projects\Git\StudentMarket\StudentMarketWebApp\StudentMarketWebApp\obj\Debug\StudentMarketWebApp.csprojResolveAssemblyReference.cache

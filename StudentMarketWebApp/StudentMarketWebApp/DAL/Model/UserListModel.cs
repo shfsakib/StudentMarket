@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace StudentMarketWebApp.DAL.Model
+namespace BitsSoftware
 {
     public class UserListModel
     {
@@ -36,9 +36,15 @@ namespace StudentMarketWebApp.DAL.Model
         public int Division { get; set; }
         public int District { get; set; }
         public string Address { get; set; }
+        public string GNidNo { get; set; }
+        public string BCertNo { get; set; }
+        public string NidNo { get; set; }
         public string Picture { get; set; }
         public string Type { get; set; }
         public string Status { get; set; }
+        public string About { get; set; }
+        public string DivisionName { get; set; }
+        public string DistrictName { get; set; }
         public string Password { get; set; }
         public string Intime { get; set; }
     }

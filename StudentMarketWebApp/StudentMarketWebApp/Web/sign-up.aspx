@@ -24,13 +24,12 @@
     <script src="../DashboardFile/Custom/sweetalert2@9.js"></script>
     <!-- Main CSS-->
     <link href="/DashboardFile/Signup/css/main.css" rel="stylesheet" media="all">
-
 </head>
 <body>
     <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
-                <div class="card-body">
+                <div class="card-body" style="background: darkgray">
                     <h2 class="title">Registration Form</h2>
                     <form runat="server">
                         <div class="input-group">
@@ -100,11 +99,11 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="row row-space">
-                             <div class="col-2">
+                        <div class="row row-space">
+                            <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">User Type</label>
-                                     <asp:DropDownList ID="ddlType" class="form-control1" runat="server">
+                                    <asp:DropDownList ID="ddlType" class="form-control1" runat="server">
                                         <asp:ListItem Value="Select">Select</asp:ListItem>
                                         <asp:ListItem Value="Buyer">Buyer</asp:ListItem>
                                         <asp:ListItem Value="Seller">Seller</asp:ListItem>
@@ -115,6 +114,34 @@
                                 <div class="input-group">
                                     <label class="label">Password</label>
                                     <asp:TextBox ID="txtPassword" runat="server" autocomplete="off" class="input--style-4" placeholder="Enter Password" MaxLength="20"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Nid No.</label>
+                                    <input class="input--style-4" id="txtNid" autocomplete="off" runat="server" type="text" placeholder="123456...." />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Birth Certificate No.</label>
+                                    <input class="input--style-4" id="txtBCert" autocomplete="off" runat="server" type="text" placeholder="123456...." />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Guardian Nid No.</label>
+                                    <input class="input--style-4" id="txtGNid" autocomplete="off" runat="server" type="text" placeholder="123456...." />
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">About</label>
+                                    <input class="input--style-4" id="txtAbout" autocomplete="off" runat="server" type="text" placeholder="write something about you" />
                                 </div>
                             </div>
                         </div>
@@ -134,7 +161,7 @@
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit" id="btnSignup" runat="server" OnServerClick="btnSignup_OnServerClick">Sign up</button>
+                            <button class="btn btn--radius-2 btn--blue" type="submit" id="btnSignup" runat="server" onserverclick="btnSignup_OnServerClick">Sign up</button>
                             <span>Back to <a href="/Web/login.aspx">Login</a></span>
                         </div>
                     </form>
