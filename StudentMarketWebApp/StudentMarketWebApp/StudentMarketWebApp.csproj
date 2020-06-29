@@ -100,6 +100,9 @@
     <Content Include="AutoComplete.asmx" />
     <Content Include="Buyer\ad-details.aspx" />
     <Content Include="Buyer\menu.html" />
+    <Content Include="Buyer\notification.aspx" />
+    <Content Include="Buyer\order-product.aspx" />
+    <Content Include="Buyer\pending-orders.aspx" />
     <Content Include="Buyer\profile.aspx" />
     <Content Include="Buyer\edit-profile.aspx" />
     <Content Include="Buyer\view-ads.aspx" />
@@ -2265,7 +2268,9 @@
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Seller\ad-details.aspx" />
+    <Content Include="Seller\edit-ad.aspx" />
     <Content Include="Seller\menu.html" />
+    <Content Include="Seller\notification.aspx" />
     <Content Include="Seller\post-ad.aspx" />
     <Content Include="Seller\profile.aspx" />
     <Content Include="Seller\Seller.asmx" />
@@ -2295,6 +2300,27 @@
     <Compile Include="Buyer\ad-details.aspx.designer.cs">
       <DependentUpon>ad-details.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Buyer\notification.aspx.cs">
+      <DependentUpon>notification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Buyer\notification.aspx.designer.cs">
+      <DependentUpon>notification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Buyer\order-product.aspx.cs">
+      <DependentUpon>order-product.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Buyer\order-product.aspx.designer.cs">
+      <DependentUpon>order-product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Buyer\pending-orders.aspx.cs">
+      <DependentUpon>pending-orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Buyer\pending-orders.aspx.designer.cs">
+      <DependentUpon>pending-orders.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Buyer\profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2323,9 +2349,11 @@
     <Compile Include="Buyer\view-profile.aspx.designer.cs">
       <DependentUpon>view-profile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Gateway\BuyGateway.cs" />
     <Compile Include="DAL\Gateway\CategoryGateway.cs" />
     <Compile Include="DAL\Gateway\PostAdGateway.cs" />
     <Compile Include="DAL\Gateway\UserListGateway.cs" />
+    <Compile Include="DAL\Model\BuyModel.cs" />
     <Compile Include="DAL\Model\CategoryModel.cs" />
     <Compile Include="DAL\Model\PostAdModel.cs" />
     <Compile Include="DAL\Model\UserListModel.cs" />
@@ -2338,6 +2366,20 @@
     </Compile>
     <Compile Include="Seller\ad-details.aspx.designer.cs">
       <DependentUpon>ad-details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seller\edit-ad.aspx.cs">
+      <DependentUpon>edit-ad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seller\edit-ad.aspx.designer.cs">
+      <DependentUpon>edit-ad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seller\notification.aspx.cs">
+      <DependentUpon>notification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seller\notification.aspx.designer.cs">
+      <DependentUpon>notification.aspx</DependentUpon>
     </Compile>
     <Compile Include="Seller\post-ad.aspx.cs">
       <DependentUpon>post-ad.aspx</DependentUpon>

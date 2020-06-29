@@ -39,9 +39,9 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
+                       <a class="nav-link" href="/Seller/notification.aspx">
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">15</span>
+                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -171,9 +171,9 @@
                                                                         <asp:Label runat="server" Text='<%#"৳"+Eval("Price")%>'></asp:Label>
                                                                     </div>
                                                                     <div class="col-md-2">
-                                                                        <asp:LinkButton ID="btnOrder" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-shopping-basket" style="color: white;"></i>&nbsp;&nbsp;Order</asp:LinkButton>
+                                                                        <asp:LinkButton ID="btnOrder" OnClick="btnOrder_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-shopping-basket" style="color: white;"></i>&nbsp;&nbsp;Order</asp:LinkButton>
                                                                         <br />
-                                                                        <asp:LinkButton ID="btnCart" runat="server" class="btn btn-primary" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-shopping-cart" style="color: white;"></i>&nbsp;&nbsp;Add to cart</asp:LinkButton>
+                                                                        <asp:LinkButton ID="btnCart" OnClick="btnCart_OnClick" runat="server" class="btn btn-primary" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-shopping-cart" style="color: white;"></i>&nbsp;&nbsp;Add to cart</asp:LinkButton>
                                                                     </div>
                                                                 </div>
                                                             </div>

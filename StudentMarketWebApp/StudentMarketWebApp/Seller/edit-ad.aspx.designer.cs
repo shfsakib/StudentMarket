@@ -10,7 +10,7 @@
 namespace StudentMarketWebApp.Seller {
     
     
-    public partial class post_ad {
+    public partial class edit_ad {
         
         /// <summary>
         /// countN control.
@@ -29,6 +29,15 @@ namespace StudentMarketWebApp.Seller {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor logOut;
+        
+        /// <summary>
+        /// adGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView adGridView;
         
         /// <summary>
         /// ddlCategory control.
@@ -67,30 +76,12 @@ namespace StudentMarketWebApp.Seller {
         protected global::System.Web.UI.WebControls.TextBox txtPrice;
         
         /// <summary>
-        /// files control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload files;
-        
-        /// <summary>
-        /// lblfileSize control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblfileSize;
-        
-        /// <summary>
-        /// btnPost control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPost;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
     }
 }

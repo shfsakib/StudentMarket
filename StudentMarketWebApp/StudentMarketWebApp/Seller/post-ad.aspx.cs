@@ -31,6 +31,7 @@ namespace StudentMarketWebApp.Seller
             {
                 func.CheckCookies();
                 func.Type(this, "Seller");
+                countN.InnerText = func.SellerNotification(Convert.ToInt32(func.UserId())).ToString();
                 func.BindDropDown(ddlCategory, "Select Category", "SELECT CategoryName Name,CategoryId ID FROM Category ORDER BY CategoryName ASC");
             }
         }

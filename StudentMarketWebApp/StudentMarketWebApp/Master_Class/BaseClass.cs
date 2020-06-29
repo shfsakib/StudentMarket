@@ -70,9 +70,9 @@ namespace BitsSoftware
                     con.Close();
             }
         }
-        public string Execute(string str)
+        public bool Execute(string str)
         {
-            string s = "false";
+            bool result = false;
             SqlConnection Conn = new SqlConnection(Connection);
             try
             {
@@ -81,13 +81,13 @@ namespace BitsSoftware
                 SqlCommand cmd = new SqlCommand(str, Conn);
                 int count = cmd.ExecuteNonQuery();
                 if (count > 0)
-                    s = "true";
+                    result = true;
                 else
-                    s = "null";
+                    result = false;
                 if (Conn.State != ConnectionState.Closed) Conn.Close();
             }
             catch { if (Conn.State != ConnectionState.Closed) Conn.Close(); }
-            return s;
+            return result;
         }
         public string IsExist(string str)
         {
@@ -209,7 +209,7 @@ namespace BitsSoftware
                 if (con.State != ConnectionState.Closed) con.Close();
             }
         }
-        public void LoadRepeater(Repeater ob, string query)
+        public void LoadDataList(DataList ob, string query)
         {
             DataTable table = new DataTable();
             SqlConnection con = new SqlConnection(Connection);
@@ -402,6 +402,27 @@ namespace BitsSoftware
                 return true;
             else
                 return false;
+        }
+
+        public int SellerNotification(int sellerId)
+        {
+            int result = 0;
+            try
+            {
+                if (con.State != ConnectionState.Open) con.Open();
+                string query = @"SELECT COUNT(SellerId) FROM Buy WHERE SellerId='"+sellerId+"' AND SellerNoti IS NULL";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader DR = cmd.ExecuteReader();
+                while (DR.Read())
+                    result = Convert.ToInt32(DR[0]);
+                DR.Close();
+                if (con.State != ConnectionState.Closed) con.Close();
+            }
+            catch (Exception ex)
+            {
+                if (con.State != ConnectionState.Closed) con.Close();
+            }
+            return result;
         }
     }
 }

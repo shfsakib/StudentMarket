@@ -39,9 +39,9 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
+                        <a class="nav-link"  href="/Buyer/notification.aspx">
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">15</span>
+                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -112,7 +112,7 @@
                 <!-- Main content -->
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="col-md-12 card card-primary card-outline" >
+                        <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
                                 <h3>Search Profile</h3>
                             </div>
@@ -140,7 +140,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-2">
                                                                         <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("UserId") %>' />
-                                                                        
+
                                                                         <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
                                                                     </div>
                                                                     <div class="col-md-8">

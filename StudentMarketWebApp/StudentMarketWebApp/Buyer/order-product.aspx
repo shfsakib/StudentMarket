@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ad-details.aspx.cs" Inherits="StudentMarketWebApp.Buyer.ad_details" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="order-product.aspx.cs" Inherits="StudentMarketWebApp.Buyer.order_product" %>
 
 <!DOCTYPE html>
 
@@ -88,9 +88,6 @@
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="accordionSidebar">
-                            <!-- Add icons to the links using the .nav-icon class
-                             with font-awesome or any other icon font library -->
-
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -115,7 +112,7 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Ad Details</h3>
+                                <h3>Order Product</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
@@ -123,44 +120,17 @@
                                     <div class="col-md-2">
                                     </div>
                                     <div class="col-md-8">
-                                        <asp:Image ID="largeImage" ImageUrl="/DashboardFile/images/image_dummy.png" runat="server" Width="100%" Height="300px" alt="big-image" />
+                                        <asp:Image ID="productImage" ImageUrl="/DashboardFile/images/image_dummy.png" runat="server" Width="200px" Height="200px" alt="big-image" />
                                     </div>
                                     <div class="col-md-2">
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <div id="sideP" class="sideP" style="overflow: auto; width: 100%;">
-                                            <asp:DataList ID="DataList1" RepeatDirection="Horizontal" Style="margin: auto" runat="server">
-                                                <ItemTemplate>
-                                                    <img id="repeaterImg" src='<%# Eval("Picture")%>' alt='<%# Eval("Picture")%>' style="cursor: pointer; border: 2px solid black; width: 100px; height: 100px; border: 2px solid white;" />
-                                                </ItemTemplate>
-                                            </asp:DataList>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <div id="sideP" class="sideP" style="overflow: auto; width: 100%;">
-                                            <asp:DataList ID="DataList2" RepeatDirection="Horizontal" Style="margin: auto" runat="server">
-                                                <ItemTemplate>
-                                                    <img id="repeaterImg" src='<%# Eval("Picture")%>' alt='<%# Eval("Picture")%>' style="border: 2px solid black; cursor: pointer; width: 100px; height: 100px; border: 2px solid white;" />
-                                                </ItemTemplate>
-                                            </asp:DataList>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2"></div>
                                 </div>
                                 <div class="row">
                                     &nbsp;<br />
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-8" style="text-align: center;">
+                                    <div class="col-md-8">
                                         <asp:Label ID="lblProductName" runat="server" Style="font-size: 30px; font-weight: bold; font-family: comic sans ms;" Text="Label"></asp:Label>
                                     </div>
                                     <div class="col-md-2"></div>
@@ -179,7 +149,8 @@
                                 <div class="row">
                                     <div class="col-md-2"></div>
                                     <div class="col-md-8">
-                                        <asp:Label ID="lblPrice" runat="server" Style="font-size: 25px; font-weight: bold; color: green; font-family: comic sans ms;" Text="৳"></asp:Label>
+                                        <asp:Label ID="lblPrice" runat="server" Style="font-size: 25px; font-weight: bold; color: green; font-family: comic sans ms;" Text="৳"></asp:Label><span>
+                                            <asp:Label ID="lblPrice1" Style="font-size: 25px; font-weight: bold; color: green; font-family: comic sans ms;" runat="server" Text="Label"></asp:Label></span>
                                         <br />
                                         <br />
                                         <asp:Label ID="lblSeller" runat="server" Text="For sale by member :"></asp:Label><span>
@@ -195,6 +166,33 @@
                                         <asp:Label ID="Label2" runat="server" Text="Description :"></asp:Label><span>
                                             <asp:Label ID="lblDescription" runat="server" Text="Label"></asp:Label>
                                         </span>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    &nbsp;<br />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Quantity : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtQuantity" class="form-control1 wd" TextMode="Number" autocomplete="off" placeholder="enter amount in piece" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Dead Line : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtDeadLine" class="form-control1 wd" autocomplete="off" placeholder="dd-mm-yyyy" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6">
+                                        <asp:LinkButton ID="btnOrder" OnClick="btnOrder_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-shopping-basket" style="color: white;"></i>&nbsp;&nbsp;Order</asp:LinkButton>
                                     </div>
                                     <div class="col-md-2"></div>
                                 </div>
@@ -237,14 +235,17 @@
             document.forms[0].target = "_blank";
         }
     </script>
-
+    <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
+    <script src="../DashboardFile/Date-jquery-1.12.4.js"></script>
+    <script src="../DashboardFile/Date-jquery-ui.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#sideP img').click(function () {
-                var image = $(this).attr('alt');
-                $('#largeImage').attr('src', image);
+        $(function () {
+            $("#txtDeadLine").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                yearRange: '1901:2099'
             });
         });
     </script>
-</body>
 </html>

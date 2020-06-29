@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ad-details.aspx.cs" Inherits="StudentMarketWebApp.Buyer.ad_details" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="notification.aspx.cs" Inherits="StudentMarketWebApp.Seller.notification" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Market | Buyer</title>
+    <title>Student Market | Seller</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -20,7 +20,6 @@
     <script src="../DashboardFile/Custom/sweetalert2.all.min.js"></script>
     <script src="../DashboardFile/Custom/sweetalert2@9.js"></script>
     <link href="../DashboardFile/PopDiv.css" rel="stylesheet" />
-
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -40,7 +39,7 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="/Buyer/notification.aspx">
+                       <a class="nav-link"  href="/Seller/notification.aspx">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
@@ -115,97 +114,69 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Ad Details</h3>
+                                <h3>Notification</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <asp:Image ID="largeImage" ImageUrl="/DashboardFile/images/image_dummy.png" runat="server" Width="100%" Height="300px" alt="big-image" />
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <div id="sideP" class="sideP" style="overflow: auto; width: 100%;">
-                                            <asp:DataList ID="DataList1" RepeatDirection="Horizontal" Style="margin: auto" runat="server">
-                                                <ItemTemplate>
-                                                    <img id="repeaterImg" src='<%# Eval("Picture")%>' alt='<%# Eval("Picture")%>' style="cursor: pointer; border: 2px solid black; width: 100px; height: 100px; border: 2px solid white;" />
-                                                </ItemTemplate>
-                                            </asp:DataList>
-
+                                    <div class="col-md-12">
+                                        <div class="table-responsive" style="border: none;">
+                                            <asp:GridView ID="notificationGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="notificationGridView_OnPageIndexChanging" OnRowDataBound="notificationGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Notification Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="30">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Serial" Visible="False">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="slLabel" runat="server" Text='<%#Container.DataItemIndex + 1 %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("BuyId") %>' />
+                                                                        <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("PostId") %>' />
+                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("BuyerId") %>' />
+                                                                        <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <h4>
+                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#Eval("Name")+" ordered "+Eval("ProductName")%>'></asp:Label>
+                                                                            <asp:LinkButton ID="titleLinkButton" OnClick="titleLinkButton_OnClick" title="View Profile" runat="server"></asp:LinkButton>
+                                                                        </h4>
+                                                                        <br />
+                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"Quantity : "+Eval("Quantity")%>'></asp:Label>
+                                                                        <br />
+                                                                        <asp:Label ID="Label2" runat="server" Text='<%#"DeadLine : "+Eval("DeadLine")%>'></asp:Label>
+                                                                        <br />
+                                                                        <asp:Label ID="Label3" runat="server" style="color: green;" Text='<%#"Price : "+"৳"+Eval("Price")%>'></asp:Label>
+                                                                        <br />
+                                                                        <asp:Label runat="server" style="color: green; font-size: 18px;" Text='<%#"Total Price : ৳"+Eval("TotalPrice")%>'></asp:Label><br/>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <asp:LinkButton ID="btnOrder" OnClick="btnOrder_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-check" style="color: white;"></i>&nbsp;&nbsp;Accept</asp:LinkButton>
+                                                                        <br />
+                                                                        <asp:LinkButton ID="btnCart" OnClick="btnCart_OnClick" runat="server" class="btn btn-danger" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-trash-alt" style="color: white;"></i>&nbsp;&nbsp;Reject</asp:LinkButton>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <div id="sideP" class="sideP" style="overflow: auto; width: 100%;">
-                                            <asp:DataList ID="DataList2" RepeatDirection="Horizontal" Style="margin: auto" runat="server">
-                                                <ItemTemplate>
-                                                    <img id="repeaterImg" src='<%# Eval("Picture")%>' alt='<%# Eval("Picture")%>' style="border: 2px solid black; cursor: pointer; width: 100px; height: 100px; border: 2px solid white;" />
-                                                </ItemTemplate>
-                                            </asp:DataList>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row">
-                                    &nbsp;<br />
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8" style="text-align: center;">
-                                        <asp:Label ID="lblProductName" runat="server" Style="font-size: 30px; font-weight: bold; font-family: comic sans ms;" Text="Label"></asp:Label>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <asp:Label ID="lblTime" runat="server" Style="font-size: 14px; font-weight: bold; color: gray; font-family: comic sans ms;" Text="Posted on "></asp:Label>
-                                        <br />
-                                        <span><i class="fa fa-map-marker text-primary"></i>
-                                            <asp:Label ID="lblLocation" Style="font-size: 14px; font-weight: bold; color: gray; font-family: comic sans ms;" runat="server" Text="Label"></asp:Label></span>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <asp:Label ID="lblPrice" runat="server" Style="font-size: 25px; font-weight: bold; color: green; font-family: comic sans ms;" Text="৳"></asp:Label>
-                                        <br />
-                                        <br />
-                                        <asp:Label ID="lblSeller" runat="server" Text="For sale by member :"></asp:Label><span>
-                                            <asp:LinkButton ID="lblUserName" OnClick="lblUserName_OnClick" OnClientClick="SetTarget();" runat="server">LinkButton</asp:LinkButton>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <asp:Label ID="Label2" runat="server" Text="Description :"></asp:Label><span>
-                                            <asp:Label ID="lblDescription" runat="server" Text="Label"></asp:Label>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-2"></div>
                                 </div>
                             </div>
                             <!-- /.row -->
                         </div>
+
                     </div>
+
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content -->
             </div>
+
             <!-- /.content-wrapper -->
             <!-- Control Sidebar -->
 
@@ -226,25 +197,10 @@
     <script>
         $(document).ready(function () {
 
-            $('#accordionSidebar').load("/Buyer/menu.html");
+            $('#accordionSidebar').load("/Seller/menu.html");
 
         });
     </script>
-    <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
-    <script src="../DashboardFile/Autocomplete-jquery-ui.js"></script>
-    <script type="text/javascript">
-        function SetTarget() {
-            document.forms[0].target = "_blank";
-        }
-    </script>
 
-    <script>
-        $(document).ready(function () {
-            $('#sideP img').click(function () {
-                var image = $(this).attr('alt');
-                $('#largeImage').attr('src', image);
-            });
-        });
-    </script>
 </body>
 </html>

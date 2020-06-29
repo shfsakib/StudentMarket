@@ -31,13 +31,31 @@ namespace StudentMarketWebApp.Buyer
                 func.CheckCookies();
                 func.Type(this, "Buyer");
                 int id = Convert.ToInt32(Request.QueryString["id"]);
-                func.LoadRepeater(Repeater1, "SELECT Picture FROM PostPic WHERE PostId='" + id + "'");
+                func.LoadDataList(DataList1, "SELECT Picture FROM PostPic WHERE PostId='" + id + "'");
+                Load();
             }
         }
-
+        private void Load()
+        {
+            int id = Convert.ToInt32(Request.QueryString["id"]);
+            postAdModel = postAdGateway.GetPost(id);
+            lblProductName.Text = postAdModel.ProductName;
+            lblTime.Text = lblTime.Text + " " + postAdModel.Intime;
+            lblLocation.Text = postAdModel.DistrictName + "," + postAdModel.DivisionName;
+            lblPrice.Text = lblPrice.Text + " " + postAdModel.Price;
+            lblUserName.Text = postAdModel.Name;
+            lblDescription.Text = postAdModel.Description;
+            largeImage.ImageUrl = postAdModel.Picture;
+        }
         protected void logOut_OnServerClick(object sender, EventArgs e)
         {
             func.Logout();
+        }
+
+        protected void lblUserName_OnClick(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(Request.QueryString["userid"]);
+            Response.Redirect("/Buyer/view-profile.aspx?id=" + id + "");
         }
     }
 }

@@ -39,9 +39,9 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
+                       <a class="nav-link"  href="/Seller/notification.aspx">
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">15</span>
+                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">

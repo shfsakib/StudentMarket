@@ -89,5 +89,64 @@ namespace StudentMarketWebApp.DAL.Gateway
             }
             return result;
         }
+        internal bool UpdatePic(PostAdModel postAdModel)
+        {
+            bool result = false;
+            SqlTransaction transaction = null;
+            try
+            {
+                if (con.State != ConnectionState.Open)
+                    if (con.State != ConnectionState.Open) con.Open();
+                transaction = con.BeginTransaction();
+                cmd = new SqlCommand("UPDATE PostPic SET Picture='" + postAdModel.Picture + "' WHERE PicId='" + postAdModel.PicId + "'", con);
+                cmd.Parameters.AddWithValue("@PicId", postAdModel.PicId);
+                cmd.Parameters.AddWithValue("@Picture", postAdModel.Picture);
+                cmd.Transaction = transaction;
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+                result = true;
+                if (con.State != ConnectionState.Closed)
+                    if (con.State != ConnectionState.Closed) con.Close();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+            }
+            return result;
+        }
+        internal PostAdModel GetPost(int id)
+        {
+            if (con.State != ConnectionState.Open)
+                if (con.State != ConnectionState.Open) con.Open();
+            string query = @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
+FROM            PostAd INNER JOIN
+                         Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
+                         PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
+                         UserList ON PostAd.UserId=UserList.UserId INNER JOIN
+						 Division ON UserList.Division=Division.ID  INNER JOIN
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.PostId='" + id + "'";
+            cmd = new SqlCommand(query, con);
+            reader = cmd.ExecuteReader();
+            postAdModel = null;
+            while (reader.Read())
+            {
+                postAdModel = new PostAdModel();
+                postAdModel.UserId = Convert.ToInt32(reader["UserId"]);
+                postAdModel.CategoryId = Convert.ToInt32(reader["CategoryId"]);
+                postAdModel.PostId = Convert.ToInt32(reader["PostId"]);
+                postAdModel.ProductName = reader["ProductName"].ToString();
+                postAdModel.Description = reader["Description"].ToString();
+                postAdModel.Price = Convert.ToDouble(reader["Price"]);
+                postAdModel.Picture = reader["Picture"].ToString();
+                postAdModel.DivisionName = reader["DivisionName"].ToString();
+                postAdModel.DistrictName = reader["DistrictName"].ToString();
+                postAdModel.Name = reader["Name"].ToString();
+                postAdModel.Intime = reader["Intime"].ToString();
+            }
+            reader.Close();
+            if (con.State != ConnectionState.Closed)
+                if (con.State != ConnectionState.Closed) con.Close();
+            return postAdModel;
+        }
     }
 }

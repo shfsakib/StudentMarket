@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StudentMarketWebApp.Seller {
+namespace StudentMarketWebApp.Buyer {
     
     
-    public partial class ad_details {
+    public partial class order_product {
         
         /// <summary>
         /// countN control.
@@ -31,22 +31,13 @@ namespace StudentMarketWebApp.Seller {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor logOut;
         
         /// <summary>
-        /// largeImage control.
+        /// productImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image largeImage;
-        
-        /// <summary>
-        /// DataList1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList DataList1;
+        protected global::System.Web.UI.WebControls.Image productImage;
         
         /// <summary>
         /// lblProductName control.
@@ -85,6 +76,15 @@ namespace StudentMarketWebApp.Seller {
         protected global::System.Web.UI.WebControls.Label lblPrice;
         
         /// <summary>
+        /// lblPrice1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPrice1;
+        
+        /// <summary>
         /// lblSeller control.
         /// </summary>
         /// <remarks>
@@ -119,5 +119,32 @@ namespace StudentMarketWebApp.Seller {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDescription;
+        
+        /// <summary>
+        /// txtQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtQuantity;
+        
+        /// <summary>
+        /// txtDeadLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDeadLine;
+        
+        /// <summary>
+        /// btnOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnOrder;
     }
 }

@@ -39,9 +39,9 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
+                        <a class="nav-link" href="/Buyer/notification.aspx">
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">15</span>
+                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -308,7 +308,7 @@
                                             <div class="col-md-12">
                                                 <asp:TextBox ID="txtPass" runat="server" class="form-control1 wd" placeholder="Enter your password"></asp:TextBox>
                                             </div>
-                                             <div class="col-md-12">Picture :</div>
+                                            <div class="col-md-12">Picture :</div>
                                             <div class="col-md-12">
                                                 <asp:FileUpload ID="userFileUpload" Style="width: 80%" onchange="ImagePreview(this);" class="form-control" accept=".png,.jpg,.jpeg" runat="server" />
                                             </div>

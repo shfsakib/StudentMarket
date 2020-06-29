@@ -10,7 +10,7 @@
 namespace StudentMarketWebApp.Seller {
     
     
-    public partial class search_profile {
+    public partial class notification {
         
         /// <summary>
         /// countN control.
@@ -31,21 +31,12 @@ namespace StudentMarketWebApp.Seller {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor logOut;
         
         /// <summary>
-        /// txtSearch control.
+        /// notificationGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
-        
-        /// <summary>
-        /// profileGridView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView profileGridView;
+        protected global::System.Web.UI.WebControls.GridView notificationGridView;
     }
 }

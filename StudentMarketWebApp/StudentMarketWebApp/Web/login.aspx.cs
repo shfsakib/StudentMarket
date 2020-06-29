@@ -31,11 +31,11 @@ namespace StudentMarketWebApp.Web
                 {
                     if (cookies["Type"].ToString() == "Buyer")
                     {
-                        Response.Redirect("/Buyer/profile.aspx");
+                        Response.Redirect("/Buyer/view-ads.aspx");
                     }
                     else if (cookies["Type"].ToString() == "Seller")
                     {
-                        Response.Redirect("/Seller/profile.aspx");
+                        Response.Redirect("/Seller/post-ad.aspx");
                     }
                     else if (cookies["Type"].ToString() == "Admin" || cookies["Type"].ToString() == "Super Admin")
                     {
@@ -76,9 +76,9 @@ namespace StudentMarketWebApp.Web
                     }
                     else if (cookie["Type"].ToString() == "Seller")
                     {
-                        Response.Redirect("/Seller/view-ads.aspx");
+                        Response.Redirect("/Seller/post-ad.aspx");
                     }
-                    else
+                    else if (cookie["Type"].ToString() == "Admin" || cookie["Type"].ToString() == "Super Admin")
                     {
                         Response.Redirect("/Admin/add-category.aspx");
                     }

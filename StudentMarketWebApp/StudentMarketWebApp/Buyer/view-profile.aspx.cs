@@ -39,11 +39,19 @@ namespace StudentMarketWebApp.Buyer
             {
                 profilePictureImage.ImageUrl = userListModel.Picture;
                 nameLabel.Text = userListModel.Name;
+                callButton.HRef = userListModel.MobileNo;
+                mailButton.HRef = "mailto:" + userListModel.Email;
             }
+           
         }
         protected void logOut_OnServerClick(object sender, EventArgs e)
         {
             func.Logout();
+        }
+
+        protected void btnReport_OnServerClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="post-ad.aspx.cs" Inherits="StudentMarketWebApp.Seller.post_ad" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="edit-ad.aspx.cs" Inherits="StudentMarketWebApp.Seller.edit_ad" %>
 
 <!DOCTYPE html>
 
@@ -20,6 +20,7 @@
     <script src="../DashboardFile/Custom/sweetalert2.all.min.js"></script>
     <script src="../DashboardFile/Custom/sweetalert2@9.js"></script>
     <link href="../DashboardFile/PopDiv.css" rel="stylesheet" />
+
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -39,9 +40,9 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link"  href="/Seller/notification.aspx">
+                       <a class="nav-link" href="/Seller/notification.aspx">
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
+                            <span class="badge badge-warning navbar-badge" runat="server"  id="countN"></span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -110,57 +111,75 @@
                 </div>
                 <!-- /.content-header -->
                 <!-- Main content -->
-                <style>
-                    input[type="file"] {
-                        display: block;
-                    }
-
-                    .imageThumb {
-                        max-height: 175px;
-                        border: 2px solid;
-                        padding: 1px;
-                        cursor: pointer;
-                        width: 175px;
-                        height: 300px;
-                    }
-
-                    .pip {
-                        display: inline-block;
-                        margin: 10px 10px 0 0;
-                    }
-
-                    .upload-btn-wrapper {
-                        position: relative;
-                        overflow: hidden;
-                        display: inline-block;
-                    }
-
-                    /*.btns {
-                        border: 2px solid gray;
-                        color: gray;
-                        background-color: white;
-                        padding: 8px 20px;
-                        border-radius: 8px;
-                        font-size: 20px;
-                        font-weight: bold;
-                    }*/
-
-                    .upload-btn-wrapper input[type=file] {
-                        font-size: 100px;
-                        position: absolute;
-                        left: 0;
-                        top: 0;
-                        opacity: 0;
-                    }
-                </style>
                 <div class="content">
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Post Ad</h3>
+                                <h3>Ad Details</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8 table-responsive">
+                                        <asp:GridView ID="adGridView" class="table table-bordered table-striped " Style="background: lavender;" runat="server" OnPageIndexChanging="categoryGridView_OnPageIndexChanging" OnRowCommand="adGridView_OnRowCommand" OnRowEditing="adGridView_OnRowEditing" OnRowUpdating="adGridView_OnRowUpdating" OnRowDeleting="adGridView_OnRowDeleting" OnRowCancelingEdit="adGridView_OnRowCancelingEdit" AutoGenerateColumns="False" ShowHeader="True" EmptyDataText="No Post Info Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
+                                            <Columns>
+                                                <asp:TemplateField HeaderText="">
+                                                    <HeaderTemplate>
+                                                        <table class="" width="100%">
+                                                            <tr>
+                                                                <th style="text-align: center">Choose_Picture</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:FileUpload ID="FileUpload" accept=".png,.jpg,.jpeg" runat="server" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("PicId") %>' />   
+                                                        <img id="repeaterImg" src='<%# Eval("Picture")%>' alt="photo" style="border: 2px solid black; cursor: pointer; width: 120px; height: 120px; border: 2px solid white;" />
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("PicId") %>'/>                                                                                                 
+                                                        <asp:FileUpload ID="editFileUpload" accept=".png,.jpg,.jpeg" runat="server" />
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <ItemStyle Width="20%"></ItemStyle>
+                                                    <HeaderTemplate>
+                                                        <table class="" width="100%">
+                                                            <tr>
+                                                                <th>
+                                                                    <label>Action</label>
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <asp:LinkButton ID="addNewButton1" runat="server" class="btn btn-primary" CommandName="AddNew" ToolTip="Add New"><i class="fas fa-plus fa-lg"></i></asp:LinkButton>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="editButton" runat="server" class="" CommandName="Edit" ToolTip="Edit"><i class="fas fa-edit fa-lg"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="deleteButton" runat="server" class="" CommandName="Delete" ToolTip="Delete"><i class="fas fa-trash-alt fa-lg"></i></asp:LinkButton>
+
+                                                    </ItemTemplate>
+                                                    <EditItemTemplate>
+                                                        <asp:LinkButton ID="updateButton" runat="server" class="" CommandName="Update" ToolTip="Update"><i class="fas fa-save fa-2x"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="cancelButton1" runat="server" class="" CommandName="Cancel" ToolTip="Cancel"><i class="fas fa-times fa-2x"></i></asp:LinkButton>
+                                                    </EditItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                        </asp:GridView>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    &nbsp;<br />
+                                </div>
                                 <div class="row">
                                     <div class="col-md-1"></div>
                                     <div class="col-md-2">
@@ -174,27 +193,27 @@
                                 <div class="row">
                                     <div class="col-md-1"></div>
                                     <div class="col-md-2">
-                                       Product Name : 
+                                        Product Name : 
                                     </div>
                                     <div class="col-md-6">
                                         <asp:TextBox ID="txtProductName" class="form-control1 wd" placeholder="Pencil box,Website etc" runat="server"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
-                                 <div class="row">
+                                <div class="row">
                                     <div class="col-md-1"></div>
                                     <div class="col-md-2">
-                                       Description : 
+                                        Description : 
                                     </div>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtDescription" class="form-control1 wd" TextMode="MultiLine" style="height: 80px;" placeholder="About your product and more" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtDescription" class="form-control1 wd" TextMode="MultiLine" Style="height: 80px;" placeholder="About your product and more" runat="server"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
-                                 <div class="row">
+                                <div class="row">
                                     <div class="col-md-1"></div>
                                     <div class="col-md-2">
-                                       Price : 
+                                        Price : 
                                     </div>
                                     <div class="col-md-6">
                                         <asp:TextBox ID="txtPrice" class="form-control1 wd" TextMode="Number" placeholder="৳2000" runat="server"></asp:TextBox>
@@ -202,33 +221,22 @@
                                     <div class="col-md-3"></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12" style="text-align: center;">
-                                        <div class="upload-btn-wrapper col-md-12" id="divs" style="text-align: center;">
-                                            <button class="btn btn-primary" style="height: 40px; width:50%;"><i class="fas fa-camera"></i>&nbsp;&nbsp;Upload Image</button>
-                                            <asp:FileUpload class="files" id="files" runat="server" name="files[]" AllowMultiple="True" accept=".png,.jpg,.jpeg" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <asp:Label ID="lblfileSize" Visible="False" runat="server" Text="Label"></asp:Label>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
                                     </div>
                                     <div class="col-md-6">
-                                        <asp:Button ID="btnPost" runat="server" class="btn btn-success" style="margin-top: 5px; width: 100%;" title="Post Ad" OnClick="btnPost_OnClick" Text="Post Ad" />
+                                        <asp:Button ID="btnUpdate" class="btn btn-primary" OnClick="btnUpdate_OnClick" runat="server" Text="Update" />
                                     </div>
                                     <div class="col-md-3"></div>
                                 </div>
                             </div>
                             <!-- /.row -->
                         </div>
-
                     </div>
-
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content -->
             </div>
-
             <!-- /.content-wrapper -->
             <!-- Control Sidebar -->
 
@@ -253,54 +261,12 @@
 
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#files").on("change", function (e) {
-                    var files = e.target.files,
-                      filesLength = files.length;
-                    $("#<%=lblfileSize.ClientID %>").text(filesLength);
-                    if (filesLength < 6) {
-                        for (var i = 0; i < filesLength; i++) {
-                            var f = files[i];
-                            var fileReader = new FileReader();
-                            fileReader.onload = (function(e) {
-                                var file = e.target;
-                                $("<span class=\"pip\">" +
-                                    "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                                    "<br/>" +
-                                    "</span>").insertAfter("#divs");
-                                //<span class=\"remove btn btn-danger\" style=\"width:100%;\"><i class=\"fas fa-trash-alt\"></i>Remove</span>
-                                //$(".remove").click(function () {
-
-                                //    $(this).parent(".pip").remove();
-                                //    $(this).parent(".files").remove();
-
-                                //});
-                            });
-                            fileReader.readAsDataURL(f);
-                        }
-                    } else {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'warning',
-                            title: 'Please choose maximum 5 photos',
-                            showConfirmButton: true,
-                            timer: 6000
-                        });
-                    }
-                });
-            }
-            else {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'warning',
-                    title: 'Your browser does not support to File API',
-                    showConfirmButton: true,
-                    timer: 6000
-                });
-                }
-        });
+    <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
+    <script src="../DashboardFile/Autocomplete-jquery-ui.js"></script>
+    <script type="text/javascript">
+        function SetTarget() {
+            document.forms[0].target = "_blank";
+        }
     </script>
 </body>
 </html>

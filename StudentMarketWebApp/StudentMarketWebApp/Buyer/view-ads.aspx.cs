@@ -44,7 +44,7 @@ FROM            PostAd INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId ORDER BY A.PostId DESC";
             func.LoadGrid(adsGridView, query);
 
         }
@@ -84,8 +84,10 @@ FROM            PostAd INNER JOIN
             DataControlFieldCell cell = (DataControlFieldCell)linkButton.Parent;
             GridViewRow row = (GridViewRow)cell.Parent;
             HiddenField empIdHiddenField = (HiddenField)row.FindControl("idHiddenField");
+            HiddenField HiddenField1 = (HiddenField)row.FindControl("HiddenField1");
             int id = Convert.ToInt32(empIdHiddenField.Value);
-            Response.Redirect("/Buyer/ad-details.aspx?id=" + id + "");
+            int userId = Convert.ToInt32(HiddenField1.Value);
+            Response.Redirect("/Buyer/ad-details.aspx?id=" + id + "&userid=" + userId + "");
         }
 
         protected void btnSearch_OnServerClick(object sender, EventArgs e)
@@ -99,7 +101,7 @@ FROM            PostAd INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.DivisionId='" + ddlDivision.SelectedValue + "' AND A.DistrictId='" + ddlDistrict.SelectedValue + "' AND A.CategoryId='" + ddlCategory.SelectedValue + "'";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.DivisionId='" + ddlDivision.SelectedValue + "' AND A.DistrictId='" + ddlDistrict.SelectedValue + "' AND A.CategoryId='" + ddlCategory.SelectedValue + "' ORDER BY A.PostId DESC";
                 func.LoadGrid(adsGridView, query);
             }
             else if (ddlDivision.Text != "--SELECT--" && ddlDistrict.Text != "--SELECT--")
@@ -111,7 +113,7 @@ FROM            PostAd INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.DivisionId='" + ddlDivision.SelectedValue + "' AND A.DistrictId='" + ddlDistrict.SelectedValue + "' ";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.DivisionId='" + ddlDivision.SelectedValue + "' AND A.DistrictId='" + ddlDistrict.SelectedValue + "' ORDER BY A.PostId DESC";
                 func.LoadGrid(adsGridView, query);
             }
             else if (ddlDivision.Text != "--SELECT--")
@@ -123,7 +125,7 @@ FROM            PostAd INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.DivisionId='" + ddlDivision.SelectedValue + "'";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.DivisionId='" + ddlDivision.SelectedValue + "' ORDER BY A.PostId DESC";
                 func.LoadGrid(adsGridView, query);
             }
             else if (ddlCategory.Text != "--SELECT CATEGORY--")
@@ -135,13 +137,25 @@ FROM            PostAd INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.CategoryId='" + ddlCategory.SelectedValue + "' ";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.CategoryId='" + ddlCategory.SelectedValue + "' ORDER BY A.PostId DESC";
                 func.LoadGrid(adsGridView, query);
             }
             else
             {
                 LoadGrid();
             }
+        }
+
+        protected void btnOrder_OnClick(object sender, EventArgs e)
+        {
+            LinkButton linkButton = (LinkButton)sender;
+            DataControlFieldCell cell = (DataControlFieldCell)linkButton.Parent;
+            GridViewRow row = (GridViewRow)cell.Parent;
+            HiddenField postId = (HiddenField)row.FindControl("idHiddenField");
+            HiddenField HiddenField1 = (HiddenField)row.FindControl("HiddenField1");
+            int id = Convert.ToInt32(postId.Value);
+            int userId = Convert.ToInt32(HiddenField1.Value);
+            Response.Redirect("/Buyer/order-product.aspx?id=" + id + "&userid=" + userId + "");
         }
     }
 }

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <title>Student Market | Seller</title>
+    <title>Student Market | Seller</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -39,9 +39,9 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
+                        <a class="nav-link" href="/Seller/notification.aspx">
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">15</span>
+                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -137,9 +137,9 @@
                                     <div class="col-md-4"></div>
                                     <div class="col-md-4" style="text-align: center">
                                         <br />
-                                        <a id="popUp" class="btn btn-primary" style="color: white;" title="Edit Profile"><i class="fas fa-pen"></i>&nbsp;&nbsp;Edit</a>
-                                        <a id="btnReport" class="btn btn-warning" style="color: white;" title="Report Profile"><i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;Report</a>
-
+                                        <a id="callButton" runat="server" class="btn btn-success" style="color: white;" title="Call"><i class="fas fa-phone"></i>&nbsp;&nbsp;Call</a>
+                                        <a id="mailButton" runat="server" class="btn btn-danger" style="color: white;" title="Mail"><i class="fas fa-mail-bulk"></i>&nbsp;&nbsp;Mail</a>
+                                        <a id="btnReport" runat="server" onserverclick="btnReport_OnServerClick" class="btn btn-warning" style="color: white;" title="Report Profile"><i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;Report</a>
                                     </div>
                                     <div class="col-md-4"></div>
                                 </div>

@@ -29,8 +29,11 @@ namespace StudentMarketWebApp.DAL.Model
 
         public int PostId { get; set; }
         public int UserId { get; set; }
+        public string Name { get; set; }
         public int CategoryId { get; set; }
         public string ProductName { get; set; }
+        public string DivisionName { get; set; }
+        public string DistrictName { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
         public int PicId { get; set; }

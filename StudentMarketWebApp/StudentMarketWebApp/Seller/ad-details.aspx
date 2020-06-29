@@ -40,9 +40,9 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
+                        <a class="nav-link"  href="/Seller/notification.aspx">
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">15</span>
+                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
@@ -120,22 +120,68 @@
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
-                                    <div class="col-md-1">
-                                    </div>
                                     <div class="col-md-2">
-                                        <div id="sideP" class="sideP" style="overflow-x: hidden; overflow: auto; height: 300px; width: 125px;">
-                                            <asp:Repeater ID="Repeater1" runat="server">
-                                                <ItemTemplate>
-                                                    <img id="repeaterImg" src='<%# Eval("Picture")%>' alt='<%# Eval("Picture")%>' style="cursor: pointer; width: 100px; height: 100px; border: 2px solid white;" />
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                        </div>
                                     </div>
                                     <div class="col-md-8">
                                         <asp:Image ID="largeImage" ImageUrl="/DashboardFile/images/image_dummy.png" runat="server" Width="100%" Height="300px" alt="big-image" />
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <div id="sideP" class="sideP" style="overflow: auto; width: 100%;">
+                                            <asp:DataList ID="DataList1" RepeatDirection="Horizontal" Style="margin: auto" runat="server">
+                                                <ItemTemplate>
+                                                    <img id="repeaterImg" src='<%# Eval("Picture")%>' alt='<%# Eval("Picture")%>' style="border: 2px solid black; cursor: pointer; width: 100px; height: 100px; border: 2px solid white;" />
+                                                </ItemTemplate>
+                                            </asp:DataList>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">&nbsp;<br />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8" style="text-align: center;">
+                                        <asp:Label ID="lblProductName" runat="server" Style="font-size: 30px; font-weight: bold; font-family: comic sans ms;" Text="Label"></asp:Label>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <asp:Label ID="lblTime" runat="server" Style="font-size: 14px; font-weight: bold; color: gray; font-family: comic sans ms;" Text="Posted on "></asp:Label>
+                                        <br/>
+                                        <span> <i class="fa fa-map-marker text-primary"></i>
+                                            <asp:Label ID="lblLocation" Style="font-size: 14px; font-weight: bold; color: gray; font-family: comic sans ms;" runat="server" Text="Label"></asp:Label></span>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                              <hr />
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <asp:Label ID="lblPrice" runat="server" Style="font-size: 25px; font-weight: bold; color: green; font-family: comic sans ms;" Text="৳"></asp:Label>
+                                        <br />
+                                        <br />
+                                        <asp:Label ID="lblSeller" runat="server" Text="For sale by member :"></asp:Label><span>
+                                            <asp:LinkButton ID="lblUserName" OnClick="lblUserName_OnClick" OnClientClick="SetTarget();" runat="server">LinkButton</asp:LinkButton>
+                                          </span>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <hr />
+                                 <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">                                      
+                                       <asp:Label ID="Label2" runat="server" Text="Description :"></asp:Label><span>
+                                            <asp:Label ID="lblDescription" runat="server" Text="Label"></asp:Label>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2"></div>
                                 </div>
                             </div>
                             <!-- /.row -->
