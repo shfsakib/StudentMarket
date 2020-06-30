@@ -106,6 +106,7 @@
     <Content Include="Buyer\profile.aspx" />
     <Content Include="Buyer\edit-profile.aspx" />
     <Content Include="Buyer\view-ads.aspx" />
+    <Content Include="Buyer\view-cart.aspx" />
     <Content Include="Buyer\view-profile.aspx" />
     <Content Include="DashboardFile\Admin\build\config\postcss.config.js" />
     <Content Include="DashboardFile\Admin\build\config\rollup.config.js" />
@@ -2341,6 +2342,13 @@
     </Compile>
     <Compile Include="Buyer\view-ads.aspx.designer.cs">
       <DependentUpon>view-ads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Buyer\view-cart.aspx.cs">
+      <DependentUpon>view-cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Buyer\view-cart.aspx.designer.cs">
+      <DependentUpon>view-cart.aspx</DependentUpon>
     </Compile>
     <Compile Include="Buyer\view-profile.aspx.cs">
       <DependentUpon>view-profile.aspx</DependentUpon>

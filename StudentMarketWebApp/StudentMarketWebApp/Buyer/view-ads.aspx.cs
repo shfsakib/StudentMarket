@@ -229,6 +229,7 @@ FROM            PostAd INNER JOIN
             Image profileImage = (Image)row.FindControl("profileImage");
             int postId = Convert.ToInt32(idHiddenField.Value);
             int userId = Convert.ToInt32(HiddenField1.Value);
+            LoadCart();
             dataTable = new DataTable();
             dataTable = (DataTable)Session["dataGrid"];
             dataRow = dataTable.NewRow();
@@ -240,6 +241,19 @@ FROM            PostAd INNER JOIN
             dataTable.Rows.Add(dataRow);
             Session["dataGrid"] = dataTable;
             func.Alert(this, "Product added to cart successfully", "s", false);
+        }
+        private void LoadCart()
+        {
+            if (Session["dataGrid"] == null)
+            {
+                dataTable = new DataTable();
+                dataTable.Columns.Add("PostId", typeof(int));
+                dataTable.Columns.Add("SellerId", typeof(int));
+                dataTable.Columns.Add("Picture", typeof(string));
+                dataTable.Columns.Add("Price", typeof(string));
+                dataTable.Columns.Add("ProductName", typeof(string));
+                Session["dataGrid"] = dataTable;
+            }
         }
     }
 }

@@ -138,7 +138,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="adsGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="adsGridView_OnPageIndexChanging" OnRowDataBound="adsGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
+                                            <asp:GridView ID="adsGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="adsGridView_OnPageIndexChanging" OnRowDataBound="adsGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Ads Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Serial" Visible="False">
                                                         <ItemTemplate>
@@ -152,6 +152,7 @@
                                                                     <div class="col-md-2">
                                                                         <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("PostId") %>' />
                                                                         <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("CategoryName") %>' />
+                                                                        <asp:HiddenField ID="HiddenField3" runat="server" Value='<%#Eval("Price") %>' />
                                                                         <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("UserId") %>' />
                                                                         <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
                                                                     </div>
@@ -172,7 +173,7 @@
                                                                     <div class="col-md-2">
                                                                         <asp:LinkButton ID="btnOrder" OnClick="btnOrder_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-shopping-basket" style="color: white;"></i>&nbsp;&nbsp;Order</asp:LinkButton>
                                                                         <br />
-                                                                        <asp:LinkButton ID="btnCart" runat="server" class="btn btn-primary" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-shopping-cart" style="color: white;"></i>&nbsp;&nbsp;Add to cart</asp:LinkButton>
+                                                                        <asp:LinkButton ID="btnCart" OnClick="btnCart_OnClick" runat="server" class="btn btn-primary" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-shopping-cart" style="color: white;"></i>&nbsp;&nbsp;Add to cart</asp:LinkButton>
                                                                     </div>
                                                                 </div>
                                                             </div>

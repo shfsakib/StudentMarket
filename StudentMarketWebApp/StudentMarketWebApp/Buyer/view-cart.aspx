@@ -119,9 +119,22 @@
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
+                                    <div class="col-lg-6">
+                                        <asp:LinkButton ID="btnOrder" class="btn btn-primary" runat="server"><i class="fas fa-shopping-basket"></i>Place Order</asp:LinkButton>
+                                        <asp:LinkButton ID="btnCancel" class="btn btn-danger" runat="server"><i class="fas fa-backspace"></i> Cancel</asp:LinkButton>
+                                    </div>
+
+                                    <div class="col-lg-6" style="text-align: right;">
+                                        <asp:Label ID="lblLabel" Style="font-size: 23px;" runat="server" Text="Total Price : ৳"></asp:Label><span>
+                                            <asp:Label ID="lblTotal" Style="font-size: 25px; color: green;" runat="server" Text=""></asp:Label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">&nbsp;<br/></div>
+                                <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="cartGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="cartGridView_OnPageIndexChanging" OnRowDataBound="cartGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
+                                            <asp:GridView ID="cartGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="cartGridView_OnPageIndexChanging" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Product Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Serial" Visible="True">
                                                         <ItemTemplate>
@@ -142,11 +155,12 @@
                                                                             <asp:Label ID="titleLabel" runat="server" Text='<%#Eval("ProductName")%>'></asp:Label>
                                                                         </h4>
                                                                         <br />
-                                                                        <asp:Label runat="server" Text='<%#"৳"+Eval("Price")%>'></asp:Label>
+                                                                        <asp:Label ID="Label1" runat="server" Text="Price : ৳"></asp:Label><span>
+                                                                        <asp:Label id="priceLabel" runat="server" Text='<%#Eval("Price")%>'></asp:Label></span>
                                                                     </div>
                                                                     <div class="col-md-2">
-                                                                        <asp:LinkButton ID="btnRemove" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-trash-alt" style="color: white;"></i>&nbsp;&nbsp;Remove</asp:LinkButton>
-                                                                        </div>
+                                                                        <asp:LinkButton ID="btnRemove" OnClick="btnRemove_OnClick" class="btn btn-danger wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-trash-alt" style="color: white;"></i>&nbsp;&nbsp;Remove</asp:LinkButton>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </ItemTemplate>
