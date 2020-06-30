@@ -40,7 +40,7 @@ namespace StudentMarketWebApp.Seller
             {
                 profilePictureImage.ImageUrl = userListModel.Picture;
                 nameLabel.Text = userListModel.Name;
-                callButton.HRef = userListModel.MobileNo;
+                callButton.HRef = "tel:" + userListModel.MobileNo;
                 mailButton.HRef = "mailto:" + userListModel.Email;
             }
         }

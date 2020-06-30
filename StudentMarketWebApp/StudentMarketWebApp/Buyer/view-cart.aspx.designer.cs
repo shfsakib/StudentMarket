@@ -10,7 +10,7 @@
 namespace StudentMarketWebApp.Buyer {
     
     
-    public partial class notification {
+    public partial class view_cart {
         
         /// <summary>
         /// countN control.
@@ -31,12 +31,12 @@ namespace StudentMarketWebApp.Buyer {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor logOut;
         
         /// <summary>
-        /// notificationGridView control.
+        /// cartGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView notificationGridView;
+        protected global::System.Web.UI.WebControls.GridView cartGridView;
     }
 }

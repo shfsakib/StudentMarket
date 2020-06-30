@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,13 +17,18 @@ namespace StudentMarketWebApp.Buyer
         private Alert alert;
         private PostAdModel postAdModel;
         private PostAdGateway postAdGateway;
-
+        private BuyModel buyModel;
+        private BuyGateway buyGateway;
+        private DataTable dataTable;
+        private DataRow dataRow;
         public view_ads()
         {
             func = BaseClass.GetInstance();
             alert = Alert.GetInstance();
             postAdModel = PostAdModel.GetInstance();
             postAdGateway = PostAdGateway.GetInstance();
+            buyModel = BuyModel.GetInstance();
+            buyGateway = BuyGateway.GetInstance();
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,13 +38,14 @@ namespace StudentMarketWebApp.Buyer
                 func.Type(this, "Buyer");
                 func.BindDropDown(ddlCategory, "Select Category", "SELECT CategoryName Name,CategoryId ID FROM Category ORDER BY CategoryName ASC");
                 func.BindDropDown(ddlDivision, "select", "SELECT Division Name,ID FROM Division ORDER BY Division ASC");
+                countN.InnerText = func.BuyerNotification(Convert.ToInt32(func.UserId())).ToString();
                 LoadGrid();
             }
         }
         private void LoadGrid()
         {
             string query =
-                @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name
+                @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,Category.CategoryName
 FROM            PostAd INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
@@ -75,6 +82,14 @@ FROM            PostAd INNER JOIN
                 titleLabel.Visible = false;
                 LinkButton titleLinkButton = (LinkButton)e.Row.FindControl("titleLinkButton");
                 titleLinkButton.Text = titleLabel.Text;
+                HiddenField categoryName = (HiddenField)e.Row.FindControl("HiddenField2");
+                string category = categoryName.Value;
+                if (category == "Developer" || category == "Artist" || category == "Designer" || category == "Event")
+                {
+                    LinkButton btnOrder = (LinkButton)e.Row.FindControl("btnOrder");
+                    LinkButton btnCart = (LinkButton)e.Row.FindControl("btnCart");
+                    btnOrder.Text = "<i class=\"fas fa-money-bill\" style=\"color: white;\"></i>&nbsp;&nbsp;Hire";
+                }
             }
         }
 
@@ -155,7 +170,76 @@ FROM            PostAd INNER JOIN
             HiddenField HiddenField1 = (HiddenField)row.FindControl("HiddenField1");
             int id = Convert.ToInt32(postId.Value);
             int userId = Convert.ToInt32(HiddenField1.Value);
-            Response.Redirect("/Buyer/order-product.aspx?id=" + id + "&userid=" + userId + "");
+            if (linkButton.Text == "<i class=\"fas fa-shopping-basket\" style=\"color: white;\"></i>&nbsp;&nbsp;Order")
+            {
+                Response.Redirect("/Buyer/order-product.aspx?id=" + id + "&userid=" + userId + "");
+            }
+            else if (linkButton.Text == "<i class=\"fas fa-money-bill\" style=\"color: white;\"></i>&nbsp;&nbsp;Hire")
+            {
+                buyModel.BuyId = Convert.ToInt32(func.GenerateId("SELECT MAX(BuyId) FROM Buy"));
+                buyModel.Invoice = buyGateway.GenerateInvoice();
+                buyModel.PostId = id;
+                buyModel.Price = 0;
+                buyModel.TotalPrice = 0;
+                buyModel.BuyerId = Convert.ToInt32(func.UserId());
+                buyModel.SellerId = Convert.ToInt32(userId);
+                buyModel.DeadLine = "";
+                buyModel.Quantity = 0;
+                buyModel.Type = "Hire";
+                buyModel.Status = "Pending";
+                buyModel.Intime = func.Date();
+                if (IsExecute(buyModel.PostId))
+                {
+                    func.Alert(Page, "You have already sent hire request", "w", true);
+                }
+                else
+                {
+                    bool result = buyGateway.SaveBuy(buyModel);
+                    if (result)
+                    {
+                        func.Alert(Page, "Hire request sent successfully,wait for seller confirmation.", "s", true);
+                    }
+                    else
+                    {
+                        func.Alert(Page, "Hire request Failed", "e", true);
+                    }
+                }
+            }
+        }
+
+        private bool IsExecute(int postId)
+        {
+            bool result = false;
+            string has = func.IsExist($"SELECT Invoice FROM Buy WHERE BuyerId='{func.UserId()}' AND  PostId='{postId}' AND Status='Pending'");
+            if (has != "")
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        protected void btnCart_OnClick(object sender, EventArgs e)
+        {
+            LinkButton linkButton = (LinkButton)sender;
+            DataControlFieldCell cell = (DataControlFieldCell)linkButton.Parent;
+            GridViewRow row = (GridViewRow)cell.Parent;
+            HiddenField idHiddenField = (HiddenField)row.FindControl("idHiddenField");
+            HiddenField HiddenField1 = (HiddenField)row.FindControl("HiddenField1");
+            HiddenField HiddenField3 = (HiddenField)row.FindControl("HiddenField3");
+            Image profileImage = (Image)row.FindControl("profileImage");
+            int postId = Convert.ToInt32(idHiddenField.Value);
+            int userId = Convert.ToInt32(HiddenField1.Value);
+            dataTable = new DataTable();
+            dataTable = (DataTable)Session["dataGrid"];
+            dataRow = dataTable.NewRow();
+            dataRow["PostId"] = postId;
+            dataRow["SellerId"] = userId;
+            dataRow["Picture"] = func.IsExist($"SELECT MIN(Picture) FROM PostPic WHERE PostId='{postId}'");
+            dataRow["ProductName"] = func.IsExist($"SELECT ProductName FROM PostAd WHERE PostId='{postId}'");
+            dataRow["Price"] = HiddenField3.Value;
+            dataTable.Rows.Add(dataRow);
+            Session["dataGrid"] = dataTable;
+            func.Alert(this, "Product added to cart successfully", "s", false);
         }
     }
 }

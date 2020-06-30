@@ -32,6 +32,7 @@ namespace StudentMarketWebApp.Buyer
                 func.Type(this, "Buyer");
                 int id = Convert.ToInt32(Request.QueryString["id"]);
                 func.LoadDataList(DataList1, "SELECT Picture FROM PostPic WHERE PostId='" + id + "'");
+                countN.InnerText = func.BuyerNotification(Convert.ToInt32(func.UserId())).ToString();
                 Load();
             }
         }

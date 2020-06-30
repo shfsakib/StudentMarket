@@ -424,5 +424,25 @@ namespace BitsSoftware
             }
             return result;
         }
+        public int BuyerNotification(int buyerId)
+        {
+            int result = 0;
+            try
+            {
+                if (con.State != ConnectionState.Open) con.Open();
+                string query = @"SELECT COUNT(BuyerId) FROM Buy WHERE BuyerId='"+buyerId+"' AND SellerNoti!='' AND BuyerNoti IS NULL";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader DR = cmd.ExecuteReader();
+                while (DR.Read())
+                    result = Convert.ToInt32(DR[0]);
+                DR.Close();
+                if (con.State != ConnectionState.Closed) con.Close();
+            }
+            catch (Exception ex)
+            {
+                if (con.State != ConnectionState.Closed) con.Close();
+            }
+            return result;
+        }
     }
 }

@@ -151,6 +151,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-2">
                                                                         <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("PostId") %>' />
+                                                                        <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("CategoryName") %>' />
                                                                         <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("UserId") %>' />
                                                                         <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
                                                                     </div>

@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="notification.aspx.cs" Inherits="StudentMarketWebApp.Seller.notification" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="view-cart.aspx.cs" Inherits="StudentMarketWebApp.Buyer.view_cart" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Market | Seller</title>
+    <title>Student Market | Buyer</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -39,7 +39,7 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                       <a class="nav-link"  href="/Seller/notification.aspx">
+                        <a class="nav-link" href="/Buyer/notification.aspx">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
@@ -114,16 +114,16 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Notification</h3>
+                                <h3>Posted Ads</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="notificationGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="notificationGridView_OnPageIndexChanging" OnRowDataBound="notificationGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Notification Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="30">
+                                            <asp:GridView ID="cartGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="cartGridView_OnPageIndexChanging" OnRowDataBound="cartGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
                                                 <Columns>
-                                                    <asp:TemplateField HeaderText="Serial" Visible="False">
+                                                    <asp:TemplateField HeaderText="Serial" Visible="True">
                                                         <ItemTemplate>
                                                             <asp:Label ID="slLabel" runat="server" Text='<%#Container.DataItemIndex + 1 %>'></asp:Label>
                                                         </ItemTemplate>
@@ -133,34 +133,20 @@
                                                             <div class="col-md-12">
                                                                 <div class="row">
                                                                     <div class="col-md-2">
-                                                                        <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("BuyId") %>' />
                                                                         <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("PostId") %>' />
-                                                                        <asp:HiddenField ID="HiddenField3" runat="server" Value='<%#Eval("Email") %>' />
-                                                                        <asp:HiddenField ID="HiddenField4" runat="server" Value='<%#Eval("Name") %>' />
-                                                                        <asp:HiddenField ID="HiddenField5" runat="server" Value='<%#Eval("ProductName") %>' />
-                                                                        <asp:HiddenField ID="HiddenField6" runat="server" Value='<%#Eval("Type") %>' />
-                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("BuyerId") %>' />
+                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("SellerId") %>' />
                                                                         <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <h4>
-                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#Eval("Name")+" wanted to "+Eval("Type")+" "+Eval("ProductName")%>'></asp:Label>
-                                                                            <asp:LinkButton ID="titleLinkButton" OnClick="titleLinkButton_OnClick" title="View Profile" runat="server"></asp:LinkButton>
+                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#Eval("ProductName")%>'></asp:Label>
                                                                         </h4>
                                                                         <br />
-                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"Quantity : "+Eval("Quantity")%>'></asp:Label>
-                                                                        <br />
-                                                                        <asp:Label ID="Label2" runat="server" Text='<%#"DeadLine : "+Eval("DeadLine")%>'></asp:Label>
-                                                                        <br />
-                                                                        <asp:Label ID="Label3" runat="server" style="color: green;" Text='<%#"Price : "+"৳"+Eval("Price")%>'></asp:Label>
-                                                                        <br />
-                                                                        <asp:Label runat="server" ID="total" style="color: green; font-size: 18px;" Text='<%#"Total Price : ৳"+Eval("TotalPrice")%>'></asp:Label><br/>
+                                                                        <asp:Label runat="server" Text='<%#"৳"+Eval("Price")%>'></asp:Label>
                                                                     </div>
                                                                     <div class="col-md-2">
-                                                                        <asp:LinkButton ID="btnOrder" OnClick="btnOrder_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-check" style="color: white;"></i>&nbsp;&nbsp;Accept</asp:LinkButton>
-                                                                        <br />
-                                                                        <asp:LinkButton ID="btnCart" OnClick="btnCart_OnClick" runat="server" class="btn btn-danger" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-trash-alt" style="color: white;"></i>&nbsp;&nbsp;Reject</asp:LinkButton>
-                                                                    </div>
+                                                                        <asp:LinkButton ID="btnRemove" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-trash-alt" style="color: white;"></i>&nbsp;&nbsp;Remove</asp:LinkButton>
+                                                                        </div>
                                                                 </div>
                                                             </div>
                                                         </ItemTemplate>
@@ -201,10 +187,8 @@
     <script>
         $(document).ready(function () {
 
-            $('#accordionSidebar').load("/Seller/menu.html");
+            $('#accordionSidebar').load("/Buyer/menu.html");
 
         });
     </script>
-
-</body>
 </html>

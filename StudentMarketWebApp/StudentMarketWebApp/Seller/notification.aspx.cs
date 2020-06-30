@@ -41,7 +41,7 @@ namespace StudentMarketWebApp.Seller
 
         private void Load()
         {
-            string query = @"SELECT        Buy.BuyId, Buy.PostId, Buy.Price, Buy.TotalPrice, Buy.BuyerId, Buy.DeadLine, Buy.Quantity, PostAd.ProductName, (SELECT Name FROM UserList WHERE UserId=Buy.BuyerId) AS Name,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=Buy.PostId)  AS Picture
+            string query = @"SELECT        Buy.BuyId, Buy.PostId, Buy.Price, Buy.TotalPrice, Buy.BuyerId, Buy.DeadLine, Buy.Quantity, PostAd.ProductName, (SELECT Name FROM UserList WHERE UserId=Buy.BuyerId) AS Name,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=Buy.PostId)  AS Picture,(SELECT Email FROM UserList WHERE UserList.UserId=Buy.BuyerId) AS Email,Buy.Type
 FROM            Buy INNER JOIN
                          PostAd ON Buy.PostId = PostAd.PostId INNER JOIN
                          UserList ON PostAd.UserId = UserList.UserId WHERE Buy.SellerId='" + func.UserId() + "' AND Buy.Status='Pending' ";
@@ -81,6 +81,16 @@ FROM            Buy INNER JOIN
                 titleLabel.Visible = false;
                 LinkButton titleLinkButton = (LinkButton)e.Row.FindControl("titleLinkButton");
                 titleLinkButton.Text = titleLabel.Text;
+                Label Label1 = (Label)e.Row.FindControl("Label1");
+                Label Label2 = (Label)e.Row.FindControl("Label2");
+                Label Label3 = (Label)e.Row.FindControl("Label3");
+                Label total = (Label)e.Row.FindControl("total");
+                HiddenField HiddenField6 = (HiddenField)e.Row.FindControl("HiddenField6");
+                if (HiddenField6.Value=="Hire")
+                {
+                    Label1.Visible = Label2.Visible = Label3.Visible = total.Visible = false;
+                }
+
             }
         }
 
@@ -90,14 +100,18 @@ FROM            Buy INNER JOIN
             DataControlFieldCell cell = (DataControlFieldCell)linkButton.Parent;
             GridViewRow row = (GridViewRow)cell.Parent;
             HiddenField HiddenField2 = (HiddenField)row.FindControl("HiddenField2");
+            HiddenField HiddenField3 = (HiddenField)row.FindControl("HiddenField3");
+            HiddenField HiddenField4 = (HiddenField)row.FindControl("HiddenField4");
+            HiddenField HiddenField5 = (HiddenField)row.FindControl("HiddenField5");
             bool result = func.Execute($"UPDATE Buy SET Status='Confirmed' WHERE SellerId='{func.UserId()}' AND BuyId='{HiddenField2.Value}'");
             if (result)
             {
-                func.Alert(this, "Order accepted successfully", "s", false);
+                func.Alert(this, "Accepted successfully", "s", false);
+                func.SendEmail("StuMarket5713@gmail.com",HiddenField3.Value,"StuMarket Product Confirmation","Hello "+HiddenField4.Value+",<br/>Your product request for "+HiddenField5.Value+" has been accepted by seller.Please check your notification and contact with seller.<br/>Thank you.","Admin4321");
                 Load();
             }
             else
-                func.Alert(this, "Failed to accept order", "e", false);
+                func.Alert(this, "Failed to accept", "e", false);
 
         }
 
@@ -107,10 +121,14 @@ FROM            Buy INNER JOIN
             DataControlFieldCell cell = (DataControlFieldCell)linkButton.Parent;
             GridViewRow row = (GridViewRow)cell.Parent;
             HiddenField HiddenField2 = (HiddenField)row.FindControl("HiddenField2");
+            HiddenField HiddenField3 = (HiddenField)row.FindControl("HiddenField3");
+            HiddenField HiddenField4 = (HiddenField)row.FindControl("HiddenField4");
+            HiddenField HiddenField5 = (HiddenField)row.FindControl("HiddenField5");
             bool result = func.Execute($"UPDATE Buy SET Status='Rejected' WHERE SellerId='{func.UserId()}' AND BuyId='{HiddenField2.Value}'");
             if (result)
             {
                 func.Alert(this, "Order removed successfully", "s", false);
+                func.SendEmail("StuMarket5713@gmail.com", HiddenField3.Value, "StuMarket Product Confirmation", "Hello " + HiddenField4.Value + ",<br/>Your product request for " + HiddenField5.Value + " has been rejected by seller.We're sorry for the inconvenience,please check other products.<br/>Thank you.", "Admin4321");
                 Load();
             }
             else

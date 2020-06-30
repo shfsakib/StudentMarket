@@ -28,6 +28,7 @@ namespace StudentMarketWebApp.Buyer
             {
                 func.CheckCookies();
                 func.Type(this, "Buyer");
+                countN.InnerText = func.BuyerNotification(Convert.ToInt32(func.UserId())).ToString();
                 Load();
             }
         }
@@ -39,7 +40,7 @@ namespace StudentMarketWebApp.Buyer
             {
                 profilePictureImage.ImageUrl = userListModel.Picture;
                 nameLabel.Text = userListModel.Name;
-                callButton.HRef = userListModel.MobileNo;
+                callButton.HRef = "tel:"+userListModel.MobileNo;
                 mailButton.HRef = "mailto:" + userListModel.Email;
             }
            

@@ -27,6 +27,7 @@ namespace StudentMarketWebApp.Buyer
             {
                 func.CheckCookies();
                 func.Type(this, "Buyer");
+                countN.InnerText = func.BuyerNotification(Convert.ToInt32(func.UserId())).ToString();
                 Load();
             }
         }
