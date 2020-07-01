@@ -80,7 +80,7 @@ namespace StudentMarketWebApp.Seller
                             
                        
                     }
-                    func.Alert(Page, "Posted Successfully", "s", true);
+                    func.Alert(Page, "Posted Successfully.Your ad will be live after admin verification.", "s", true);
                     Refresh();
                 }
                 else

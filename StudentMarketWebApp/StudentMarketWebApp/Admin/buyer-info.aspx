@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="profile.aspx.cs" Inherits="StudentMarketWebApp.Buyer.profile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="buyer-info.aspx.cs" Inherits="StudentMarketWebApp.Admin.buyer_info" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Market | Buyer</title>
+    <title>Student Market | Admin</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -38,12 +38,7 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link"  href="/Buyer/notification.aspx">
-                            <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
-                        </a>
-                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="fas fa-ellipsis-v fa-lg"></i>
@@ -114,20 +109,27 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Search Profile</h3>
+                                <h3>Buyer Profile</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
+                                    <div class="col-md-2">
+                                        <asp:DropDownList ID="ddlStatus" AutoPostBack="True" OnSelectedIndexChanged="ddlStatus_OnSelectedIndexChanged" class="form-control1 wd" runat="server">
+                                            <asp:ListItem Value="A">Active</asp:ListItem>
+                                            <asp:ListItem Value="I">Inactive</asp:ListItem>
+                                            <asp:ListItem Value="W">Waiting</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
                                     <div class="col-md-5">
                                         <asp:TextBox ID="txtSearch" class="form-control1 wd" placeholder="Search Profile" AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" runat="server"></asp:TextBox>
                                     </div>
-                                    <div class="col-md-7"></div>
+                                    <div class="col-md-5"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="profileGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="profileGridView_OnPageIndexChanging" OnRowDataBound="profileGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
+                                            <asp:GridView ID="profileGridView" class="table table-bordered table-striped " runat="server" OnRowDataBound="profileGridView_OnRowDataBound" OnPageIndexChanging="profileGridView_OnPageIndexChanging" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Serial" Visible="False">
                                                         <ItemTemplate>
@@ -140,13 +142,12 @@
                                                                 <div class="row">
                                                                     <div class="col-md-2">
                                                                         <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("UserId") %>' />
-
+                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("Status") %>' />
                                                                         <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <h4>
                                                                             <asp:Label ID="NameLabel" runat="server" Text='<%#Eval("Name")%>'></asp:Label>
-                                                                            <asp:LinkButton ID="NameLinkButton" OnClick="NameLinkButton_OnClick" OnClientClick="SetTarget();" runat="server"></asp:LinkButton>
                                                                         </h4>
                                                                         <br />
                                                                         <asp:Label ID="Label1" runat="server" Text='<%#"About : "+Eval("About")%>'></asp:Label>
@@ -156,7 +157,8 @@
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <a class="btn btn-success wd" style="color: white; width: 100%" title="Call" href='tel:<%#Eval("MobileNo") %>'><i class="fas fa-phone" style="color: white;"></i>&nbsp;&nbsp;Call</a><br />
-                                                                        <a class="btn" style="color: white; width: 100%; background: red;" title="Mail" href='mailto:<%#Eval("Email") %>'><i class="fas fa-mail-bulk" style="color: white;"></i>&nbsp;&nbsp;Mail</a>
+                                                                        <a class="btn wd" style="color: white; width: 100%; background: brown;" title="Mail" href='mailto:<%#Eval("Email") %>'><i class="fas fa-mail-bulk" style="color: white;"></i>&nbsp;&nbsp;Mail</a><br />
+                                                                        <asp:LinkButton ID="statusButton" OnClick="statusButton_OnClick" runat="server" class="btn btn-primary" Style="color: white; width: 100%;"><i class="fas fa-check" style="color: white;"></i>&nbsp;&nbsp;Inactive</asp:LinkButton>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -195,7 +197,7 @@
     <script>
         $(document).ready(function () {
 
-            $('#accordionSidebar').load("/Buyer/menu.html");
+            $('#accordionSidebar').load("/Admin/menu.html");
 
         });
     </script>
@@ -205,7 +207,7 @@
         $("#<%=txtSearch.ClientID %>").autocomplete({
             source: function (request, response) {
                 $.ajax({
-                    url: "Buyer.asmx/GetUsers",
+                    url: "Admin.asmx/GetBuyers",
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
@@ -217,9 +219,7 @@
                                 label: item,
                                 value: item
                             };
-
                         }));
-
                     },
                     error: function (result) {
                         Swal.fire({

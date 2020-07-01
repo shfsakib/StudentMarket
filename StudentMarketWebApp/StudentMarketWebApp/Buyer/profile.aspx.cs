@@ -49,12 +49,12 @@ FROM            UserList INNER JOIN
                @"SELECT        UserList.*, Division.DIVISION AS DivisionName, District.DISTRICTNM AS DistrictName
 FROM            UserList INNER JOIN
                          Division ON UserList.Division=Division.ID INNER JOIN
-                         District ON UserList.District=District.DISTRICTID  
-						 EXCEPT 
-						 SELECT        UserList.*, Division.DIVISION AS DivisionName, District.DISTRICTNM AS DistrictName
+                         District ON UserList.District=District.DISTRICTID   WHERE UserList.NAME LIKE '%"+txtSearch.Text+"%' "+
+						 " EXCEPT "+
+						 @"SELECT        UserList.*, Division.DIVISION AS DivisionName, District.DISTRICTNM AS DistrictName
 FROM            UserList INNER JOIN
                          Division ON UserList.Division=Division.ID INNER JOIN
-                         District ON UserList.District=District.DISTRICTID WHERE NAME+' | '+ MobileNo LIKE '%" + txtSearch + "%'  ORDER BY UserList.UserId ASC";
+                         District ON UserList.District=District.DISTRICTID WHERE UserList.UserId='"+func.UserId()+"'  ORDER BY UserList.UserId ASC";
             func.LoadGrid(profileGridView, query);
         }
 

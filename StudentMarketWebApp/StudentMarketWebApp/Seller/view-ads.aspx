@@ -140,7 +140,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="adsGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="adsGridView_OnPageIndexChanging" OnRowDataBound="adsGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
+                                            <asp:GridView ID="adsGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="adsGridView_OnPageIndexChanging" OnRowDataBound="adsGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Ads Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Serial" Visible="False">
                                                         <ItemTemplate>

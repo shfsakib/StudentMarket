@@ -39,7 +39,7 @@ namespace StudentMarketWebApp.Buyer
         private void Load()
         {
             int id = Convert.ToInt32(Request.QueryString["id"]);
-            postAdModel = postAdGateway.GetPost(id);
+            postAdModel = postAdGateway.GetPost(id,"A");
             lblProductName.Text = postAdModel.ProductName;
             lblTime.Text = lblTime.Text + " " + postAdModel.Intime;
             lblLocation.Text = postAdModel.DistrictName + "," + postAdModel.DivisionName;

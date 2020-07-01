@@ -46,7 +46,7 @@ namespace StudentMarketWebApp.Seller
         private void Load()
         {
             int id = Convert.ToInt32(Request.QueryString["id"]);
-            postAdModel = postAdGateway.GetPost(id);
+            postAdModel = postAdGateway.GetPost(id, "A");
             ddlCategory.SelectedValue = postAdModel.CategoryId.ToString();
             txtProductName.Text = postAdModel.ProductName;
             txtDescription.Text = postAdModel.Description;

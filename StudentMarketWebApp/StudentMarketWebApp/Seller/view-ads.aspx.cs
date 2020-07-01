@@ -41,13 +41,13 @@ namespace StudentMarketWebApp.Seller
         private void LoadGrid()
         {
             string query =
-                @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name
+                @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price,PostAd.Status, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
 FROM            PostAd INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId ORDER BY A.PostId DESC";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.Status='A' ORDER BY A.PostId DESC";
             func.LoadGrid(adsGridView, query);
 
         }
@@ -111,49 +111,49 @@ FROM            PostAd INNER JOIN
             if (ddlDivision.Text != "--SELECT--" && ddlDistrict.Text != "--SELECT--" && ddlCategory.Text != "--SELECT CATEGORY--")
             {
                 string query =
-               @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name
+               @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price,PostAd.Status, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
 FROM            PostAd INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.DivisionId='" + ddlDivision.SelectedValue + "' AND A.DistrictId='" + ddlDistrict.SelectedValue + "' AND A.CategoryId='" + ddlCategory.SelectedValue + "' ORDER BY A.PostId DESC";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.Status='A' AND A.DivisionId='" + ddlDivision.SelectedValue + "' AND A.DistrictId='" + ddlDistrict.SelectedValue + "' AND A.CategoryId='" + ddlCategory.SelectedValue + "' ORDER BY A.PostId DESC";
                 func.LoadGrid(adsGridView, query);
             }
             else if (ddlDivision.Text != "--SELECT--" && ddlDistrict.Text != "--SELECT--")
             {
                 string query =
-               @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name
+               @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price,PostAd.Status, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
 FROM            PostAd INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.DivisionId='" + ddlDivision.SelectedValue + "' AND A.DistrictId='" + ddlDistrict.SelectedValue + "' ORDER BY A.PostId DESC";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.Status='A' AND A.DivisionId='" + ddlDivision.SelectedValue + "' AND A.DistrictId='" + ddlDistrict.SelectedValue + "' ORDER BY A.PostId DESC";
                 func.LoadGrid(adsGridView, query);
             }
             else if (ddlDivision.Text != "--SELECT--")
             {
                 string query =
-               @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name
+               @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price,PostAd.Status, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
 FROM            PostAd INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.DivisionId='" + ddlDivision.SelectedValue + "' ORDER BY A.PostId DESC";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.Status='A' AND A.DivisionId='" + ddlDivision.SelectedValue + "' ORDER BY A.PostId DESC";
                 func.LoadGrid(adsGridView, query);
             }
             else if (ddlCategory.Text != "--SELECT CATEGORY--")
             {
                 string query =
-               @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name
+               @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price,PostAd.Status, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
 FROM            PostAd INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.CategoryId='" + ddlCategory.SelectedValue + "' ORDER BY A.PostId DESC";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.Status='A' AND A.CategoryId='" + ddlCategory.SelectedValue + "' ORDER BY A.PostId DESC";
                 func.LoadGrid(adsGridView, query);
             }
             else
@@ -167,13 +167,13 @@ FROM            PostAd INNER JOIN
             if (chkOwn.Checked)
             {
                 string query =
-             @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name
+             @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price,PostAd.Status, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
 FROM            PostAd INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.UserId='" + func.UserId() + "' ";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.Status='A' AND A.UserId='" + func.UserId() + "' ";
                 func.LoadGrid(adsGridView, query);
             }
             else

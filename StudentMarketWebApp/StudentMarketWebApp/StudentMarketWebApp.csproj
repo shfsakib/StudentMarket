@@ -96,9 +96,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\add-category.aspx" />
+    <Content Include="Admin\Admin.asmx" />
+    <Content Include="Admin\buyer-info.aspx" />
     <Content Include="Admin\menu.html" />
+    <Content Include="Admin\post-approval.aspx" />
+    <Content Include="Admin\seller-info.aspx" />
+    <Content Include="Admin\view-ads.aspx" />
     <Content Include="AutoComplete.asmx" />
     <Content Include="Buyer\ad-details.aspx" />
+    <Content Include="Buyer\Buyer.asmx" />
     <Content Include="Buyer\menu.html" />
     <Content Include="Buyer\notification.aspx" />
     <Content Include="Buyer\order-product.aspx" />
@@ -2272,6 +2278,7 @@
     <Content Include="Seller\edit-ad.aspx" />
     <Content Include="Seller\menu.html" />
     <Content Include="Seller\notification.aspx" />
+    <Content Include="Seller\pending-ads.aspx" />
     <Content Include="Seller\post-ad.aspx" />
     <Content Include="Seller\profile.aspx" />
     <Content Include="Seller\Seller.asmx" />
@@ -2290,6 +2297,38 @@
     <Compile Include="Admin\add-category.aspx.designer.cs">
       <DependentUpon>add-category.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Admin.asmx.cs">
+      <DependentUpon>Admin.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Admin\buyer-info.aspx.cs">
+      <DependentUpon>buyer-info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\buyer-info.aspx.designer.cs">
+      <DependentUpon>buyer-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\post-approval.aspx.cs">
+      <DependentUpon>post-approval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\post-approval.aspx.designer.cs">
+      <DependentUpon>post-approval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\seller-info.aspx.cs">
+      <DependentUpon>seller-info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\seller-info.aspx.designer.cs">
+      <DependentUpon>seller-info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\view-ads.aspx.cs">
+      <DependentUpon>view-ads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\view-ads.aspx.designer.cs">
+      <DependentUpon>view-ads.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AutoComplete.asmx.cs">
       <DependentUpon>AutoComplete.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -2300,6 +2339,10 @@
     </Compile>
     <Compile Include="Buyer\ad-details.aspx.designer.cs">
       <DependentUpon>ad-details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Buyer\Buyer.asmx.cs">
+      <DependentUpon>Buyer.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Buyer\notification.aspx.cs">
       <DependentUpon>notification.aspx</DependentUpon>
@@ -2388,6 +2431,13 @@
     </Compile>
     <Compile Include="Seller\notification.aspx.designer.cs">
       <DependentUpon>notification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seller\pending-ads.aspx.cs">
+      <DependentUpon>pending-ads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seller\pending-ads.aspx.designer.cs">
+      <DependentUpon>pending-ads.aspx</DependentUpon>
     </Compile>
     <Compile Include="Seller\post-ad.aspx.cs">
       <DependentUpon>post-ad.aspx</DependentUpon>

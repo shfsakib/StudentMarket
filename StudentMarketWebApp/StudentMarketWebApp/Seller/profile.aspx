@@ -121,7 +121,7 @@
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <asp:TextBox ID="txtSearch" class="form-control1 wd" placeholder="Name | Mobile No." AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtSearch" class="form-control1 wd" placeholder="Search Profile" AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" runat="server"></asp:TextBox>
                                     </div>
                                     <div class="col-md-7"></div>
                                 </div>

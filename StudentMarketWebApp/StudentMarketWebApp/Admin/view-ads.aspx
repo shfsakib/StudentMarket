@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="post-ad.aspx.cs" Inherits="StudentMarketWebApp.Seller.post_ad" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="view-ads.aspx.cs" Inherits="StudentMarketWebApp.Admin.view_ads" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Market | Seller</title>
+    <title>Student Market | Buyer</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -20,6 +20,7 @@
     <script src="../DashboardFile/Custom/sweetalert2.all.min.js"></script>
     <script src="../DashboardFile/Custom/sweetalert2@9.js"></script>
     <link href="../DashboardFile/PopDiv.css" rel="stylesheet" />
+
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -39,7 +40,7 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link"  href="/Seller/notification.aspx">
+                        <a class="nav-link" href="/Buyer/notification.aspx">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
@@ -110,125 +111,101 @@
                 </div>
                 <!-- /.content-header -->
                 <!-- Main content -->
-                <style>
-                    input[type="file"] {
-                        display: block;
-                    }
-
-                    .imageThumb {
-                        max-height: 175px;
-                        border: 2px solid;
-                        padding: 1px;
-                        cursor: pointer;
-                        width: 175px;
-                        height: 300px;
-                    }
-
-                    .pip {
-                        display: inline-block;
-                        margin: 10px 10px 0 0;
-                    }
-
-                    .upload-btn-wrapper {
-                        position: relative;
-                        overflow: hidden;
-                        display: inline-block;
-                    }
-
-                    /*.btns {
-                        border: 2px solid gray;
-                        color: gray;
-                        background-color: white;
-                        padding: 8px 20px;
-                        border-radius: 8px;
-                        font-size: 20px;
-                        font-weight: bold;
-                    }*/
-
-                    .upload-btn-wrapper input[type=file] {
-                        font-size: 100px;
-                        position: absolute;
-                        left: 0;
-                        top: 0;
-                        opacity: 0;
-                    }
-                </style>
                 <div class="content">
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Post Ad</h3>
+                                <h3>Ad Details</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
-                                    <div class="col-md-1"></div>
                                     <div class="col-md-2">
-                                        Choose Category : 
                                     </div>
-                                    <div class="col-md-6">
-                                        <asp:DropDownList ID="ddlCategory" class="form-control1 wd" runat="server"></asp:DropDownList>
+                                    <div class="col-md-8">
+                                        <asp:Image ID="largeImage" ImageUrl="/DashboardFile/images/image_dummy.png" runat="server" Width="100%" Height="300px" alt="big-image" />
                                     </div>
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-2">
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">
-                                       Product Name : 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:TextBox ID="txtProductName" class="form-control1 wd" placeholder="Pencil box,Website etc" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="col-md-3"></div>
-                                </div>
-                                 <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">
-                                       Description : 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:TextBox ID="txtDescription" class="form-control1 wd" TextMode="MultiLine" style="height: 80px;" placeholder="About your product and more" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="col-md-3"></div>
-                                </div>
-                                 <div class="row">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-2">
-                                       Price : 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:TextBox ID="txtPrice" class="form-control1 wd" TextMode="Number" placeholder="৳2000" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="col-md-3"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12" style="text-align: center;">
-                                        <div class="upload-btn-wrapper col-md-12" id="divs" style="text-align: center;">
-                                            <button class="btn btn-primary" style="height: 40px; width:50%;"><i class="fas fa-camera"></i>&nbsp;&nbsp;Upload Image</button>
-                                            <asp:FileUpload class="files" id="files" runat="server" name="files[]" AllowMultiple="True" accept=".png,.jpg,.jpeg" />
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <div id="sideP" class="sideP" style="overflow: auto; width: 100%;">
+                                            <asp:DataList ID="DataList1" RepeatDirection="Horizontal" Style="margin: auto" runat="server">
+                                                <ItemTemplate>
+                                                    <img id="repeaterImg" src='<%# Eval("Picture")%>' alt='<%# Eval("Picture")%>' style="cursor: pointer; border: 2px solid black; width: 100px; height: 100px; border: 2px solid white;" />
+                                                </ItemTemplate>
+                                            </asp:DataList>
+
                                         </div>
                                     </div>
+                                    <div class="col-md-2"></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <asp:Label ID="lblfileSize" Visible="False" runat="server" Text="Label"></asp:Label>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <div id="sideP" class="sideP" style="overflow: auto; width: 100%;">
+                                            <asp:DataList ID="DataList2" RepeatDirection="Horizontal" Style="margin: auto" runat="server">
+                                                <ItemTemplate>
+                                                    <img id="repeaterImg" src='<%# Eval("Picture")%>' alt='<%# Eval("Picture")%>' style="border: 2px solid black; cursor: pointer; width: 100px; height: 100px; border: 2px solid white;" />
+                                                </ItemTemplate>
+                                            </asp:DataList>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <asp:Button ID="btnPost" runat="server" class="btn btn-success" style="margin-top: 5px; width: 100%;" title="Post Ad" OnClick="btnPost_OnClick" Text="Post Ad" />
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    &nbsp;<br />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8" style="text-align: center;">
+                                        <asp:Label ID="lblProductName" runat="server" Style="font-size: 30px; font-weight: bold; font-family: comic sans ms;" Text="Label"></asp:Label>
                                     </div>
-                                    <div class="col-md-3"></div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <asp:Label ID="lblTime" runat="server" Style="font-size: 14px; font-weight: bold; color: gray; font-family: comic sans ms;" Text="Posted on "></asp:Label>
+                                        <br />
+                                        <span><i class="fa fa-map-marker text-primary"></i>
+                                            <asp:Label ID="lblLocation" Style="font-size: 14px; font-weight: bold; color: gray; font-family: comic sans ms;" runat="server" Text="Label"></asp:Label></span>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <asp:Label ID="lblPrice" runat="server" Style="font-size: 25px; font-weight: bold; color: green; font-family: comic sans ms;" Text="৳"></asp:Label>
+                                        <br />
+                                        <br />
+                                        <asp:Label ID="lblSeller" runat="server" Text="For sale by member :"></asp:Label><span>
+                                            <asp:LinkButton ID="lblUserName" runat="server">LinkButton</asp:LinkButton>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <asp:Label ID="Label2" runat="server" Text="Description :"></asp:Label><span>
+                                            <asp:Label ID="lblDescription" runat="server" Text="Label"></asp:Label>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2"></div>
                                 </div>
                             </div>
                             <!-- /.row -->
                         </div>
-
                     </div>
-
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content -->
             </div>
-
             <!-- /.content-wrapper -->
             <!-- Control Sidebar -->
 
@@ -249,58 +226,24 @@
     <script>
         $(document).ready(function () {
 
-            $('#accordionSidebar').load("/Seller/menu.html");
+            $('#accordionSidebar').load("/Admin/menu.html");
 
         });
     </script>
+    <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
+    <script src="../DashboardFile/Autocomplete-jquery-ui.js"></script>
+    <script type="text/javascript">
+        function SetTarget() {
+            document.forms[0].target = "_blank";
+        }
+    </script>
+
     <script>
         $(document).ready(function () {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#files").on("change", function (e) {
-                    var files = e.target.files,
-                      filesLength = files.length;
-                    $("#<%=lblfileSize.ClientID %>").text(filesLength);
-                    $(".pip").remove();
-                    if (filesLength < 6) {
-                        for (var i = 0; i < filesLength; i++) {
-                            var f = files[i];
-                            var fileReader = new FileReader();
-                            fileReader.onload = (function(e) {
-                                var file = e.target;
-                                $("<span class=\"pip\">" +
-                                    "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                                    "<br/>" +
-                                    "</span>").insertAfter("#divs");
-                                //<span class=\"remove btn btn-danger\" style=\"width:100%;\"><i class=\"fas fa-trash-alt\"></i>Remove</span>
-                                //$(".remove").click(function () {
-
-                                //    $(this).parent(".pip").remove();
-                                //    $(this).parent(".files").remove();
-
-                                //});
-                            });
-                            fileReader.readAsDataURL(f);
-                        }
-                    } else {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'warning',
-                            title: 'Please choose maximum 5 photos',
-                            showConfirmButton: true,
-                            timer: 6000
-                        });
-                    }
-                });
-            }
-            else {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'warning',
-                    title: 'Your browser does not support to File API',
-                    showConfirmButton: true,
-                    timer: 6000
-                });
-                }
+            $('#sideP img').click(function () {
+                var image = $(this).attr('alt');
+                $('#largeImage').attr('src', image);
+            });
         });
     </script>
 </body>

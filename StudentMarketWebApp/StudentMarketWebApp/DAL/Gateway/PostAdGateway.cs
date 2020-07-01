@@ -41,13 +41,14 @@ namespace StudentMarketWebApp.DAL.Gateway
                 if (con.State != ConnectionState.Open)
                     if (con.State != ConnectionState.Open) con.Open();
                 transaction = con.BeginTransaction();
-                cmd = new SqlCommand("INSERT INTO PostAd( PostId,UserId, CategoryId, ProductName, Description, Price, Intime) VALUES(@PostId,@UserId, @CategoryId, @ProductName, @Description, @Price, @Intime)", con);
+                cmd = new SqlCommand("INSERT INTO PostAd( PostId,UserId, CategoryId, ProductName, Description, Price,Status, Intime) VALUES(@PostId,@UserId, @CategoryId, @ProductName, @Description, @Price,@Status, @Intime)", con);
                 cmd.Parameters.AddWithValue("@PostId", postAdModel.PostId);
                 cmd.Parameters.AddWithValue("@UserId", postAdModel.UserId);
                 cmd.Parameters.AddWithValue("@CategoryId", postAdModel.CategoryId);
                 cmd.Parameters.AddWithValue("@ProductName", postAdModel.ProductName);
                 cmd.Parameters.AddWithValue("@Description", postAdModel.Description);
                 cmd.Parameters.AddWithValue("@Price", postAdModel.Price);
+                cmd.Parameters.AddWithValue("@Status", "W");
                 cmd.Parameters.AddWithValue("@Intime", postAdModel.Intime);
                 cmd.Transaction = transaction;
                 cmd.ExecuteNonQuery();
@@ -114,17 +115,17 @@ namespace StudentMarketWebApp.DAL.Gateway
             }
             return result;
         }
-        internal PostAdModel GetPost(int id)
+        internal PostAdModel GetPost(int id,string status)
         {
             if (con.State != ConnectionState.Open)
                 if (con.State != ConnectionState.Open) con.Open();
-            string query = @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
+            string query = @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price,PostAd.Status, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
 FROM            PostAd INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
 						 Division ON UserList.Division=Division.ID  INNER JOIN
-                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.PostId='" + id + "'";
+                         District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.PostId='" + id + "' AND A.Status='"+ status + "'";
             cmd = new SqlCommand(query, con);
             reader = cmd.ExecuteReader();
             postAdModel = null;

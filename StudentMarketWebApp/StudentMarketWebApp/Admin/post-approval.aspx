@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="profile.aspx.cs" Inherits="StudentMarketWebApp.Buyer.profile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="post-approval.aspx.cs" Inherits="StudentMarketWebApp.Admin.post_approval" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Market | Buyer</title>
+    <title>Student Market | Seller</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -39,7 +39,7 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link"  href="/Buyer/notification.aspx">
+                       <a class="nav-link" href="/Seller/notification.aspx">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
@@ -49,7 +49,7 @@
                             <i class="fas fa-ellipsis-v fa-lg"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="/Buyer/edit-profile.aspx" class="dropdown-item">
+                            <a href="/Seller/edit-profile.aspx" class="dropdown-item">
                                 <!-- Message Start -->
                                 Edit Profile
                            <!-- Message End -->
@@ -114,20 +114,14 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Search Profile</h3>
+                                <h3>Posted Ads</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <asp:TextBox ID="txtSearch" class="form-control1 wd" placeholder="Search Profile" AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="col-md-7"></div>
-                                </div>
-                                <div class="row">
+                               <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="profileGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="profileGridView_OnPageIndexChanging" OnRowDataBound="profileGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
+                                            <asp:GridView ID="adsGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="adsGridView_OnPageIndexChanging" OnRowDataBound="adsGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Ads Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Serial" Visible="False">
                                                         <ItemTemplate>
@@ -139,24 +133,28 @@
                                                             <div class="col-md-12">
                                                                 <div class="row">
                                                                     <div class="col-md-2">
-                                                                        <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("UserId") %>' />
-
+                                                                        <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("PostId") %>' />
+                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("UserId") %>' />
                                                                         <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <h4>
-                                                                            <asp:Label ID="NameLabel" runat="server" Text='<%#Eval("Name")%>'></asp:Label>
-                                                                            <asp:LinkButton ID="NameLinkButton" OnClick="NameLinkButton_OnClick" OnClientClick="SetTarget();" runat="server"></asp:LinkButton>
+                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#Eval("Name")+" selling "+Eval("ProductName")%>'></asp:Label>
+                                                                            <asp:LinkButton ID="titleLinkButton" OnClick="titleLinkButton_OnClick" title="Post Details" runat="server"></asp:LinkButton>
                                                                         </h4>
                                                                         <br />
-                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"About : "+Eval("About")%>'></asp:Label>
+                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"Description : "+Eval("Description")%>'></asp:Label>
                                                                         <br />
                                                                         <i class="fa fa-map-marker text-primary"></i>
                                                                         <asp:Label runat="server" Text='<%#Eval("DistrictName")+","+Eval("DivisionName")%>'></asp:Label>
+                                                                        <br />
+                                                                        <br />
+                                                                        <asp:Label runat="server" Text='<%#"৳"+Eval("Price")%>'></asp:Label>
                                                                     </div>
                                                                     <div class="col-md-2">
-                                                                        <a class="btn btn-success wd" style="color: white; width: 100%" title="Call" href='tel:<%#Eval("MobileNo") %>'><i class="fas fa-phone" style="color: white;"></i>&nbsp;&nbsp;Call</a><br />
-                                                                        <a class="btn" style="color: white; width: 100%; background: red;" title="Mail" href='mailto:<%#Eval("Email") %>'><i class="fas fa-mail-bulk" style="color: white;"></i>&nbsp;&nbsp;Mail</a>
+                                                                        <asp:LinkButton ID="btnAccept" OnClick="btnAccept_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-check" style="color: white;"></i>&nbsp;&nbsp;Approve</asp:LinkButton>
+                                                                        <br />
+                                                                        <asp:LinkButton ID="btnRemove" OnClick="btnRemove_OnClick" runat="server" class="btn btn-danger" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-backspace" style="color: white;"></i>&nbsp;&nbsp;Remove</asp:LinkButton>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -170,11 +168,14 @@
                             </div>
                             <!-- /.row -->
                         </div>
+
                     </div>
+
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content -->
             </div>
+
             <!-- /.content-wrapper -->
             <!-- Control Sidebar -->
 
@@ -195,51 +196,10 @@
     <script>
         $(document).ready(function () {
 
-            $('#accordionSidebar').load("/Buyer/menu.html");
+            $('#accordionSidebar').load("/Admin/menu.html");
 
         });
     </script>
-    <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
-    <script src="../DashboardFile/Autocomplete-jquery-ui.js"></script>
-    <script>
-        $("#<%=txtSearch.ClientID %>").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "Buyer.asmx/GetUsers",
-                    type: "POST",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{ 'txt' : '" + $("#<%=txtSearch.ClientID %>").val() + "'}",
-                    dataFilter: function (data) { return data; },
-                    success: function (data) {
-                        response($.map(data.d, function (item) {
-                            return {
-                                label: item,
-                                value: item
-                            };
 
-                        }));
-
-                    },
-                    error: function (result) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'warning',
-                            title: 'User not found',
-                            showConfirmButton: true,
-                            timer: 6000
-                        });
-                    }
-                });
-            },
-
-            minLength: 1,
-        });
-    </script>
-    <script type="text/javascript">
-        function SetTarget() {
-            document.forms[0].target = "_blank";
-        }
-    </script>
 </body>
 </html>
