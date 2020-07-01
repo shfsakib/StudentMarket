@@ -42,6 +42,8 @@ namespace StudentMarketWebApp.Seller
                 nameLabel.Text = userListModel.Name;
                 callButton.HRef = "tel:" + userListModel.MobileNo;
                 mailButton.HRef = "mailto:" + userListModel.Email;
+                ViewState["mail"] = userListModel.Email;
+                ViewState["mobile"] = userListModel.MobileNo;
             }
         }
         protected void logOut_OnServerClick(object sender, EventArgs e)
@@ -51,7 +53,16 @@ namespace StudentMarketWebApp.Seller
 
         protected void btnReport_OnServerClick(object sender, EventArgs e)
         {
+            bool result = func.SendEmail("StuMarket5713@gmail.com", "StuMarket5713@gmail.com", "StuMarket Profile Report", "Hello Admin,<br/>" + nameLabel.Text + " has been reported by a seller.<br/>Reported Email: " + ViewState["mail"].ToString() + "<br/>Reported Mobile No.: " + ViewState["mobile"] + "<br/>User Email : " + func.Email() + "<br/>User Mobile No. : " + func.Mobile() + "<br/>", "Admin4321");
+            if (result)
+            {
+                    func.Alert(Page, "We are very sorry you have to face this kind of problem. We will contact with you soon.", "s", true);
+            }
+            else
+            {
+                    func.Alert(Page, "Failed to report", "e", true);
 
+           }
         }
     }
 }

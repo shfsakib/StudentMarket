@@ -40,7 +40,7 @@ namespace StudentMarketWebApp.Seller
             try
             {
 
-                string query = @"SELECT NAME+' | '+ MobileNo txt FROM UserList WHERE NAME+' | '+ MobileNo LIKE '%" + txt + "%'" +
+                string query = @"SELECT NAME txt FROM UserList WHERE NAME+' | '+ MobileNo LIKE '%" + txt + "%'" +
                                "EXCEPT SELECT NAME+' | ' + MobileNo FROM UserList WHERE NAME+' | ' + MobileNo ='" + func.Name() + " | " + func.Mobile() + "' AND Status='A'";
                 using (cmd = new SqlCommand(query, conn))
                 {

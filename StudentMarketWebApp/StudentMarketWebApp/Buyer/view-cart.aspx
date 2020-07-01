@@ -120,8 +120,8 @@
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <asp:LinkButton ID="btnOrder" class="btn btn-primary" runat="server"><i class="fas fa-shopping-basket"></i>Place Order</asp:LinkButton>
-                                        <asp:LinkButton ID="btnCancel" class="btn btn-danger" runat="server"><i class="fas fa-backspace"></i> Cancel</asp:LinkButton>
+                                        <asp:LinkButton ID="btnOrder" OnClick="btnOrder_OnClick" class="btn btn-primary" runat="server"><i class="fas fa-shopping-basket"></i>Place Order</asp:LinkButton>
+                                        <asp:LinkButton ID="btnCancel" OnClick="btnCancel_OnClick" class="btn btn-danger" runat="server"><i class="fas fa-backspace"></i> Cancel</asp:LinkButton>
                                     </div>
 
                                     <div class="col-lg-6" style="text-align: right;">

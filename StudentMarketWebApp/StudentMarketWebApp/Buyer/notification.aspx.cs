@@ -43,7 +43,7 @@ namespace StudentMarketWebApp.Buyer
             string query = @"SELECT        Buy.BuyId, Buy.PostId, Buy.Price, Buy.TotalPrice, Buy.BuyerId, Buy.DeadLine,Buy.Status, Buy.Quantity, PostAd.ProductName, (SELECT Name FROM UserList WHERE UserId=Buy.SellerId) AS Name,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=Buy.PostId)  AS Picture
 FROM            Buy INNER JOIN
                          PostAd ON Buy.PostId = PostAd.PostId INNER JOIN
-                         UserList ON PostAd.UserId = UserList.UserId WHERE Buy.BuyerId='"+func.UserId()+"' AND Buy.Status!='Pending' ";
+                         UserList ON PostAd.UserId = UserList.UserId WHERE Buy.BuyerId='"+func.UserId()+"' AND Buy.Status!='Pending' ORDER BY BuyId DESC ";
             func.LoadGrid(notificationGridView, query);
         }
         private void Read()

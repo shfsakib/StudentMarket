@@ -49,12 +49,12 @@ namespace StudentMarketWebApp.Buyer
             if (Session["dataGrid"] == null)
             {
                 dataTable = new DataTable();
-                dataTable.Columns.Add("PostId", typeof (int));
+                dataTable.Columns.Add("PostId", typeof(int));
 
-                dataTable.Columns.Add("SellerId", typeof (int));
-                dataTable.Columns.Add("Picture", typeof (string));
-                dataTable.Columns.Add("Price", typeof (string));
-                dataTable.Columns.Add("ProductName", typeof (string));
+                dataTable.Columns.Add("SellerId", typeof(int));
+                dataTable.Columns.Add("Picture", typeof(string));
+                dataTable.Columns.Add("Price", typeof(string));
+                dataTable.Columns.Add("ProductName", typeof(string));
                 Session["dataGrid"] = dataTable;
             }
             else
@@ -68,7 +68,7 @@ namespace StudentMarketWebApp.Buyer
 
 
             dataTable = new DataTable();
-            dataTable = (DataTable) Session["dataGrid"];
+            dataTable = (DataTable)Session["dataGrid"];
             cartGridView.DataSource = dataTable;
             cartGridView.DataBind();
 
@@ -87,17 +87,18 @@ namespace StudentMarketWebApp.Buyer
 
         protected void btnRemove_OnClick(object sender, EventArgs e)
         {
-            LinkButton linkButton = (LinkButton) sender;
-            DataControlFieldCell cell = (DataControlFieldCell) linkButton.Parent;
-            GridViewRow row = (GridViewRow) cell.Parent;
-            int id=row.RowIndex;
-            DataTable dataTable = (DataTable) Session["dataGrid"];
+            LinkButton linkButton = (LinkButton)sender;
+            DataControlFieldCell cell = (DataControlFieldCell)linkButton.Parent;
+            GridViewRow row = (GridViewRow)cell.Parent;
+            int id = row.RowIndex;
+            DataTable dataTable = (DataTable)Session["dataGrid"];
             int rowIndex = id;
             if (dataTable.Rows.Count >= 0)
             {
                 dataTable.Rows[rowIndex].Delete();
                 cartGridView.DataSource = dataTable;
                 cartGridView.DataBind();
+                CalculateSum();
             }
         }
 
@@ -119,6 +120,54 @@ namespace StudentMarketWebApp.Buyer
                 lblTotal.Text = "0";
             }
 
+        }
+
+        protected void btnOrder_OnClick(object sender, EventArgs e)
+        {
+            if (cartGridView.Rows.Count >= 0)
+            {
+                InsertOrders();
+            }
+            else
+            {
+                func.Alert(Page, "Please add a item to cart first", "w", true);
+            }
+        }
+        private void InsertOrders()
+        {
+            buyModel.Invoice = buyGateway.GenerateInvoice();
+            foreach (GridViewRow gridViewRow in cartGridView.Rows)
+            {
+                buyModel.BuyId = Convert.ToInt32(func.GenerateId("SELECT MAX(BuyId) FROM Buy"));
+                buyModel.PostId = Convert.ToInt32((gridViewRow.FindControl("idHiddenField") as HiddenField).Value);
+                buyModel.Price = Convert.ToDouble((gridViewRow.FindControl("priceLabel") as Label).Text);
+                buyModel.TotalPrice = Convert.ToDouble((gridViewRow.FindControl("priceLabel") as Label).Text);
+                buyModel.BuyerId = Convert.ToInt32(func.UserId());
+                buyModel.SellerId = Convert.ToInt32((gridViewRow.FindControl("HiddenField1") as HiddenField).Value);
+                buyModel.DeadLine = "";
+                buyModel.Quantity = 1;
+                buyModel.Type = "Buy";
+                buyModel.Status = "Pending";
+                buyModel.Intime = func.Date();
+                bool result = buyGateway.SaveBuy(buyModel);
+                if (result)
+                {
+                    Session["gridData"] = null;
+                    cartGridView.DataSource = null;
+                    cartGridView.DataBind();
+                    lblTotal.Text = "0";
+                    func.Alert(Page, "Ordered successfully,wait for seller confirmation.", "s", true);
+                }
+                else
+                {
+                    func.Alert(Page, "Order Failed", "e", true);
+                }
+            }
+        }
+        protected void btnCancel_OnClick(object sender, EventArgs e)
+        {
+            Session["dataGrid"] = null;
+            Response.Redirect("/Buyer/view-ads.aspx");
         }
     }
 }
