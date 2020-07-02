@@ -29,16 +29,16 @@ namespace StudentMarketWebApp.Admin
             if (!IsPostBack)
             {
                 func.CheckCookies();
-                //func.Type(this, "Buyer");
+                func.AdminType(this, "Super Admin", "Admin");
                 int id = Convert.ToInt32(Request.QueryString["id"]);
                 func.LoadDataList(DataList1, "SELECT Picture FROM PostPic WHERE PostId='" + id + "'");
-               Load();
+                Load();
             }
         }
         private void Load()
         {
             int id = Convert.ToInt32(Request.QueryString["id"]);
-            postAdModel = postAdGateway.GetPost(id,"W");
+            postAdModel = postAdGateway.GetPost(id, "W");
             lblProductName.Text = postAdModel.ProductName;
             lblTime.Text = lblTime.Text + " " + postAdModel.Intime;
             lblLocation.Text = postAdModel.DistrictName + "," + postAdModel.DivisionName;

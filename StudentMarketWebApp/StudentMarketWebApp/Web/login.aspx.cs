@@ -14,7 +14,7 @@ namespace StudentMarketWebApp.Web
         private Alert alert;
         private UserListModel userListModel;
         private UserListGateway userListGateway;
-        HttpCookie cookie = new HttpCookie("Stu");
+
         public login()
         {
             func = BaseClass.GetInstance();
@@ -37,7 +37,11 @@ namespace StudentMarketWebApp.Web
                     {
                         Response.Redirect("/Seller/post-ad.aspx");
                     }
-                    else if (cookies["Type"].ToString() == "Admin" || cookies["Type"].ToString() == "Super Admin")
+                    else if (cookies["Type"].ToString() == "Admin")
+                    {
+                        Response.Redirect("/Admin/add-category.aspx");
+                    }
+                    else if (cookies["Type"].ToString() == "Super Admin")
                     {
                         Response.Redirect("/Admin/add-category.aspx");
                     }
@@ -62,6 +66,9 @@ namespace StudentMarketWebApp.Web
                         $"SELECT Password FROM UserList WHERE Email='{txtEmail.Value}' AND Password='{txtPassword.Value}' AND Status='A' COLLATE Latin1_General_CS_AI");
                 if (password == txtPassword.Value)
                 {
+                    HttpCookie cookie = new HttpCookie("Stu");
+                    cookie.Expires = DateTime.Now.AddDays(-1);
+                    HttpContext.Current.Response.Cookies.Add(cookie);
                     cookie["Name"] = func.IsExist($"SELECT Name FROM UserList WHERE Email='{txtEmail.Value}'");
                     cookie["Type"] = func.IsExist($"SELECT Type FROM UserList WHERE Email='{txtEmail.Value}'");
                     cookie["UserId"] = func.IsExist($"SELECT UserId FROM UserList WHERE Email='{txtEmail.Value}'");
@@ -78,17 +85,42 @@ namespace StudentMarketWebApp.Web
                     {
                         Response.Redirect("/Seller/post-ad.aspx");
                     }
-                    else if (cookie["Type"].ToString() == "Admin" || cookie["Type"].ToString() == "Super Admin")
-                    {
-                        Response.Redirect("/Admin/add-category.aspx");
-                    }
-
                 }
                 else
                 {
-                    func.Alert(Page, "Invalid email & password", "w", true);
+                    string password1 =
+                        func.IsExist(
+                            $"SELECT Password FROM Admin WHERE Email='{txtEmail.Value}' AND Password='{txtPassword.Value}' AND Status='Active' COLLATE Latin1_General_CS_AI");
+                    if (password1 == txtPassword.Value)
+                    {
+                        HttpCookie cookie = new HttpCookie("Stu");
+                        cookie.Expires = DateTime.Now.AddDays(-1);
+                        Response.Cookies.Add(cookie);
+                        cookie["Name"] = func.IsExist($"SELECT Name FROM Admin WHERE Email='{txtEmail.Value}'");
+                        cookie["Type"] = func.IsExist($"SELECT Type FROM Admin WHERE Email='{txtEmail.Value}'");
+                        cookie["UserId"] = func.IsExist($"SELECT AdminId FROM Admin WHERE Email='{txtEmail.Value}'");
+                        cookie["Picture"] =
+                            func.IsExist($"SELECT ProfilePicture FROM Admin WHERE Email='{txtEmail.Value}'");
+                        cookie["Mobile"] = func.IsExist($"SELECT MobileNumber FROM Admin WHERE Email='{txtEmail.Value}'");
+                        cookie["Email"] = func.IsExist($"SELECT Email FROM Admin WHERE Email='{txtEmail.Value}'");
+                        cookie.Expires = DateTime.Now.AddDays(30);
+                        Response.Cookies.Add(cookie);
+                        if (cookie["Type"].ToString() == "Admin")
+                        {
+                            Response.Redirect("/Admin/add-category.aspx");
+                        }
+                        else if (cookie["Type"].ToString() == "Super Admin")
+                        {
+                            Response.Redirect("/Admin/add-category.aspx");
+                        }
+                    }
+                    else
+                    {
+                        func.Alert(Page, "Invalid email & password", "w", true);
+                    }
+
                 }
             }
         }
     }
-}
+    }

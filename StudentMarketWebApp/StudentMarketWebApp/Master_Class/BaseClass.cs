@@ -350,12 +350,34 @@ namespace BitsSoftware
             HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
             return cookies["Email"];
         }
+        public string CheckType()
+        {
+            HttpCookie cookie = new HttpCookie("Stu");
+            HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
+            return cookies["Type"];
+        }
 
         public void Type(Page page, string type)
         {
             HttpCookie cookie = new HttpCookie("Stu");
             HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
             if (cookies["Type"] != type)
+            {
+                HttpContext.Current.Response.Redirect("/Web/login.aspx");
+            }
+
+        }
+        public void AdminType(Page page, string type1, string type2)
+        {
+            HttpCookie cookie = new HttpCookie("Stu");
+            HttpCookie cookies = HttpContext.Current.Request.Cookies["Stu"];
+            if (cookies["Type"] == type1)
+            {
+            }
+            else if (cookies["Type"] == type2)
+            {
+            }
+            else
             {
                 HttpContext.Current.Response.Redirect("/Web/login.aspx");
             }
@@ -410,7 +432,7 @@ namespace BitsSoftware
             try
             {
                 if (con.State != ConnectionState.Open) con.Open();
-                string query = @"SELECT COUNT(SellerId) FROM Buy WHERE SellerId='"+sellerId+"' AND SellerNoti IS NULL";
+                string query = @"SELECT COUNT(SellerId) FROM Buy WHERE SellerId='" + sellerId + "' AND SellerNoti IS NULL";
                 SqlCommand cmd = new SqlCommand(query, con);
                 SqlDataReader DR = cmd.ExecuteReader();
                 while (DR.Read())
@@ -430,7 +452,7 @@ namespace BitsSoftware
             try
             {
                 if (con.State != ConnectionState.Open) con.Open();
-                string query = @"SELECT COUNT(BuyerId) FROM Buy WHERE BuyerId='"+buyerId+"' AND SellerNoti!='' AND BuyerNoti IS NULL";
+                string query = @"SELECT COUNT(BuyerId) FROM Buy WHERE BuyerId='" + buyerId + "' AND SellerNoti!='' AND BuyerNoti IS NULL";
                 SqlCommand cmd = new SqlCommand(query, con);
                 SqlDataReader DR = cmd.ExecuteReader();
                 while (DR.Read())

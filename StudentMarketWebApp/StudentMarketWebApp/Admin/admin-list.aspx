@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="buyer-info.aspx.cs" Inherits="StudentMarketWebApp.Admin.buyer_info" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="admin-list.aspx.cs" Inherits="StudentMarketWebApp.Admin.admin_list" %>
 
 <!DOCTYPE html>
 
@@ -109,62 +109,88 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Buyer Profile</h3>
+                                <h3>Admin List</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <asp:DropDownList ID="ddlStatus" AutoPostBack="True" OnSelectedIndexChanged="ddlStatus_OnSelectedIndexChanged" class="form-control1 wd" runat="server">
-                                            <asp:ListItem Value="A">Active</asp:ListItem>
-                                            <asp:ListItem Value="I">Inactive</asp:ListItem>
-                                            <asp:ListItem Value="W">Waiting</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
                                     <div class="col-md-5">
                                         <asp:TextBox ID="txtSearch" class="form-control1 wd" placeholder="Search Profile" AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" runat="server"></asp:TextBox>
                                     </div>
                                     <div class="col-md-5"></div>
+                                    <div class="col-md-2">
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="profileGridView" class="table table-bordered table-striped " runat="server" OnRowDataBound="profileGridView_OnRowDataBound" OnPageIndexChanging="profileGridView_OnPageIndexChanging" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
+                                            <asp:GridView ID="adminGridView" EmptyDataText="No Data Found !" class="table table-bordered table-striped" runat="server" AutoGenerateColumns="False" CellPadding="3" PageSize="15" AllowPaging="True" OnPageIndexChanging="adminGridView_OnPageIndexChanging" HorizontalAlign="Left" ShowHeaderWhenEmpty="True">
                                                 <Columns>
-                                                    <asp:TemplateField HeaderText="Serial" Visible="False">
+                                                    <asp:TemplateField HeaderText="SL">
                                                         <ItemTemplate>
                                                             <asp:Label ID="slLabel" runat="server" Text='<%#Container.DataItemIndex + 1 %>'></asp:Label>
+                                                            <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("AdminId") %>' />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Name">
                                                         <ItemTemplate>
-                                                            <div class="col-md-12">
-                                                                <div class="row">
-                                                                    <div class="col-md-2">
-                                                                        <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("UserId") %>' />
-                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("Status") %>' />
-                                                                        <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <h4>
-                                                                            <asp:Label ID="NameLabel" runat="server" Text='<%#Eval("Name")%>'></asp:Label>
-                                                                        </h4>
-                                                                        <br />
-                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"About : "+Eval("About")%>'></asp:Label>
-                                                                        <br />
-                                                                        <i class="fa fa-map-marker text-primary"></i>
-                                                                        <asp:Label runat="server" Text='<%#Eval("DistrictName")+","+Eval("DivisionName")%>'></asp:Label>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <a class="btn btn-success wd" style="color: white; width: 100%" title="Call" href='tel:<%#Eval("MobileNo") %>'><i class="fas fa-phone" style="color: white;"></i>&nbsp;&nbsp;Call</a><br />
-                                                                        <a class="btn wd" style="color: white; width: 100%; background: brown;" title="Mail" href='mailto:<%#Eval("Email") %>'><i class="fas fa-mail-bulk" style="color: white;"></i>&nbsp;&nbsp;Mail</a><br />
-                                                                        <asp:LinkButton ID="statusButton" OnClick="statusButton_OnClick" runat="server" class="btn btn-primary" Style="color: white; width: 100%;"><i class="fas fa-check" style="color: white;"></i>&nbsp;&nbsp;Inactive</asp:LinkButton>
-                                                                    </div>
+                                                            <asp:Label runat="server" Text='<%#Eval("Name")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Email">
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" Text=' <%#Eval("Email") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Mobile No.">
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" Text=' <%#Eval("MobileNumber") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Nid No.">
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" Text=' <%#Eval("NidNo") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Gender">
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" Text=' <%#Eval("Gender") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="DateofBirth">
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" Text=' <%#Eval("DateofBirth") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Profile Pic">
+                                                        <ItemTemplate>
+                                                            <asp:Image ID="profilesImage" ImageUrl='<%#Eval("ProfilePicture")%>' runat="server" Style="width: 50px; height: 50px;" /><br />
+                                                            </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Type">
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" Text=' <%#Eval("Type") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Refered By">
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" Text=' <%#Eval("ReferedBy") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="In Time">
+                                                        <ItemTemplate>
+                                                            <asp:Label runat="server" Text=' <%#Eval("InTime") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Action">
+                                                        <ItemTemplate>
+                                                            <div class="">
+                                                                <asp:LinkButton runat="server" ID="restrictLinkButton" OnClick="restrictLinkButton_OnClick" class="btn btn-danger" Style="color: white; width: 100%">Restrict</asp:LinkButton>
                                                                 </div>
-                                                            </div>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                 </Columns>
+
                                             </asp:GridView>
                                         </div>
                                     </div>

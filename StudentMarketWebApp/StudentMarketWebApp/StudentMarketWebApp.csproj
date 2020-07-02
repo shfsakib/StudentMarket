@@ -96,10 +96,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\add-category.aspx" />
+    <Content Include="Admin\admin-list.aspx" />
     <Content Include="Admin\Admin.asmx" />
     <Content Include="Admin\buyer-info.aspx" />
+    <Content Include="Admin\create-admin.aspx" />
+    <Content Include="Admin\edit-profile.aspx" />
     <Content Include="Admin\menu.html" />
     <Content Include="Admin\post-approval.aspx" />
+    <Content Include="Admin\restricted-admin.aspx" />
     <Content Include="Admin\seller-info.aspx" />
     <Content Include="Admin\view-ads.aspx" />
     <Content Include="AutoComplete.asmx" />
@@ -2297,6 +2301,13 @@
     <Compile Include="Admin\add-category.aspx.designer.cs">
       <DependentUpon>add-category.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\admin-list.aspx.cs">
+      <DependentUpon>admin-list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admin-list.aspx.designer.cs">
+      <DependentUpon>admin-list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Admin.asmx.cs">
       <DependentUpon>Admin.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -2308,12 +2319,33 @@
     <Compile Include="Admin\buyer-info.aspx.designer.cs">
       <DependentUpon>buyer-info.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\create-admin.aspx.cs">
+      <DependentUpon>create-admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\create-admin.aspx.designer.cs">
+      <DependentUpon>create-admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\edit-profile.aspx.cs">
+      <DependentUpon>edit-profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\edit-profile.aspx.designer.cs">
+      <DependentUpon>edit-profile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\post-approval.aspx.cs">
       <DependentUpon>post-approval.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\post-approval.aspx.designer.cs">
       <DependentUpon>post-approval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\restricted-admin.aspx.cs">
+      <DependentUpon>restricted-admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\restricted-admin.aspx.designer.cs">
+      <DependentUpon>restricted-admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\seller-info.aspx.cs">
       <DependentUpon>seller-info.aspx</DependentUpon>
@@ -2400,10 +2432,12 @@
     <Compile Include="Buyer\view-profile.aspx.designer.cs">
       <DependentUpon>view-profile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Gateway\AdminGateway.cs" />
     <Compile Include="DAL\Gateway\BuyGateway.cs" />
     <Compile Include="DAL\Gateway\CategoryGateway.cs" />
     <Compile Include="DAL\Gateway\PostAdGateway.cs" />
     <Compile Include="DAL\Gateway\UserListGateway.cs" />
+    <Compile Include="DAL\Model\AdminModel.cs" />
     <Compile Include="DAL\Model\BuyModel.cs" />
     <Compile Include="DAL\Model\CategoryModel.cs" />
     <Compile Include="DAL\Model\PostAdModel.cs" />
@@ -2494,6 +2528,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Photos\Admin\" />
     <Folder Include="Photos\Post\" />
   </ItemGroup>
   <PropertyGroup>

@@ -39,7 +39,7 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                       <a class="nav-link"  href="/Seller/notification.aspx">
+                        <a class="nav-link" href="/Seller/notification.aspx">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
@@ -262,9 +262,8 @@
                             </style>
                             <div class="bg_personalInfor-model" id="popupDiv">
                                 <div class="model_personalInfo" style="overflow: scroll; overflow-x: hidden; width: 400px; height: 700px; background-color: white; position: relative">
+                                    <br />
                                     <div class="close p-t-2" style="position: absolute; top: 0; right: 0; font-size: 35px; transform: rotate(90deg); cursor: pointer; font-family: arial, sans-serif;">x</div>
-                                    <br />
-                                    <br />
                                     <br />
                                     <div class="col-md-12">
                                         <div class="row">

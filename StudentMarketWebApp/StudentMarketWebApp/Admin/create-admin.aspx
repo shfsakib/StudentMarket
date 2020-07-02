@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="order-product.aspx.cs" Inherits="StudentMarketWebApp.Buyer.order_product" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="create-admin.aspx.cs" Inherits="StudentMarketWebApp.Admin.create_admin" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Market | Buyer</title>
+    <title>Student Market | Admin</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -20,7 +20,6 @@
     <script src="../DashboardFile/Custom/sweetalert2.all.min.js"></script>
     <script src="../DashboardFile/Custom/sweetalert2@9.js"></script>
     <link href="../DashboardFile/PopDiv.css" rel="stylesheet" />
-
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -40,17 +39,11 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="/Buyer/notification.aspx">
-                            <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="fas fa-ellipsis-v fa-lg"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="/Buyer/edit-profile.aspx" class="dropdown-item">
+                            <a href="/Admin/edit-profile.aspx" class="dropdown-item">
                                 <!-- Message Start -->
                                 Edit Profile
                            <!-- Message End -->
@@ -88,6 +81,9 @@
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="accordionSidebar">
+                            <!-- Add icons to the links using the .nav-icon class
+                             with font-awesome or any other icon font library -->
+
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -112,79 +108,64 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Order Product</h3>
+                                <h3>Posted Ads</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <asp:Image ID="productImage" ImageUrl="/DashboardFile/images/image_dummy.png" runat="server" Width="200px" Height="200px" alt="big-image" />
-                                    </div>
-                                    <div class="col-md-2">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    &nbsp;<br />
-                                </div>
-                                <div class="row">
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <asp:Label ID="lblProductName" runat="server" Style="font-size: 30px; font-weight: bold; font-family: comic sans ms;" Text="Label"></asp:Label>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <asp:Label ID="lblTime" runat="server" Style="font-size: 14px; font-weight: bold; color: gray; font-family: comic sans ms;" Text="Posted on "></asp:Label>
-                                        <br />
-                                        <span><i class="fa fa-map-marker text-primary"></i>
-                                            <asp:Label ID="lblLocation" Style="font-size: 14px; font-weight: bold; color: gray; font-family: comic sans ms;" runat="server" Text="Label"></asp:Label></span>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <asp:Label ID="lblPrice" runat="server" Style="font-size: 25px; font-weight: bold; color: green; font-family: comic sans ms;" Text="৳"></asp:Label><span>
-                                            <asp:Label ID="lblPrice1" Style="font-size: 25px; font-weight: bold; color: green; font-family: comic sans ms;" runat="server" Text="Label"></asp:Label></span>
-                                        <br />
-                                        <br />
-                                        <asp:Label ID="lblSeller" runat="server" Text="For sale by member :"></asp:Label><span>
-                                            <asp:LinkButton ID="lblUserName" OnClick="lblUserName_OnClick" OnClientClick="SetTarget();" runat="server">LinkButton</asp:LinkButton>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
-                                        <asp:Label ID="Label2" runat="server" Text="Description :"></asp:Label><span>
-                                            <asp:Label ID="lblDescription" runat="server" Text="Label"></asp:Label>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row">
-                                    &nbsp;<br />
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-2">Quantity : </div>
+                                    <div class="col-md-2">Name : </div>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtQuantity" class="form-control1 wd" TextMode="Number" autocomplete="off" placeholder="enter amount in piece" runat="server"></asp:TextBox>
+                                        <input type="text" runat="server" class="form-control1 wd" placeholder="Mr. xyz" id="nameTextBox" />
                                     </div>
                                     <div class="col-md-2"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-2">Dead Line : </div>
+                                    <div class="col-md-2">Email : </div>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtDeadLine" class="form-control1 wd" autocomplete="off" placeholder="dd-mm-yyyy" runat="server"></asp:TextBox>
+                                        <input class="form-control1 wd" id="txtEmail" autocomplete="off" runat="server" type="email" placeholder="example@example.com" />
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Mobile No. : </div>
+                                    <div class="col-md-6">
+                                        <input type="number" runat="server" autocomplete="off" class="form-control1 wd" placeholder="01XXXXXXXXX" id="mobileNoTextBox" />
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Nid No. : </div>
+                                    <div class="col-md-6">
+                                        <input type="number" runat="server" autocomplete="off" class="form-control1 wd" placeholder="123456..." id="nidTextBox" />
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Date of Birth : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="dateofBirthTextBox" autocomplete="off" class="form-control1 wd" runat="server" required="required" placeholder="dd/mm/yyyy"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Gender : </div>
+                                    <div class="col-md-6">
+                                        <asp:RadioButton ID="maleRadioButton" runat="server" Text="Male" GroupName="gender" Checked="True" />
+                                        <asp:RadioButton ID="femaleRadioButton" runat="server" Text="Female" GroupName="gender" />
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Profile Picture : </div>
+                                    <div class="col-md-6">
+                                        <asp:FileUpload ID="profilePicFileUpload" onchange="ImagePreview(this);" class="form-control1 wd" accept=".png,.jpg,.jpeg" alt="profile pic" required="required" runat="server" />
                                     </div>
                                     <div class="col-md-2"></div>
                                 </div>
@@ -192,18 +173,58 @@
                                     <div class="col-md-2"></div>
                                     <div class="col-md-2"></div>
                                     <div class="col-md-6">
-                                        <asp:LinkButton ID="btnOrder" OnClick="btnOrder_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-shopping-basket" style="color: white;"></i>&nbsp;&nbsp;Order</asp:LinkButton>
+                                        <br />
+                                        <img id="profilePicImage" runat="server" class="form-control1 wd" src="/DashboardFile/images/photo_dummy.png" alt="ProfilePic" style="height: 250px; width: 250px" />
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Type : </div>
+                                    <div class="col-md-6">
+                                        <asp:DropDownList ID="typeDropDownList" class="form-control1 wd" required="required" runat="server">
+                                            <asp:ListItem Text="Select"></asp:ListItem>
+                                            <asp:ListItem Text="Super Admin"></asp:ListItem>
+                                            <asp:ListItem Text="Admin"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Password : </div>
+                                    <div class="col-md-6">
+                                        <input type="text" runat="server" autocomplete="off" class="form-control1 wd" placeholder="enter password" id="passwordTextBox" />
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Confirm Password : </div>
+                                    <div class="col-md-6">
+                                        <input type="text" runat="server" autocomplete="off" class="form-control1 wd" placeholder="confirm password" id="confirmPasswordTextBox" />
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6">
+                                        <asp:LinkButton ID="createButton" OnClick="createButton_OnClick" Style="width: 100%;" runat="server" class="btn btn-primary"> <i class="icon-add_to_queue"></i> Create</asp:LinkButton>
                                     </div>
                                     <div class="col-md-2"></div>
                                 </div>
                             </div>
                             <!-- /.row -->
                         </div>
+
                     </div>
+
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /.content -->
             </div>
+
             <!-- /.content-wrapper -->
             <!-- Control Sidebar -->
 
@@ -224,23 +245,31 @@
     <script>
         $(document).ready(function () {
 
-            $('#accordionSidebar').load("/Buyer/menu.html");
+            $('#accordionSidebar').load("/Admin/menu.html");
 
         });
     </script>
-    <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
-    <script src="../DashboardFile/Autocomplete-jquery-ui.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-        function SetTarget() {
-            document.forms[0].target = "_blank";
-        }
+        function ImagePreview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#<%=profilePicImage.ClientID%>').prop('src', e.target.result)
+                        .width(200)
+                        .height(200);
+                };
+                reader.readAsDataURL(input.files[0]);
+                }
+            }
+
     </script>
     <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
     <script src="../DashboardFile/Date-jquery-1.12.4.js"></script>
     <script src="../DashboardFile/Date-jquery-ui.js"></script>
     <script>
         $(function () {
-            $("#txtDeadLine").datepicker({
+            $("#dateofBirthTextBox").datepicker({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: 'dd-mm-yy',
@@ -248,4 +277,5 @@
             });
         });
     </script>
+</body>
 </html>

@@ -50,7 +50,7 @@
                             <i class="fas fa-ellipsis-v fa-lg"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="/Seller/edit-profile.aspx" class="dropdown-item">
+                            <a href="/Admin/edit-profile.aspx" class="dropdown-item">
                                 <!-- Message Start -->
                                 Edit Profile
                            <!-- Message End -->

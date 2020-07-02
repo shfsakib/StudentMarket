@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="edit-profile.aspx.cs" Inherits="StudentMarketWebApp.Buyer.ViewProfile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="edit-profile.aspx.cs" Inherits="StudentMarketWebApp.Admin.edit_profile" %>
 
 <!DOCTYPE html>
 
@@ -49,7 +49,7 @@
                             <i class="fas fa-ellipsis-v fa-lg"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="/Buyer/edit-profile.aspx" class="dropdown-item">
+                            <a href="/Admin/edit-profile.aspx" class="dropdown-item">
                                 <!-- Message Start -->
                                 Edit Profile
                            <!-- Message End -->
@@ -188,64 +188,13 @@
                                         <asp:Label ID="lblNid" runat="server" Style="font-family: comic sans ms; font-size: 16px;" Text="Nid No."></asp:Label>
                                     </div>
                                     <div class="col-md-2">
-                                        Birth Certificate No. : 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <asp:Label ID="lblBCert" runat="server" Style="font-family: comic sans ms; font-size: 16px;" Text="Birth Certificate No."></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        Guardian Nid No. : 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <asp:Label ID="lblGNid" runat="server" Style="font-family: comic sans ms; font-size: 16px;" Text="Guardian Nid No."></asp:Label>
-                                    </div>
-                                    <div class="col-md-2">
                                         Password : 
                                     </div>
                                     <div class="col-md-4">
                                         <asp:Label ID="lblPassword" runat="server" Style="font-family: comic sans ms; font-size: 16px;" Text="Password"></asp:Label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        About : 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <asp:Label ID="lblAbout" runat="server" Style="font-family: comic sans ms; font-size: 16px;" Text="About"></asp:Label>
-                                    </div>
-                                    <div class="col-md-6">
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <asp:Label ID="Label2" runat="server" Style="font-family: comic sans ms; font-size: 24px; font-weight: bold;" Text="Location : "></asp:Label>
-                                    </div>
-                                    <div class="col-md-4">
-                                    </div>
-                                    <div class="col-md-4"></div>
-                                </div>
-                                <div class="row">
-                                    &nbsp;<br />
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        Division : 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <asp:Label ID="lblDivision" runat="server" Style="font-family: comic sans ms; font-size: 16px;" Text="Division"></asp:Label>
-                                    </div>
-                                    <div class="col-md-2">
-                                        District : 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <asp:Label ID="lblDistrict" runat="server" Style="font-family: comic sans ms; font-size: 16px;" Text="District"></asp:Label>
-                                    </div>
-                                </div>
                             </div>
-                            <!-- /.row -->
                             <style>
                                 .bg_personalInfor-model {
                                     width: 100%;
@@ -258,16 +207,19 @@
                                     position: absolute;
                                     top: 0;
                                     left: 0;
-                                    overflow: hidden;
+                                    overflow: scroll;
+                                    overflow-x: hidden;
                                 }
                             </style>
                             <div class="bg_personalInfor-model" id="popupDiv">
-                                <div class="model_personalInfo" style="overflow: scroll; overflow-x: hidden; width: 400px; height: 700px; background-color: white; position: relative">
-                                    <div class="close p-t-2" style="position: absolute; top: 0; right: 0; font-size: 35px; transform: rotate(90deg); cursor: pointer; font-family: arial, sans-serif;">x</div>
+                                <div class="model_personalInfo" style="overflow: scroll; margin-top: 15%; overflow-x: hidden; width: 400px; height: 750px; background-color: white; position: relative">
                                     <br />
                                     <br />
+                                    <button onclick="close()" class="btn btn-danger" style="position: absolute; top: 0; right: 4px; font-size: 18px; transform: rotate(90deg); cursor: pointer; font-family: arial, sans-serif;">X</button>
                                     <div class="col-md-12">
                                         <div class="row">
+                                            
+                                            <div class="col-md-12"></div>
                                             <div class="col-md-12">Name :</div>
                                             <div class="col-md-12">
                                                 <asp:TextBox ID="txtName" runat="server" class="form-control1 wd" placeholder="Mr. xyz"></asp:TextBox>
@@ -288,21 +240,9 @@
                                                     <asp:ListItem>Female</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
-                                            <div class="col-md-12">About :</div>
-                                            <div class="col-md-12">
-                                                <asp:TextBox ID="txtAbout" runat="server" class="form-control1 wd" placeholder="write something about you"></asp:TextBox>
-                                            </div>
                                             <div class="col-md-12">Nid No. :</div>
                                             <div class="col-md-12">
                                                 <asp:TextBox ID="txtNid" runat="server" class="form-control1 wd" placeholder="123456..."></asp:TextBox>
-                                            </div>
-                                            <div class="col-md-12">Birth Certificate No. :</div>
-                                            <div class="col-md-12">
-                                                <asp:TextBox ID="txtBCert" runat="server" class="form-control1 wd" placeholder="123456..."></asp:TextBox>
-                                            </div>
-                                            <div class="col-md-12">Guardian Nid No. :</div>
-                                            <div class="col-md-12">
-                                                <asp:TextBox ID="txtGNid" runat="server" class="form-control1 wd" placeholder="123456..."></asp:TextBox>
                                             </div>
                                             <div class="col-md-12">Password :</div>
                                             <div class="col-md-12">
@@ -310,7 +250,7 @@
                                             </div>
                                             <div class="col-md-12">Picture :</div>
                                             <div class="col-md-12">
-                                                <asp:FileUpload ID="userFileUpload" Style="width: 80%" onchange="ImagePreview(this);" class="form-control1 wd" accept=".png,.jpg,.jpeg" runat="server" />
+                                                <asp:FileUpload ID="userFileUpload" Style="width: 80%" onchange="ImagePreview(this);" class="form-control" accept=".png,.jpg,.jpeg" runat="server" />
                                             </div>
                                             <div class="col-md-12">
                                                 <img id="userImage" src="/DashboardFile/images/photo_dummy.png" alt="employee Image" style="height: 250px; width: 250px" runat="server" class="form-control" />
@@ -328,11 +268,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- /.row -->
                         </div>
-
                     </div>
                     <!-- /.container-fluid -->
-
                 </div>
                 <!-- /.content -->
             </div>
@@ -367,11 +306,10 @@
                 document.querySelector('.bg_personalInfor-model').style.display = 'flex';
 
             });
-        document.querySelector('.close').addEventListener('click',
-            function () {
-
+        //document.querySelector('.close').addEventListener('click',
+            function close(){
                 document.querySelector('.bg_personalInfor-model').style.display = 'none';
-            });
+            };
 
     </script>
     <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />

@@ -62,12 +62,11 @@ VALUES(@CategoryId, @CategoryName,  @InTime)";
             connection.Close();
             return rowAffect;
         }
-        public bool IsCategoryExist(int id)
+        public bool IsCategoryExist(string name)
         {
 
 
-            string query = @"SELECT      *
-FROM            Category WHERE CategoryId='" + id + "'";
+            string query = @"SELECT      * FROM            Category WHERE CategoryName='" + name + "'";
             command = new SqlCommand(query, connection);
             connection.Open();
             reader = command.ExecuteReader();

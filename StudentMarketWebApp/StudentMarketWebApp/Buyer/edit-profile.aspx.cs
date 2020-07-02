@@ -35,7 +35,7 @@ namespace StudentMarketWebApp.Buyer
         {
             userListModel = userListGateway.GetUser(Convert.ToInt32(func.UserId()));
             ViewState["pic"] = userListModel.Picture; ;
-            profilePictureImage.ImageUrl = ViewState["pic"].ToString();
+            profilePictureImage.ImageUrl= userImage.Src = ViewState["pic"].ToString();
             nameLabel.Text = txtName.Text = userListModel.Name;
             lblEmail.Text = userListModel.Email;
             lblMobile.Text = txtMobile.Text = userListModel.MobileNo;

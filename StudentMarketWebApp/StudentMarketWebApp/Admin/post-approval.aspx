@@ -49,7 +49,7 @@
                             <i class="fas fa-ellipsis-v fa-lg"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="/Seller/edit-profile.aspx" class="dropdown-item">
+                            <a href="/Admin/edit-profile.aspx" class="dropdown-item">
                                 <!-- Message Start -->
                                 Edit Profile
                            <!-- Message End -->
@@ -114,7 +114,7 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Posted Ads</h3>
+                                <h3>Approve Pending Post</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">

@@ -17,21 +17,22 @@ namespace StudentMarketWebApp.Admin
 
         public add_category()
         {
-            categoryGateway=new CategoryGateway();
-            func=BaseClass.GetInstance();
-            alert=Alert.GetInstance();
+            categoryGateway = new CategoryGateway();
+            func = BaseClass.GetInstance();
+            alert = Alert.GetInstance();
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 func.CheckCookies();
+                func.AdminType(this, "Super Admin","Admin");
                 LoadCategory();
             }
         }
         private void LoadCategory()
         {
-            func.LoadGrid(categoryGridView,"SELECT * FROM Category ORDER BY CategoryId DESC");
+            func.LoadGrid(categoryGridView, "SELECT * FROM Category ORDER BY CategoryId DESC");
         }
         protected void categoryGridView_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -43,20 +44,27 @@ namespace StudentMarketWebApp.Admin
         {
             if (e.CommandName.Equals("AddNew"))
             {
-
-                CategoryModel categoryModel = new CategoryModel();
-                categoryModel.CategoryId = categoryGateway.GenerateId();
-                categoryModel.CategoryName = (categoryGridView.HeaderRow.FindControl("categoryFooterTextBox") as HtmlInputText).Value.Trim();
-                categoryModel.InTime = func.Date();
-                int a = categoryGateway.Save(categoryModel);
-                if (a>0)
-                {
-                    LoadCategory();
-                    func.Alert(this,alert.InsertSuccess,"s",false);
-                }
+                if ((categoryGridView.HeaderRow.FindControl("categoryFooterTextBox") as HtmlInputText).Value.Trim() == "")
+                    func.Alert(this, "Category Name Required", "w", true);
+                else if (categoryGateway.IsCategoryExist((categoryGridView.HeaderRow.FindControl("categoryFooterTextBox") as HtmlInputText).Value.Trim()))
+                    func.Alert(this, "Category Name Already Exist", "w", true);
                 else
                 {
-                    func.Alert(this,alert.InsertFailed,"s",false);
+                    CategoryModel categoryModel = new CategoryModel();
+                    categoryModel.CategoryId = categoryGateway.GenerateId();
+                    categoryModel.CategoryName =
+                        (categoryGridView.HeaderRow.FindControl("categoryFooterTextBox") as HtmlInputText).Value.Trim();
+                    categoryModel.InTime = func.Date();
+                    int a = categoryGateway.Save(categoryModel);
+                    if (a > 0)
+                    {
+                        LoadCategory();
+                        func.Alert(this, alert.InsertSuccess, "s", false);
+                    }
+                    else
+                    {
+                        func.Alert(this, alert.InsertFailed, "s", false);
+                    }
                 }
             }
         }
@@ -69,21 +77,30 @@ namespace StudentMarketWebApp.Admin
 
         protected void categoryGridView_OnRowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            var id = (HiddenField)categoryGridView.Rows[e.RowIndex].FindControl("idHiddenField");
-            CategoryModel categoryModel = new CategoryModel();
-            categoryModel.CategoryName =
-                (categoryGridView.Rows[e.RowIndex].FindControl("categoryTextBox") as HtmlInputText).Value.Trim();
-            categoryModel.CategoryId = Convert.ToInt32(id.Value);
-            int a = categoryGateway.updateAllCategory(categoryModel);
-            if (a > 0)
-            {
-               func.Alert(this, alert.UpdateSuccess, "s", false);
-                categoryGridView.EditIndex = -1;
-                LoadCategory();
-            }
+            if ((categoryGridView.Rows[e.RowIndex].FindControl("categoryTextBox") as HtmlInputText).Value.Trim() == "")
+                func.Alert(this, "Category Name Required", "w", true);
+            else if (
+                categoryGateway.IsCategoryExist(
+                    (categoryGridView.Rows[e.RowIndex].FindControl("categoryTextBox") as HtmlInputText).Value.Trim()))
+                func.Alert(this, "Category Name Already Exist", "w", true);
             else
             {
-                func.Alert(this, alert.UpdateFailed, "s", false);
+                var id = (HiddenField)categoryGridView.Rows[e.RowIndex].FindControl("idHiddenField");
+                CategoryModel categoryModel = new CategoryModel();
+                categoryModel.CategoryName =
+                    (categoryGridView.Rows[e.RowIndex].FindControl("categoryTextBox") as HtmlInputText).Value.Trim();
+                categoryModel.CategoryId = Convert.ToInt32(id.Value);
+                int a = categoryGateway.updateAllCategory(categoryModel);
+                if (a > 0)
+                {
+                    func.Alert(this, alert.UpdateSuccess, "s", false);
+                    categoryGridView.EditIndex = -1;
+                    LoadCategory();
+                }
+                else
+                {
+                    func.Alert(this, alert.UpdateFailed, "s", false);
+                }
             }
         }
 

@@ -28,9 +28,8 @@ namespace StudentMarketWebApp.Admin
         {
             if (!IsPostBack)
             {
-
                 func.CheckCookies();
-                //func.Type(this, "Buyer");
+                func.AdminType(this, "Super Admin", "Admin");
                 LoadGrid();
             }
         }
