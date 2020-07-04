@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="order-history.aspx.cs" Inherits="StudentMarketWebApp.Seller.order_history" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="view-payment.aspx.cs" Inherits="StudentMarketWebApp.Buyer.view_payment" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <title>Student Market | Seller</title>
+    <title>Student Market | Buyer</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -39,7 +39,7 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="/Seller/notification.aspx">
+                        <a class="nav-link" href="/Buyer/notification.aspx">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
@@ -114,14 +114,21 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Notification</h3>
+                                <h3>Pending Orders</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
+                                    <div class="col-md-5">
+                                        <asp:TextBox ID="txtSearch" AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" class="form-control1 wd" placeholder="Search by invoice,email or mobile no." runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-7">
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12">
-                                        <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="historyGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="historyGridView_OnPageIndexChanging" OnRowDataBound="historyGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Notification Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="30">
+                                        <div class="table-responsive" style="border: none; color: grey;">
+                                            <asp:GridView ID="paymentGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="paymentGridView_OnPageIndexChanging" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="30">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Serial" Visible="False">
                                                         <ItemTemplate>
@@ -133,32 +140,23 @@
                                                             <div class="col-md-12">
                                                                 <div class="row">
                                                                     <div class="col-md-2">
-                                                                        <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("BuyId") %>' />
-                                                                        <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("PostId") %>' />
-                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("BuyerId") %>' />
+                                                                        <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("OrderInvoice") %>' />
+                                                                        <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("PayId") %>' />
+                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("SellerId") %>' />
                                                                         <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <h4>
-                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#"You"+" have "+Eval("Status") +Eval("Name")+" request for "+Eval("ProductName")%>'></asp:Label>
-                                                                            <asp:LinkButton ID="titleLinkButton" OnClick="titleLinkButton_OnClick" title="View Profile" runat="server"></asp:LinkButton>
+                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%# "You have paid BDT " + Eval("Price") +" to "+Eval("Name")+" for "+Eval("OrderInvoice")%>'></asp:Label>
                                                                         </h4>
                                                                         <br />
-                                                                        <asp:Label ID="Label5" runat="server" Text="Order Invoice : "></asp:Label><span>
-                                                                            <asp:Label ID="Label6" runat="server" Text='<%#Eval("Invoice")%>'></asp:Label></span>
+                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"TrxId : "+Eval("TrxId")%>'></asp:Label>
                                                                         <br />
-                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"Quantity : "+Eval("Quantity")%>'></asp:Label>
-                                                                        <br />
-                                                                        <asp:Label ID="Label2" runat="server" Text='<%#"DeadLine : "+Eval("DeadLine")%>'></asp:Label>
-                                                                        <br />
-                                                                        <asp:Label ID="Label4" runat="server" Text="Payment Method : "></asp:Label><span>
-                                                                            <asp:Label ID="lblpayment" runat="server" Text='<%#Eval("PaymentMethod")%>'></asp:Label></span>
-                                                                        <br/>
-                                                                        <asp:Label ID="Label3" runat="server" Style="color: green;" Text='<%#"Price : "+"৳"+Eval("Price")%>'></asp:Label>
-                                                                        <br />
-                                                                        <asp:Label runat="server" Style="color: green; font-size: 18px;" Text='<%#"Total Price : ৳"+Eval("TotalPrice")%>'></asp:Label><br />
+                                                                        <asp:Label ID="Label2" runat="server" Text="Payment Time : "></asp:Label><span>
+                                                                            <asp:Label ID="lblquantity" runat="server" Text='<%#Eval("Intime")%>'></asp:Label>
                                                                     </div>
                                                                     <div class="col-md-2">
+                                                                        <asp:LinkButton ID="btnRemove" OnClick="btnRemove_OnClick" runat="server" class="btn btn-danger" Style="color: white; width: 100%;" title="Remove"><i class="fas fa-trash-alt" style="color: white;"></i>&nbsp;&nbsp;Remove</asp:LinkButton>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -204,6 +202,41 @@
 
         });
     </script>
+    
+    <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
+    <script src="../DashboardFile/Autocomplete-jquery-ui.js"></script>
+    <script>
+        $("#<%=txtSearch.ClientID %>").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "Buyer.asmx/GetPayInvoice",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{ 'txt' : '" + $("#<%=txtSearch.ClientID %>").val() + "'}",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.d, function (item) {
+                            return {
+                                label: item,
+                                value: item
+                            };
+                        }));
+                    },
+                    error: function (result) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'warning',
+                            title: 'Invoice not found',
+                            showConfirmButton: true,
+                            timer: 6000
+                        });
+                    }
+                });
+            },
 
+            minLength: 1,
+        });
+    </script>
 </body>
 </html>

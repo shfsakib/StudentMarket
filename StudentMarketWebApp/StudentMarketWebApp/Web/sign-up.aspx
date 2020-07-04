@@ -22,6 +22,7 @@
     <link href="../DashboardFile/Custom/sweet-alert.css" rel="stylesheet" />
     <script src="../DashboardFile/Custom/sweetalert2.all.min.js"></script>
     <script src="../DashboardFile/Custom/sweetalert2@9.js"></script>
+    <script src="../DashboardFile/style.js"></script>
     <!-- Main CSS-->
     <link href="/DashboardFile/Signup/css/main.css" rel="stylesheet" media="all">
 </head>

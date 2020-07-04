@@ -173,7 +173,10 @@
                                                                     <div class="col-md-2">
                                                                         <asp:LinkButton ID="btnOrder" OnClick="btnOrder_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-shopping-basket" style="color: white;"></i>&nbsp;&nbsp;Order</asp:LinkButton>
                                                                         <br />
-                                                                        <asp:LinkButton ID="btnCart" OnClick="btnCart_OnClick" runat="server" class="btn btn-primary" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-shopping-cart" style="color: white;"></i>&nbsp;&nbsp;Add to cart</asp:LinkButton>
+                                                                        <asp:LinkButton ID="btnCart" OnClick="btnCart_OnClick" runat="server" class="btn btn-primary wd" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-shopping-cart" style="color: white;"></i>&nbsp;&nbsp;Add to cart</asp:LinkButton>
+                                                                        <br />
+                                                                        <asp:CheckBox ID="chkPay" AutoPostBack="True" runat="server" OnCheckedChanged="chkPay_OnCheckedChanged" Text="Pay online" Checked="True"/><br/>
+                                                                        <asp:CheckBox ID="chkCash" AutoPostBack="True" OnCheckedChanged="chkCash_OnCheckedChanged" runat="server" Text="Cash on delivery"/>                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>

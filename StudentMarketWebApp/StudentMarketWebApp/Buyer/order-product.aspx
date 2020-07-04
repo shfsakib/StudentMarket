@@ -170,7 +170,16 @@
                                     <div class="col-md-2"></div>
                                 </div>
                                 <div class="row">
-                                    &nbsp;<br />
+                                    &nbsp;<br/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6">
+                                        <asp:CheckBox ID="chkPay" AutoPostBack="True" runat="server" OnCheckedChanged="chkPay_OnCheckedChanged" Text="Pay online" Checked="True" />
+                                        <asp:CheckBox ID="chkCash" AutoPostBack="True" OnCheckedChanged="chkCash_OnCheckedChanged" runat="server" Text="Cash on delivery" />
+                                    </div>
+                                    <div class="col-md-2"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2"></div>

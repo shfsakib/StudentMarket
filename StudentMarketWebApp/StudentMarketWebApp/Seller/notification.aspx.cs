@@ -41,7 +41,7 @@ namespace StudentMarketWebApp.Seller
 
         private void Load()
         {
-            string query = @"SELECT        Buy.BuyId, Buy.PostId, Buy.Price, Buy.TotalPrice, Buy.BuyerId, Buy.DeadLine, Buy.Quantity, PostAd.ProductName, (SELECT Name FROM UserList WHERE UserId=Buy.BuyerId) AS Name,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=Buy.PostId)  AS Picture,(SELECT Email FROM UserList WHERE UserList.UserId=Buy.BuyerId) AS Email,Buy.Type
+            string query = @"SELECT        Buy.BuyId, Buy.PostId, Buy.Price,Buy.PaymentMethod, Buy.TotalPrice, Buy.BuyerId, Buy.DeadLine, Buy.Quantity, PostAd.ProductName, (SELECT Name FROM UserList WHERE UserId=Buy.BuyerId) AS Name,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=Buy.PostId)  AS Picture,(SELECT Email FROM UserList WHERE UserList.UserId=Buy.BuyerId) AS Email,Buy.Type
 FROM            Buy INNER JOIN
                          PostAd ON Buy.PostId = PostAd.PostId INNER JOIN
                          UserList ON PostAd.UserId = UserList.UserId WHERE Buy.SellerId='" + func.UserId() + "' AND Buy.Status='Pending' ";

@@ -28,6 +28,12 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/DashboardFile/Login/css/util.css">
     <link rel="stylesheet" type="text/css" href="/DashboardFile/Login/css/main.css">
+    <link href="../DashboardFile/Custom/sweet-alert.css" rel="stylesheet" />
+    <script src="../DashboardFile/Custom/sweetalert2.all.min.js"></script>
+    <script src="../DashboardFile/Custom/sweetalert2@9.js"></script>
+    <link href="../DashboardFile/PopDiv.css" rel="stylesheet" />
+    <script src="../DashboardFile/style.js"></script>
+
 </head>
 <body>
     <div class="limiter">
@@ -45,12 +51,14 @@
                         <input class="input100" id="txtPassword" runat="server" type="password" name="pass" placeholder="Password" />
                         <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                     </div>
-
-                    <div class="container-login100-form-btn m-t-32">
-                        <button class="login100-form-btn" id="btnLogin" runat="server" OnServerClick="btnLogin_OnServerClick">Login</button>
+                    <div class="wrap-input100 validate-input ml-4">
+                        <asp:LinkButton ID="lnkForgot" runat="server" Style="color: blue;" OnClick="lnkForgot_OnClick">Forgot Password?</asp:LinkButton>
                     </div>
-                    <br/>
-                 <span style="margin-left: 30px">Don't have an account?<a href="/Web/sign-up.aspx">Sign up</a></span><br/>
+                    <div class="container-login100-form-btn m-t-32">
+                        <button class="login100-form-btn" id="btnLogin" runat="server" onserverclick="btnLogin_OnServerClick">Login</button>
+                    </div>
+                    <br />
+                    <span style="margin-left: 30px">Don't have an account?<a href="/Web/sign-up.aspx">Sign up</a></span><br />
                     <span style="margin-left: 30px">Back to<a href="/Web/sign-up.aspx">Home</a></span>
                 </form>
             </div>

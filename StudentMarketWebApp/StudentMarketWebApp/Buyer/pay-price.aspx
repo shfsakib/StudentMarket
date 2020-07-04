@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="buyer-info.aspx.cs" Inherits="StudentMarketWebApp.Admin.buyer_info" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pay-price.aspx.cs" Inherits="StudentMarketWebApp.Buyer.pay_price" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Market | Admin</title>
+    <title>Student Market | Buyer</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -20,6 +20,7 @@
     <script src="../DashboardFile/Custom/sweetalert2.all.min.js"></script>
     <script src="../DashboardFile/Custom/sweetalert2@9.js"></script>
     <link href="../DashboardFile/PopDiv.css" rel="stylesheet" />
+
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -38,13 +39,18 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
-
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="/Buyer/notification.aspx">
+                            <i class="far fa-bell"></i>
+                            <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="fas fa-ellipsis-v fa-lg"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="/Admin/edit-profile.aspx" class="dropdown-item">
+                            <a href="/Buyer/edit-profile.aspx" class="dropdown-item">
                                 <!-- Message Start -->
                                 Edit Profile
                            <!-- Message End -->
@@ -82,9 +88,6 @@
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="accordionSidebar">
-                            <!-- Add icons to the links using the .nav-icon class
-                             with font-awesome or any other icon font library -->
-
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -109,68 +112,81 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Buyer Profile</h3>
+                                <h3>Pay Price</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <asp:DropDownList ID="ddlStatus" AutoPostBack="True" OnSelectedIndexChanged="ddlStatus_OnSelectedIndexChanged" class="form-control1 wd" runat="server">
-                                            <asp:ListItem Value="A">Active</asp:ListItem>
-                                            <asp:ListItem Value="I">Inactive</asp:ListItem>
-                                            <asp:ListItem Value="W">Waiting</asp:ListItem>
-                                        </asp:DropDownList>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Search Seller : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtSearch" AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" class="form-control1 wd" autocomplete="off" placeholder="search by mobile no. or name" runat="server"></asp:TextBox>
                                     </div>
-                                    <div class="col-md-5">
-                                        <asp:TextBox ID="txtSearch" class="form-control1 wd" placeholder="Search Profile" AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" runat="server"></asp:TextBox>
-                                    </div>
-                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2"></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="profileGridView" class="table table-bordered table-striped " runat="server" OnRowDataBound="profileGridView_OnRowDataBound" OnPageIndexChanging="profileGridView_OnPageIndexChanging" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
-                                                <Columns>
-                                                    <asp:TemplateField HeaderText="Serial" Visible="False">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="slLabel" runat="server" Text='<%#Container.DataItemIndex + 1 %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <div class="col-md-12">
-                                                                <div class="row">
-                                                                    <div class="col-md-2">
-                                                                        <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("UserId") %>' />
-                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("Status") %>' />
-                                                                        <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <h4>
-                                                                            <asp:Label ID="NameLabel" runat="server" Text='<%#Eval("Name")%>'></asp:Label>
-                                                                        </h4>
-                                                                        <br />
-                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"About : "+Eval("About")%>'></asp:Label>
-                                                                        <br />
-                                                                        <i class="fa fa-map-marker text-primary"></i>
-                                                                        <asp:Label runat="server" Text='<%#Eval("DistrictName")+","+Eval("DivisionName")%>'></asp:Label>
-                                                                        <br/>
-                                                                         <asp:Label ID="Label2" runat="server" Text='<%#"Password : "+Eval("Password")%>'></asp:Label>
-                                                                       
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <a class="btn btn-success wd" style="color: white; width: 100%" title="Call" href='tel:<%#Eval("MobileNo") %>'><i class="fas fa-phone" style="color: white;"></i>&nbsp;&nbsp;Call</a><br />
-                                                                        <a class="btn wd" style="color: white; width: 100%; background: brown;" title="Mail" href='mailto:<%#Eval("Email") %>'><i class="fas fa-mail-bulk" style="color: white;"></i>&nbsp;&nbsp;Mail</a><br />
-                                                                        <asp:LinkButton ID="statusButton" OnClick="statusButton_OnClick" runat="server" class="btn btn-primary" Style="color: white; width: 100%;"><i class="fas fa-check" style="color: white;"></i>&nbsp;&nbsp;Inactive</asp:LinkButton>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                            </asp:GridView>
-                                        </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Name : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtName" class="form-control1 wd" autocomplete="off" placeholder="Mr. xyz" runat="server"></asp:TextBox>
                                     </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Email : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtEmail" class="form-control1 wd" autocomplete="off" placeholder="example@example.com" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Contact No. : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtMobile" class="form-control1 wd" autocomplete="off" placeholder="01XXXXXXXXX" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6">
+                                        <asp:Image ID="imgSeller" class="wd" Style="height: 175px; width: 175px; border: 1px solid black;" ImageUrl="/DashboardFile/images/photo_dummy.png" runat="server" />
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Order Invoice : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtInvoice" class="form-control1 wd" AutoPostBack="True" OnTextChanged="txtInvoice_OnTextChanged" autocomplete="off" placeholder="XXXXXXX" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Price : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtPrice" class="form-control1 wd" autocomplete="off" style="" ReadOnly="True" placeholder="1000.00" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2">Bkash Trx Id : </div>
+                                    <div class="col-md-6">
+                                        <asp:TextBox ID="txtTrxId" class="form-control1 wd"  autocomplete="off" placeholder="XXXXXXX" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6">
+                                        <asp:LinkButton ID="btnPay" OnClick="btnPay_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Pay"><i class="fas fa-money-bill" style="color: white;"></i>&nbsp;&nbsp;Pay</asp:LinkButton>
+                                    </div>
+                                    <div class="col-md-2"></div>
                                 </div>
                             </div>
                             <!-- /.row -->
@@ -200,17 +216,35 @@
     <script>
         $(document).ready(function () {
 
-            $('#accordionSidebar').load("/Admin/menu.html");
+            $('#accordionSidebar').load("/Buyer/menu.html");
 
         });
     </script>
     <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
     <script src="../DashboardFile/Autocomplete-jquery-ui.js"></script>
+    <script type="text/javascript">
+        function SetTarget() {
+            document.forms[0].target = "_blank";
+        }
+    </script>
+    <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
+    <script src="../DashboardFile/Date-jquery-1.12.4.js"></script>
+    <script src="../DashboardFile/Date-jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#txtDeadLine").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                yearRange: '1901:2099'
+            });
+        });
+    </script>
     <script>
         $("#<%=txtSearch.ClientID %>").autocomplete({
             source: function (request, response) {
                 $.ajax({
-                    url: "Admin.asmx/GetBuyers",
+                    url: "Buyer.asmx/GetSellers",
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
@@ -239,10 +273,37 @@
             minLength: 1,
         });
     </script>
-    <script type="text/javascript">
-        function SetTarget() {
-            document.forms[0].target = "_blank";
-        }
+    <script>
+        $("#<%=txtInvoice.ClientID %>").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "Buyer.asmx/GetInvoice",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{ 'txt' : '" + $("#<%=txtInvoice.ClientID %>").val() + "'}",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.d, function (item) {
+                            return {
+                                label: item,
+                                value: item
+                            };
+                        }));
+                    },
+                    error: function (result) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'warning',
+                            title: 'Invoice not found',
+                            showConfirmButton: true,
+                            timer: 6000
+                        });
+                    }
+                });
+            },
+
+            minLength: 1,
+        });
     </script>
-</body>
 </html>

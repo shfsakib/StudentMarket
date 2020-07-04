@@ -144,9 +144,15 @@
                                                                             <asp:LinkButton ID="titleLinkButton" OnClick="titleLinkButton_OnClick" title="View Profile" runat="server"></asp:LinkButton>
                                                                         </h4>
                                                                         <br />
+                                                                        <asp:Label ID="Label5" runat="server" Text="Order Invoice : "></asp:Label><span>
+                                                                            <asp:Label ID="Label6" runat="server" Text='<%#Eval("Invoice")%>'></asp:Label></span>
+                                                                        <br />
                                                                         <asp:Label ID="Label1" runat="server" Text='<%#"Quantity : "+Eval("Quantity")%>'></asp:Label>
                                                                         <br />
                                                                         <asp:Label ID="Label2" runat="server" Text='<%#"DeadLine : "+Eval("DeadLine")%>'></asp:Label>
+                                                                        <br />
+                                                                        <asp:Label ID="Label4" runat="server" Text="Payment Method : "></asp:Label><span>
+                                                                            <asp:Label ID="lblpayment" runat="server" Text='<%#Eval("PaymentMethod")%>'></asp:Label></span>
                                                                         <br />
                                                                         <asp:Label ID="Label3" runat="server" Style="color: green;" Text='<%#"Price : "+"৳"+Eval("Price")%>'></asp:Label>
                                                                         <br />

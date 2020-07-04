@@ -65,13 +65,10 @@ namespace StudentMarketWebApp.Buyer
 
         private void FillGrid()
         {
-
-
             dataTable = new DataTable();
             dataTable = (DataTable)Session["dataGrid"];
             cartGridView.DataSource = dataTable;
             cartGridView.DataBind();
-
         }
 
         protected void logOut_OnServerClick(object sender, EventArgs e)
@@ -136,6 +133,7 @@ namespace StudentMarketWebApp.Buyer
         private void InsertOrders()
         {
             buyModel.Invoice = buyGateway.GenerateInvoice();
+            bool result = false;
             foreach (GridViewRow gridViewRow in cartGridView.Rows)
             {
                 buyModel.BuyId = Convert.ToInt32(func.GenerateId("SELECT MAX(BuyId) FROM Buy"));
@@ -144,24 +142,25 @@ namespace StudentMarketWebApp.Buyer
                 buyModel.TotalPrice = Convert.ToDouble((gridViewRow.FindControl("priceLabel") as Label).Text);
                 buyModel.BuyerId = Convert.ToInt32(func.UserId());
                 buyModel.SellerId = Convert.ToInt32((gridViewRow.FindControl("HiddenField1") as HiddenField).Value);
+                buyModel.PaymentMethod = (gridViewRow.FindControl("lblpayment") as Label).Text;
                 buyModel.DeadLine = "";
                 buyModel.Quantity = 1;
                 buyModel.Type = "Buy";
                 buyModel.Status = "Pending";
                 buyModel.Intime = func.Date();
-                bool result = buyGateway.SaveBuy(buyModel);
-                if (result)
-                {
-                    Session["gridData"] = null;
-                    cartGridView.DataSource = null;
-                    cartGridView.DataBind();
-                    lblTotal.Text = "0";
-                    func.Alert(Page, "Ordered successfully,wait for seller confirmation.", "s", true);
-                }
-                else
-                {
-                    func.Alert(Page, "Order Failed", "e", true);
-                }
+                result = buyGateway.SaveBuy(buyModel);
+            }
+            if (result)
+            {
+                Session["dataGrid"] = null;
+                cartGridView.DataSource = null;
+                cartGridView.DataBind();
+                lblTotal.Text = "0";
+                func.Alert(Page, "Ordered successfully,wait for seller confirmation.", "s", true);
+            }
+            else
+            {
+                func.Alert(Page, "Order Failed", "e", true);
             }
         }
         protected void btnCancel_OnClick(object sender, EventArgs e)

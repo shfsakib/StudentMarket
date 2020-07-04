@@ -152,6 +152,9 @@
                                                                         <br />
                                                                         <asp:Label ID="Label2" runat="server" Text='<%#"DeadLine : "+Eval("DeadLine")%>'></asp:Label>
                                                                         <br />
+                                                                        <asp:Label ID="Label4" runat="server" Text="Payment Method : "></asp:Label><span>
+                                                                            <asp:Label ID="lblpayment" runat="server" Text='<%#Eval("PaymentMethod")%>'></asp:Label></span>
+                                                                        <br/>
                                                                         <asp:Label ID="Label3" runat="server" style="color: green;" Text='<%#"Price : "+"৳"+Eval("Price")%>'></asp:Label>
                                                                         <br />
                                                                         <asp:Label runat="server" ID="total" style="color: green; font-size: 18px;" Text='<%#"Total Price : ৳"+Eval("TotalPrice")%>'></asp:Label><br/>

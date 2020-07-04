@@ -92,8 +92,8 @@ namespace StudentMarketWebApp.DAL.Gateway
                 if (con.State != ConnectionState.Open)
                     if (con.State != ConnectionState.Open) con.Open();
                 transaction = con.BeginTransaction();
-                cmd = new SqlCommand("INSERT INTO Buy(BuyId, Invoice, PostId, Price, TotalPrice, BuyerId, SellerId, DeadLine,Quantity, Status,Type, Intime)" +
-                                     " VALUES(@BuyId, @Invoice, @PostId, @Price, @TotalPrice, @BuyerId, @SellerId, @DeadLine,@Quantity, @Status,@Type, @Intime)", con);
+                cmd = new SqlCommand("INSERT INTO Buy(BuyId, Invoice, PostId, Price, TotalPrice, BuyerId, SellerId, DeadLine,Quantity,PaymentMethod, Status,Type, Intime)" +
+                                     " VALUES(@BuyId, @Invoice, @PostId, @Price, @TotalPrice, @BuyerId, @SellerId, @DeadLine,@Quantity,@PaymentMethod, @Status,@Type, @Intime)", con);
                 cmd.Parameters.AddWithValue("@PostId", buyModel.PostId);
                 cmd.Parameters.AddWithValue("@BuyId", buyModel.BuyId);
                 cmd.Parameters.AddWithValue("@Invoice", buyModel.Invoice);
@@ -103,6 +103,7 @@ namespace StudentMarketWebApp.DAL.Gateway
                 cmd.Parameters.AddWithValue("@SellerId", buyModel.SellerId);
                 cmd.Parameters.AddWithValue("@DeadLine", buyModel.DeadLine);
                 cmd.Parameters.AddWithValue("@Quantity", buyModel.Quantity);
+                cmd.Parameters.AddWithValue("@PaymentMethod", buyModel.PaymentMethod);
                 cmd.Parameters.AddWithValue("@Status", buyModel.Status);
                 cmd.Parameters.AddWithValue("@Type", buyModel.Type);
                 cmd.Parameters.AddWithValue("@Intime", buyModel.Intime);
@@ -139,6 +140,7 @@ namespace StudentMarketWebApp.DAL.Gateway
                 buyModel.DeadLine = reader["DeadLine"].ToString();
                 buyModel.Price = Convert.ToDouble(reader["Price"]);
                 buyModel.TotalPrice = Convert.ToDouble(reader["TotalPrice"]);
+                buyModel.PaymentMethod = reader["PaymentMethod"].ToString();
                 buyModel.Type = reader["Type"].ToString();
                 buyModel.Status = reader["Status"].ToString();
                 buyModel.Intime = reader["Intime"].ToString();

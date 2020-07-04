@@ -33,13 +33,13 @@ namespace StudentMarketWebApp.Seller
             {
                 func.CheckCookies();
                 func.Type(this, "Seller");
-               countN.InnerText = func.BuyerNotification(Convert.ToInt32(func.UserId())).ToString();
+                countN.InnerText = func.BuyerNotification(Convert.ToInt32(func.UserId())).ToString();
                 Load();
             }
         }
         private void Load()
         {
-            string query = @"SELECT        Buy.BuyId, Buy.PostId, Buy.Price, Buy.TotalPrice, Buy.BuyerId, Buy.DeadLine,Buy.Status, Buy.Quantity, PostAd.ProductName, (SELECT Name FROM UserList WHERE UserId=Buy.BuyerId) AS Name,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=Buy.PostId)  AS Picture
+            string query = @"SELECT        Buy.BuyId, Buy.PostId, Buy.Price, Buy.TotalPrice, Buy.BuyerId, Buy.DeadLine,Buy.Status,Buy.PaymentMethod,Buy.Invoice, Buy.Quantity, PostAd.ProductName, (SELECT Name FROM UserList WHERE UserId=Buy.BuyerId) AS Name,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=Buy.PostId)  AS Picture
 FROM            Buy INNER JOIN
                          PostAd ON Buy.PostId = PostAd.PostId INNER JOIN
                          UserList ON PostAd.UserId = UserList.UserId WHERE Buy.SellerId='" + func.UserId() + "' AND Buy.Status!='Pending' ORDER BY BuyId DESC ";

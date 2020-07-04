@@ -143,5 +143,43 @@ FROM            UserList INNER JOIN
                     if (con.State != ConnectionState.Closed) con.Close();
             return userListModel;
         }
+        internal UserListModel GetUser(string email)
+        {
+            if (con.State != ConnectionState.Open)
+                if (con.State != ConnectionState.Open) con.Open();
+            string query = @"SELECT        UserList.*, Division.DIVISION AS DivisionName, District.DISTRICTNM AS DistrictName
+FROM            UserList INNER JOIN
+                         Division ON UserList.Division=Division.ID INNER JOIN
+                         District ON UserList.District=District.DISTRICTID WHERE UserList.NAME+' | '+ UserList.Email='" + email + "'";
+            cmd = new SqlCommand(query, con);
+            reader = cmd.ExecuteReader();
+            userListModel = null;
+            while (reader.Read())
+            {
+                userListModel = new UserListModel();
+                userListModel.UserId = Convert.ToInt32(reader["UserId"]);
+                userListModel.Division = Convert.ToInt32(reader["Division"]);
+                userListModel.District = Convert.ToInt32(reader["District"]);
+                userListModel.Name = reader["Name"].ToString();
+                userListModel.Email = reader["Email"].ToString();
+                userListModel.MobileNo = reader["MobileNo"].ToString();
+                userListModel.Picture = reader["Picture"].ToString();
+                userListModel.DOB = reader["DOB"].ToString();
+                userListModel.Gender = reader["Gender"].ToString();
+                userListModel.DivisionName = reader["DivisionName"].ToString();
+                userListModel.DistrictName = reader["DistrictName"].ToString();
+                userListModel.Address = reader["Address"].ToString();
+                userListModel.GNidNo = reader["GNidNo"].ToString();
+                userListModel.BCertNo = reader["BCertNo"].ToString();
+                userListModel.NidNo = reader["NidNo"].ToString();
+                userListModel.About = reader["About"].ToString();
+                userListModel.Type = reader["Type"].ToString();
+                userListModel.Password = reader["Password"].ToString();
+            }
+            reader.Close();
+            if (con.State != ConnectionState.Closed)
+                if (con.State != ConnectionState.Closed) con.Close();
+            return userListModel;
+        }
     }
 }

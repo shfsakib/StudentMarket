@@ -119,12 +119,13 @@ namespace StudentMarketWebApp.DAL.Gateway
         {
             if (con.State != ConnectionState.Open)
                 if (con.State != ConnectionState.Open) con.Open();
-            string query = @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price,PostAd.Status, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime
+            string query = @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price,PostAd.Status, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,SUBSTRING(PostAd.Intime,1,10) AS Intime,Buy.PaymentMethod
 FROM            PostAd INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
                          PostPic ON PostAd.PostId = PostPic.PostId INNER JOIN
                          UserList ON PostAd.UserId=UserList.UserId INNER JOIN
-						 Division ON UserList.Division=Division.ID  INNER JOIN
+						 Division ON UserList.Division=Division.ID  LEFT JOIN
+						 Buy ON Buy.PostId=PostAd.PostId INNER JOIN
                          District ON UserList.District=District.DISTRICTID)A INNER JOIN PostPic ON A.PostId=PostPic.PostId WHERE A.PostId='" + id + "' AND A.Status='"+ status + "'";
             cmd = new SqlCommand(query, con);
             reader = cmd.ExecuteReader();
@@ -141,6 +142,7 @@ FROM            PostAd INNER JOIN
                 postAdModel.Picture = reader["Picture"].ToString();
                 postAdModel.DivisionName = reader["DivisionName"].ToString();
                 postAdModel.DistrictName = reader["DistrictName"].ToString();
+                postAdModel.PaymentMethod = reader["PaymentMethod"].ToString();
                 postAdModel.Name = reader["Name"].ToString();
                 postAdModel.Intime = reader["Intime"].ToString();
             }

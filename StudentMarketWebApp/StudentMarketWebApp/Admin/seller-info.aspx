@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <title>Student Market | Admin</title>
+    <title>Student Market | Admin</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -154,6 +154,8 @@
                                                                         <br />
                                                                         <i class="fa fa-map-marker text-primary"></i>
                                                                         <asp:Label runat="server" Text='<%#Eval("DistrictName")+","+Eval("DivisionName")%>'></asp:Label>
+                                                                        <br />
+                                                                        <asp:Label ID="Label2" runat="server" Text='<%#"Password : "+Eval("Password")%>'></asp:Label>
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <a class="btn btn-success wd" style="color: white; width: 100%" title="Call" href='tel:<%#Eval("MobileNo") %>'><i class="fas fa-phone" style="color: white;"></i>&nbsp;&nbsp;Call</a><br />
@@ -196,7 +198,6 @@
     <script src="/DashboardFile/Admin/dist/js/adminlte.min.js"></script>
     <script>
         $(document).ready(function () {
-
             $('#accordionSidebar').load("/Admin/menu.html");
 
         });

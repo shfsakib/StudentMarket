@@ -170,6 +170,8 @@ FROM            PostAd INNER JOIN
             HiddenField HiddenField1 = (HiddenField)row.FindControl("HiddenField1");
             int id = Convert.ToInt32(postId.Value);
             int userId = Convert.ToInt32(HiddenField1.Value);
+            CheckBox chkCash = (CheckBox)row.FindControl("chkCash");
+            CheckBox chkPay = (CheckBox)row.FindControl("chkPay");
             if (linkButton.Text == "<i class=\"fas fa-shopping-basket\" style=\"color: white;\"></i>&nbsp;&nbsp;Order")
             {
                 Response.Redirect("/Buyer/order-product.aspx?id=" + id + "&userid=" + userId + "");
@@ -185,6 +187,14 @@ FROM            PostAd INNER JOIN
                 buyModel.SellerId = Convert.ToInt32(userId);
                 buyModel.DeadLine = "";
                 buyModel.Quantity = 0;
+                if (chkPay.Checked)
+                {
+                    buyModel.PaymentMethod = "Pay Online";
+                }
+                else if (chkCash.Checked)
+                {
+                    buyModel.PaymentMethod = "Cash on delivery";
+                }
                 buyModel.Type = "Hire";
                 buyModel.Status = "Pending";
                 buyModel.Intime = func.Date();
@@ -226,6 +236,8 @@ FROM            PostAd INNER JOIN
             HiddenField idHiddenField = (HiddenField)row.FindControl("idHiddenField");
             HiddenField HiddenField1 = (HiddenField)row.FindControl("HiddenField1");
             HiddenField HiddenField3 = (HiddenField)row.FindControl("HiddenField3");
+            CheckBox chkCash = (CheckBox)row.FindControl("chkCash");
+            CheckBox chkPay = (CheckBox)row.FindControl("chkPay");
             Image profileImage = (Image)row.FindControl("profileImage");
             int postId = Convert.ToInt32(idHiddenField.Value);
             int userId = Convert.ToInt32(HiddenField1.Value);
@@ -238,6 +250,14 @@ FROM            PostAd INNER JOIN
             dataRow["Picture"] = func.IsExist($"SELECT MIN(Picture) FROM PostPic WHERE PostId='{postId}'");
             dataRow["ProductName"] = func.IsExist($"SELECT ProductName FROM PostAd WHERE PostId='{postId}'");
             dataRow["Price"] = HiddenField3.Value;
+            if (chkPay.Checked)
+            {
+                dataRow["PaymentMethod"] = "Pay Online";
+            }
+            else if (chkCash.Checked)
+            {
+                dataRow["PaymentMethod"] = "Cash on delivery";
+            }
             dataTable.Rows.Add(dataRow);
             Session["dataGrid"] = dataTable;
             func.Alert(this, "Product added to cart successfully", "s", false);
@@ -252,7 +272,35 @@ FROM            PostAd INNER JOIN
                 dataTable.Columns.Add("Picture", typeof(string));
                 dataTable.Columns.Add("Price", typeof(string));
                 dataTable.Columns.Add("ProductName", typeof(string));
+                dataTable.Columns.Add("PaymentMethod", typeof(string));
                 Session["dataGrid"] = dataTable;
+            }
+        }
+
+        protected void chkPay_OnCheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            DataControlFieldCell cell = (DataControlFieldCell)checkBox.Parent;
+            GridViewRow row = (GridViewRow)cell.Parent;
+            CheckBox chkCash = (CheckBox)row.FindControl("chkCash");
+            if (checkBox.Checked)
+            {
+                chkCash.Checked = false;
+                checkBox.Checked = true;
+            }
+        }
+
+        protected void chkCash_OnCheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            DataControlFieldCell cell = (DataControlFieldCell)checkBox.Parent;
+            GridViewRow row = (GridViewRow)cell.Parent;
+            CheckBox chkPay = (CheckBox)row.FindControl("chkPay");
+            if (checkBox.Checked)
+            {
+                chkPay.Checked = false;
+                checkBox.Checked = true;
+
             }
         }
     }

@@ -41,7 +41,7 @@ namespace StudentMarketWebApp.Buyer
         private void Load()
         {
             int id = Convert.ToInt32(Request.QueryString["id"]);
-            postAdModel = postAdGateway.GetPost(id,"A");
+            postAdModel = postAdGateway.GetPost(id, "A");
             lblProductName.Text = postAdModel.ProductName;
             lblTime.Text = lblTime.Text + " " + postAdModel.Intime;
             lblLocation.Text = postAdModel.DistrictName + "," + postAdModel.DivisionName;
@@ -49,6 +49,17 @@ namespace StudentMarketWebApp.Buyer
             lblUserName.Text = postAdModel.Name;
             lblDescription.Text = postAdModel.Description;
             productImage.ImageUrl = postAdModel.Picture;
+            if (postAdModel.PaymentMethod.ToString() == "Pay online")
+            {
+                chkPay.Checked = true;
+                chkCash.Checked = false;
+            }
+            else if (postAdModel.PaymentMethod.ToString() == "Cash on delivery")
+            {
+                chkCash.Checked = true;
+                chkPay.Checked = false;
+            }
+
         }
 
         private void LoadEdit()
@@ -61,6 +72,16 @@ namespace StudentMarketWebApp.Buyer
                 buyModel = buyGateway.GetOrder(buyId);
                 txtQuantity.Text = buyModel.Quantity.ToString();
                 txtDeadLine.Text = buyModel.DeadLine;
+                if (buyModel.PaymentMethod.ToString() == "Pay online")
+                {
+                    chkPay.Checked = true;
+                    chkCash.Checked = false;
+                }
+                else if (buyModel.PaymentMethod.ToString() == "Cash on delivery")
+                {
+                    chkCash.Checked = true;
+                    chkPay.Checked = false;
+                }
                 btnOrder.Text =
                     "<i class=\"fas fa-shopping-basket\" style=\"color: white;\"></i>&nbsp;&nbsp;Update Order";
             }
@@ -82,7 +103,7 @@ namespace StudentMarketWebApp.Buyer
             int postId = Convert.ToInt32(Request.QueryString["id"]);
             int userId = Convert.ToInt32(Request.QueryString["userid"]);
             string ans = func.IsExist($"SELECT * FROM Buy WHERE PostId='{postId}' AND BuyerId={func.UserId()} AND Status='Pending'");
-            if (ans!="")
+            if (ans != "")
             {
                 result = true;
             }
@@ -113,6 +134,14 @@ namespace StudentMarketWebApp.Buyer
                     buyModel.SellerId = Convert.ToInt32(userId);
                     buyModel.DeadLine = txtDeadLine.Text;
                     buyModel.Quantity = Convert.ToInt32(txtQuantity.Text);
+                    if (chkPay.Checked)
+                    {
+                        buyModel.PaymentMethod = "Pay Online";
+                    }
+                    else if (chkCash.Checked)
+                    {
+                        buyModel.PaymentMethod = "Cash on delivery";
+                    }
                     buyModel.Type = "Order";
                     buyModel.Status = "Pending";
                     buyModel.Intime = func.Date();
@@ -137,7 +166,15 @@ namespace StudentMarketWebApp.Buyer
                 else
                 {
                     int buyId = Convert.ToInt32(Request.QueryString["buyId"]);
-                    bool result = func.Execute($"UPDATE Buy SET Quantity='{txtQuantity.Text}',DeadLine='{txtDeadLine.Text}',TotalPrice='{Convert.ToInt32(lblPrice1.Text) * Convert.ToInt32(txtQuantity.Text)}' WHERE BuyId='{buyId}'");
+                    if (chkPay.Checked)
+                    {
+                        buyModel.PaymentMethod = "Pay Online";
+                    }
+                    else if (chkCash.Checked)
+                    {
+                        buyModel.PaymentMethod = "Cash on delivery";
+                    }
+                    bool result = func.Execute($"UPDATE Buy SET Quantity='{txtQuantity.Text}',DeadLine='{txtDeadLine.Text}',TotalPrice='{Convert.ToInt32(lblPrice1.Text) * Convert.ToInt32(txtQuantity.Text)}',PaymentMethod='{buyModel.PaymentMethod}' WHERE BuyId='{buyId}'");
                     if (result)
                     {
                         func.Alert(Page, "Order updated successfully", "s", true);
@@ -148,6 +185,24 @@ namespace StudentMarketWebApp.Buyer
                         func.Alert(Page, "Order Failed", "e", true);
                     }
                 }
+            }
+        }
+
+        protected void chkPay_OnCheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPay.Checked)
+            {
+                chkCash.Checked = false;
+                chkPay.Checked = true;
+            }
+        }
+
+        protected void chkCash_OnCheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCash.Checked)
+            {
+                chkPay.Checked = false;
+                chkCash.Checked = true;
             }
         }
     }

@@ -122,5 +122,32 @@ namespace StudentMarketWebApp.Web
                 }
             }
         }
+
+        protected void lnkForgot_OnClick(object sender, EventArgs e)
+        {
+            if (txtEmail.Value == "")
+                func.Alert(Page, "Email id required", "w", true);
+            else
+            {
+                string x = func.IsExist($"SELECT Password FROM UserList WHERE Email='{txtEmail.Value}'");
+                if (x == "")
+                {
+                    func.Alert(Page, "Email id does not exist for buyer or seller", "w", true);
+                }
+                else
+                {
+                    bool result = func.SendEmail("StuMarket5713@gmail.com", txtEmail.Value, "Recover Password", "Hello User,<br/>Your Password is : "+x+"<br/>", "Admin4321");
+                    if (result)
+                    {
+                        func.Alert(Page, "Your password has been sent to your email id.", "s", true);
+                    }
+                    else
+                    {
+                        func.Alert(Page, "Recover password failed,Please contact with admin.", "e", true);
+
+                    }
+                }
+            }
+        }
     }
-    }
+}

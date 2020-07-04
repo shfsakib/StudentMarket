@@ -36,6 +36,7 @@ namespace StudentMarketWebApp.DAL.Model
         public int SellerId { get; set; }
         public string DeadLine { get; set; }
         public int Quantity { get; set; }
+        public string PaymentMethod { get; set; }
         public string Type { get; set; }
         public string Status { get; set; }
         public string Intime { get; set; }

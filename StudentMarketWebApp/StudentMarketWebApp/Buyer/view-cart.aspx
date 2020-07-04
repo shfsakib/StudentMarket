@@ -130,7 +130,8 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="row">&nbsp;<br/></div>
+                                <div class="row">&nbsp;<br />
+                                </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
@@ -156,7 +157,10 @@
                                                                         </h4>
                                                                         <br />
                                                                         <asp:Label ID="Label1" runat="server" Text="Price : ৳"></asp:Label><span>
-                                                                        <asp:Label id="priceLabel" runat="server" Text='<%#Eval("Price")%>'></asp:Label></span>
+                                                                            <asp:Label ID="priceLabel" runat="server" Text='<%#Eval("Price")%>'></asp:Label></span>
+                                                                        <br />
+                                                                        <asp:Label ID="Label2" runat="server" Text="Payment Method : "></asp:Label><span>
+                                                                            <asp:Label ID="lblpayment" runat="server" Text='<%#Eval("PaymentMethod")%>'></asp:Label></span>
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <asp:LinkButton ID="btnRemove" OnClick="btnRemove_OnClick" class="btn btn-danger wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-trash-alt" style="color: white;"></i>&nbsp;&nbsp;Remove</asp:LinkButton>
