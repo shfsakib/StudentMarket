@@ -45,7 +45,6 @@ namespace StudentMarketWebApp.Buyer
                 ViewState["mail"] = userListModel.Email;
                 ViewState["mobile"] = userListModel.MobileNo;
             }
-
         }
         protected void logOut_OnServerClick(object sender, EventArgs e)
         {

@@ -81,7 +81,7 @@ namespace StudentMarketWebApp.Buyer
             bool result = false;
             int postId = Convert.ToInt32(Request.QueryString["id"]);
             int userId = Convert.ToInt32(Request.QueryString["userid"]);
-            string ans = func.IsExist($"SELECT * FROM Buy WHERE PostId='{postId}' AND BuyerId={func.UserId()} AND (Status!='Rejected' OR Status!='Confirmed')");
+            string ans = func.IsExist($"SELECT * FROM Buy WHERE PostId='{postId}' AND BuyerId={func.UserId()} AND Status='Pending'");
             if (ans!="")
             {
                 result = true;

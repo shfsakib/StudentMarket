@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="notification.aspx.cs" Inherits="StudentMarketWebApp.Buyer.notification" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="order-history.aspx.cs" Inherits="StudentMarketWebApp.Seller.order_history" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Market | Buyer</title>
+   <title>Student Market | Seller</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -121,7 +121,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="notificationGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="notificationGridView_OnPageIndexChanging" OnRowDataBound="notificationGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Notification Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="30">
+                                            <asp:GridView ID="historyGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="historyGridView_OnPageIndexChanging" OnRowDataBound="historyGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Notification Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="30">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Serial" Visible="False">
                                                         <ItemTemplate>
@@ -135,12 +135,12 @@
                                                                     <div class="col-md-2">
                                                                         <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("BuyId") %>' />
                                                                         <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("PostId") %>' />
-                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("SellerId") %>' />
+                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("BuyerId") %>' />
                                                                         <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <h4>
-                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#Eval("Name")+" "+Eval("Status") +" your requst for "+Eval("ProductName")%>'></asp:Label>
+                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#"You"+" have "+Eval("Status") +Eval("Name")+" request for "+Eval("ProductName")%>'></asp:Label>
                                                                             <asp:LinkButton ID="titleLinkButton" OnClick="titleLinkButton_OnClick" title="View Profile" runat="server"></asp:LinkButton>
                                                                         </h4>
                                                                         <br />
