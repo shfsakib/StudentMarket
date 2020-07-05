@@ -107,7 +107,7 @@ namespace StudentMarketWebApp.Buyer
         {
             if (txtInvoice.Text != "")
             {
-                string price = func.IsExist($"SELECT SUM(PRICE) FROM Buy WHERE Invoice='{txtInvoice.Text}'");
+                string price = func.IsExist($"SELECT SUM(PRICE) FROM Buy WHERE Invoice='{txtInvoice.Text}' AND PaymentMethod='Pay online'");
                 if (price != "")
                     txtPrice.Text = price;
 
