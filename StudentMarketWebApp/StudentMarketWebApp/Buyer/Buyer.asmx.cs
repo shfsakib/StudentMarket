@@ -85,7 +85,8 @@ namespace StudentMarketWebApp.Buyer
             try
             {
 
-                string query = @"SELECT DISTINCT Invoice txt FROM Buy WHERE Invoice LIKE '%" + txt + "%' AND BuyerId='"+func.UserId()+"'";
+                string query = @"SELECT DISTINCT Invoice txt FROM Buy INNER JOIN UserList ON UserList.UserId=Buy.BuyerId WHERE  Buy.Invoice LIKE '%" + txt + "%' AND Buy.BuyerId='" + func.UserId() + "' " +
+                               "EXCEPT SELECT DISTINCT OrderInvoice txt FROM PayPrice INNER JOIN UserList ON UserList.UserId=PayPrice.BuyerId WHERE  PayPrice.BuyerId='" + func.UserId() + "'";
                 using (cmd = new SqlCommand(query, conn))
                 {
                     if (conn.State != System.Data.ConnectionState.Open) conn.Open();
