@@ -114,8 +114,6 @@ namespace ShabolombiAndroidApp.DLL.Gateway
         }
         public bool Login(string email, string password)
         {
-
-
             string query = "SELECT * FROM Admin WHERE Email='" + email + "' AND Password='" + password + "' AND Status='Active' COLLATE Latin1_General_CS_AI";
             command = new SqlCommand(query, connection);
             connection.Open();
@@ -123,12 +121,9 @@ namespace ShabolombiAndroidApp.DLL.Gateway
             bool isExist = reader.HasRows;
             connection.Close();
             return isExist;
-
         }
         public List<AdminModel> GetAllAdmin()
         {
-
-
             string query = "SELECT * FROM Admin WHERE Status='Active'";
             command = new SqlCommand(query, connection);
             connection.Open();
@@ -147,14 +142,11 @@ namespace ShabolombiAndroidApp.DLL.Gateway
                 adminModel.DateofBirth = reader["DateofBirth"].ToString();
                 adminModel.ProfilePicture = reader["ProfilePicture"].ToString();
                 adminModel.Password = reader["Password"].ToString();
-
                 adminModel.Type = reader["Type"].ToString();
                 adminModel.ReferedBy = reader["ReferedBy"].ToString();
                 adminModel.Status = reader["Status"].ToString();
                 adminModel.InTime = reader["InTime"].ToString();
-
                 adminModelList.Add(adminModel);
-
             }
             connection.Close();
             return adminModelList;
@@ -162,8 +154,6 @@ namespace ShabolombiAndroidApp.DLL.Gateway
         }
         public List<AdminModel> GetAdminByData(string email)
         {
-
-
             string query = "SELECT * FROM Admin WHERE Status='Active' AND NAME+' | '+ MobileNumber LIKE '%" + email + "%'";
             command = new SqlCommand(query, connection);
             connection.Open();
@@ -182,7 +172,6 @@ namespace ShabolombiAndroidApp.DLL.Gateway
                 adminModel.DateofBirth = reader["DateofBirth"].ToString();
                 adminModel.ProfilePicture = reader["ProfilePicture"].ToString();
                 adminModel.Password = reader["Password"].ToString();
-
                 adminModel.Type = reader["Type"].ToString();
                 adminModel.ReferedBy = reader["ReferedBy"].ToString();
                 adminModel.Status = reader["Status"].ToString();
@@ -191,11 +180,9 @@ namespace ShabolombiAndroidApp.DLL.Gateway
             }
             connection.Close();
             return adminModelList;
-
         }
         public int UpdateData(AdminModel adminModel)
         {
-
             string query = @"UPDATE Admin SET Status='" + adminModel.Status + "' WHERE AdminId='" + adminModel.AdminId + "'";
             SqlCommand command = new SqlCommand(query, connection);
             connection.Open();
@@ -205,8 +192,6 @@ namespace ShabolombiAndroidApp.DLL.Gateway
         }
         public List<AdminModel> GetAllRestrictAdmin()
         {
-
-
             string query = "SELECT * FROM Admin WHERE Status='Restrict'";
             command = new SqlCommand(query, connection);
             connection.Open();
@@ -225,12 +210,10 @@ namespace ShabolombiAndroidApp.DLL.Gateway
                 adminModel.DateofBirth = reader["DateofBirth"].ToString();
                 adminModel.ProfilePicture = reader["ProfilePicture"].ToString();
                 adminModel.Password = reader["Password"].ToString();
-
                 adminModel.Type = reader["Type"].ToString();
                 adminModel.ReferedBy = reader["ReferedBy"].ToString();
                 adminModel.Status = reader["Status"].ToString();
                 adminModel.InTime = reader["InTime"].ToString();
-
                 adminModelList.Add(adminModel);
 
             }
@@ -240,8 +223,6 @@ namespace ShabolombiAndroidApp.DLL.Gateway
         }
         public List<AdminModel> GetRestrictAdminByData(string email)
         {
-
-
             string query = "SELECT * FROM Admin WHERE Status='Restrict' AND NAME+' | '+ MobileNumber LIKE '%" + email + "%'";
             command = new SqlCommand(query, connection);
             connection.Open();
@@ -260,7 +241,6 @@ namespace ShabolombiAndroidApp.DLL.Gateway
                 adminModel.DateofBirth = reader["DateofBirth"].ToString();
                 adminModel.ProfilePicture = reader["ProfilePicture"].ToString();
                 adminModel.Password = reader["Password"].ToString();
-
                 adminModel.Type = reader["Type"].ToString();
                 adminModel.ReferedBy = reader["ReferedBy"].ToString();
                 adminModel.Status = reader["Status"].ToString();
@@ -273,8 +253,6 @@ namespace ShabolombiAndroidApp.DLL.Gateway
         }
         public AdminModel GetData(AdminModel adminModel)
         {
-
-
             string query = "SELECT * FROM Admin WHERE Email='" + adminModel.Email + "'";
             command = new SqlCommand(query, connection);
             connection.Open();
@@ -285,10 +263,7 @@ namespace ShabolombiAndroidApp.DLL.Gateway
                 adminModel.Type = reader["Type"].ToString();
                 adminModel.ProfilePicture = reader["ProfilePicture"].ToString();
                 adminModel.Email = reader["Email"].ToString();
-
-
                 adminModel.AdminId = Convert.ToInt32(reader["AdminId"]);
-
             }
             connection.Close();
             return adminModel;
@@ -296,13 +271,10 @@ namespace ShabolombiAndroidApp.DLL.Gateway
         }
         public AdminModel GetAllAdminById(int userId)
         {
-
-
             string query = "SELECT * FROM Admin WHERE Status='Active' AND AdminId='"+userId+"'";
             command = new SqlCommand(query, connection);
             connection.Open();
             reader = command.ExecuteReader();
-            
             AdminModel adminModel = null;
             while (reader.Read())
             {
@@ -316,22 +288,16 @@ namespace ShabolombiAndroidApp.DLL.Gateway
                 adminModel.DateofBirth = reader["DateofBirth"].ToString();
                 adminModel.ProfilePicture = reader["ProfilePicture"].ToString();
                 adminModel.Password = reader["Password"].ToString();
-
                 adminModel.Type = reader["Type"].ToString();
                 adminModel.ReferedBy = reader["ReferedBy"].ToString();
                 adminModel.Status = reader["Status"].ToString();
                 adminModel.InTime = reader["InTime"].ToString();
-
-                
-
             }
             connection.Close();
             return adminModel;
-
         }
         public int UpdateAdminData(AdminModel adminModel)
         {
-
             string query = @"UPDATE Admin SET  Name='"+adminModel.Name+"', Email='"+adminModel.Email+"', MobileNumber='"+adminModel.MobileNumber+"', NidNo='"+adminModel.NidNo+"', Gender='"+adminModel.Gender+"', DateofBirth='"+adminModel.DateofBirth+
                 "', ProfilePicture='"+adminModel.ProfilePicture+"', Password='"+adminModel.Password+"' WHERE AdminId='" + adminModel.AdminId + "'";
             SqlCommand command = new SqlCommand(query, connection);

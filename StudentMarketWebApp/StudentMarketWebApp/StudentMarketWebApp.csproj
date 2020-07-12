@@ -2285,6 +2285,7 @@
     <Content Include="Seller\menu.html" />
     <Content Include="Seller\notification.aspx" />
     <Content Include="Seller\order-history.aspx" />
+    <Content Include="Seller\payment-history.aspx" />
     <Content Include="Seller\pending-ads.aspx" />
     <Content Include="Seller\post-ad.aspx" />
     <Content Include="Seller\profile.aspx" />
@@ -2491,6 +2492,13 @@
     </Compile>
     <Compile Include="Seller\order-history.aspx.designer.cs">
       <DependentUpon>order-history.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seller\payment-history.aspx.cs">
+      <DependentUpon>payment-history.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seller\payment-history.aspx.designer.cs">
+      <DependentUpon>payment-history.aspx</DependentUpon>
     </Compile>
     <Compile Include="Seller\pending-ads.aspx.cs">
       <DependentUpon>pending-ads.aspx</DependentUpon>

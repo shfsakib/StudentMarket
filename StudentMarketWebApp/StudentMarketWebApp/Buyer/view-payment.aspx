@@ -114,7 +114,7 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Pending Orders</h3>
+                                <h3>Payment History</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">

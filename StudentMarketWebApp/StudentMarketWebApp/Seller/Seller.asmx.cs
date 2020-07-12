@@ -79,5 +79,27 @@ namespace StudentMarketWebApp.Seller
             catch (Exception ex) { }
             return result;
         }
+        [WebMethod]
+        public List<string> GetPayInvoice(string txt)
+        {
+            List<string> result = new List<string>();
+            try
+            {
+
+                string query = @"SELECT PayPrice.OrderInvoice txt FROM PayPrice INNER JOIN UserList ON UserList.UserId=PayPrice.BuyerId  WHERE PayPrice.OrderInvoice+' | '+UserList.Email+' | '+UserList.MobileNo LIKE '%" + txt + "%' AND PayPrice.SellerId='" + func.UserId() + "'";
+                using (cmd = new SqlCommand(query, conn))
+                {
+                    if (conn.State != System.Data.ConnectionState.Open) conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        result.Add(reader["txt"].ToString().TrimEnd());
+                    }
+                }
+            }
+            catch (Exception ex) { }
+            return result;
+        }
     }
 }

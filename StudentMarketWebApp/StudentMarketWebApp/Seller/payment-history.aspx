@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="view-ads.aspx.cs" Inherits="StudentMarketWebApp.Seller.view_ads" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="payment-history.aspx.cs" Inherits="StudentMarketWebApp.Seller.payment_history" %>
 
 <!DOCTYPE html>
 
@@ -39,7 +39,7 @@
                     <!-- Messages Dropdown Menu -->
                     <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                       <a class="nav-link" href="/Seller/notification.aspx">
+                        <a class="nav-link" href="/Buyer/notification.aspx">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge" runat="server" id="countN"></span>
                         </a>
@@ -49,7 +49,7 @@
                             <i class="fas fa-ellipsis-v fa-lg"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="/Seller/edit-profile.aspx" class="dropdown-item">
+                            <a href="/Buyer/edit-profile.aspx" class="dropdown-item">
                                 <!-- Message Start -->
                                 Edit Profile
                            <!-- Message End -->
@@ -114,33 +114,21 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>View Ads</h3>
+                                <h3>Payment History</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <asp:DropDownList ID="ddlDivision" AutoPostBack="True" OnSelectedIndexChanged="ddlDivision_OnSelectedIndexChanged" class="form-control1 wd" runat="server"></asp:DropDownList>
+                                    <div class="col-md-5">
+                                        <asp:TextBox ID="txtSearch" AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" class="form-control1 wd" placeholder="Search by invoice,email or mobile no." runat="server"></asp:TextBox>
                                     </div>
-                                    <div class="col-md-3">
-                                        <asp:DropDownList ID="ddlDistrict" class="form-control1 wd" runat="server">
-                                            <asp:ListItem>--SELECT--</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <asp:DropDownList ID="ddlCategory" class="form-control1 wd" runat="server"></asp:DropDownList>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button id="btnSearch" class="btn btn-warning" title="Search" style="color: white; width: 100%;" runat="server" OnServerClick="btnSearch_OnServerClick"><i class="fas fa-search"></i></button>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <asp:CheckBox ID="chkOwn" AutoPostBack="True" Text=" View Own Post" OnCheckedChanged="chkOwn_OnCheckedChanged" runat="server" />
+                                    <div class="col-md-7">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="adsGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="adsGridView_OnPageIndexChanging" OnRowDataBound="adsGridView_OnRowDataBound" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Ads Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
+                                        <div class="table-responsive" style="border: none; color: grey;">
+                                            <asp:GridView ID="paymentGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="paymentGridView_OnPageIndexChanging" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="30">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Serial" Visible="False">
                                                         <ItemTemplate>
@@ -152,28 +140,22 @@
                                                             <div class="col-md-12">
                                                                 <div class="row">
                                                                     <div class="col-md-2">
-                                                                        <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("PostId") %>' />
-                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("UserId") %>' />
+                                                                        <asp:HiddenField ID="idHiddenField" runat="server" Value='<%#Eval("OrderInvoice") %>' />
+                                                                        <asp:HiddenField ID="HiddenField2" runat="server" Value='<%#Eval("PayId") %>' />
+                                                                        <asp:HiddenField ID="HiddenField1" runat="server" Value='<%#Eval("SellerId") %>' />
                                                                         <asp:Image ID="profileImage" ImageUrl='<%#Eval("Picture")%>' runat="server" Style="width: 75px; height: 75px;" />
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <h4>
-                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#Eval("Name")+" selling "+Eval("ProductName")%>'></asp:Label>
-                                                                            <asp:LinkButton ID="titleLinkButton" OnClick="titleLinkButton_OnClick" title="Post Details" runat="server"></asp:LinkButton>
+                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%# Eval("Name")+" have paid BDT " + Eval("Price") +" to you for "+Eval("OrderInvoice")%>'></asp:Label>
                                                                         </h4>
                                                                         <br />
-                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"Description : "+Eval("Description")%>'></asp:Label>
+                                                                        <asp:Label ID="Label1" runat="server" Text='<%#"TrxId : "+Eval("TrxId")%>'></asp:Label>
                                                                         <br />
-                                                                        <i class="fa fa-map-marker text-primary"></i>
-                                                                        <asp:Label runat="server" Text='<%#Eval("DistrictName")+","+Eval("DivisionName")%>'></asp:Label>
-                                                                        <br />
-                                                                        <br />
-                                                                        <asp:Label runat="server" Text='<%#"৳"+Eval("Price")%>'></asp:Label>
+                                                                        <asp:Label ID="Label2" runat="server" Text="Payment Time : "></asp:Label><span>
+                                                                            <asp:Label ID="lblquantity" runat="server" Text='<%#Eval("Intime")%>'></asp:Label>
                                                                     </div>
                                                                     <div class="col-md-2">
-                                                                        <asp:LinkButton ID="btnOrder" OnClick="btnOrder_OnClick" class="btn btn-success wd" runat="server" Style="color: white; width: 100%" title="Order"><i class="fas fa-shopping-basket" style="color: white;"></i>&nbsp;&nbsp;Order</asp:LinkButton>
-                                                                        <br />
-                                                                        <asp:LinkButton ID="btnCart" OnClick="btnCart_OnClick" runat="server" class="btn btn-primary" Style="color: white; width: 100%;" title="Add to cart"><i class="fas fa-shopping-cart" style="color: white;"></i>&nbsp;&nbsp;Add to cart</asp:LinkButton>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -220,5 +202,40 @@
         });
     </script>
 
+    <link href="../DashboardFile/AutoComplete-jquery-ui.css" rel="stylesheet" />
+    <script src="../DashboardFile/Autocomplete-jquery-ui.js"></script>
+    <script>
+        $("#<%=txtSearch.ClientID %>").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "Seller.asmx/GetPayInvoice",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{ 'txt' : '" + $("#<%=txtSearch.ClientID %>").val() + "'}",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.d, function (item) {
+                            return {
+                                label: item,
+                                value: item
+                            };
+                        }));
+                    },
+                    error: function (result) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'warning',
+                            title: 'Invoice not found',
+                            showConfirmButton: true,
+                            timer: 6000
+                        });
+                    }
+                });
+            },
+
+            minLength: 1,
+        });
+    </script>
 </body>
 </html>
