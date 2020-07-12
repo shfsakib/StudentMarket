@@ -154,9 +154,7 @@
                                                                         <br />
                                                                         <i class="fa fa-map-marker text-primary"></i>
                                                                         <asp:Label runat="server" Text='<%#Eval("DistrictName")+","+Eval("DivisionName")%>'></asp:Label>
-                                                                        <br />
-                                                                        <asp:Label ID="Label2" runat="server" Text='<%#"Password : "+Eval("Password")%>'></asp:Label>
-                                                                    </div>
+                                                                       </div>
                                                                     <div class="col-md-2">
                                                                         <a class="btn btn-success wd" style="color: white; width: 100%" title="Call" href='tel:<%#Eval("MobileNo") %>'><i class="fas fa-phone" style="color: white;"></i>&nbsp;&nbsp;Call</a><br />
                                                                         <a class="btn wd" style="color: white; width: 100%; background: brown;" title="Mail" href='mailto:<%#Eval("Email") %>'><i class="fas fa-mail-bulk" style="color: white;"></i>&nbsp;&nbsp;Mail</a><br />

@@ -56,6 +56,28 @@ namespace StudentMarketWebApp.Admin
             return result;
         }
         [WebMethod]
+        public List<string> GetAdmin(string txt)
+        {
+            List<string> result = new List<string>();
+            try
+            {
+
+                string query = @"SELECT NAME+' | '+ MobileNumber txt FROM Admin WHERE NAME+' | '+ MobileNumber LIKE '%" + txt + "%'";
+                using (cmd = new SqlCommand(query, conn))
+                {
+                    if (conn.State != System.Data.ConnectionState.Open) conn.Open();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        result.Add(reader["txt"].ToString().TrimEnd());
+                    }
+                }
+            }
+            catch (Exception ex) { }
+            return result;
+        }
+        [WebMethod]
         public List<string> GetSellers(string txt)
         {
             List<string> result = new List<string>();

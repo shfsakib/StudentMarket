@@ -154,8 +154,6 @@
                                                                         <br />
                                                                         <i class="fa fa-map-marker text-primary"></i>
                                                                         <asp:Label runat="server" Text='<%#Eval("DistrictName")+","+Eval("DivisionName")%>'></asp:Label>
-                                                                        <br/>
-                                                                         <asp:Label ID="Label2" runat="server" Text='<%#"Password : "+Eval("Password")%>'></asp:Label>
                                                                        
                                                                     </div>
                                                                     <div class="col-md-2">

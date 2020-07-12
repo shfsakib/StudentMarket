@@ -108,7 +108,7 @@
                     <div class="container-fluid">
                         <div class="col-md-12 card card-primary card-outline">
                             <div class="card-title">
-                                <h3>Posted Ads</h3>
+                                <h3>Create Admin</h3>
                             </div>
                             <hr />
                             <div class="col-md-12 card-body bc">

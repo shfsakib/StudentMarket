@@ -164,7 +164,7 @@ namespace ShabolombiAndroidApp.DLL.Gateway
         {
 
 
-            string query = "SELECT * FROM Admin WHERE Status='Active' AND Email LIKE '%" + email + "%'";
+            string query = "SELECT * FROM Admin WHERE Status='Active' AND NAME+' | '+ MobileNumber LIKE '%" + email + "%'";
             command = new SqlCommand(query, connection);
             connection.Open();
             reader = command.ExecuteReader();
@@ -242,7 +242,7 @@ namespace ShabolombiAndroidApp.DLL.Gateway
         {
 
 
-            string query = "SELECT * FROM Admin WHERE Status='Restrict' AND Email LIKE '%" + email + "%'";
+            string query = "SELECT * FROM Admin WHERE Status='Restrict' AND NAME+' | '+ MobileNumber LIKE '%" + email + "%'";
             command = new SqlCommand(query, connection);
             connection.Open();
             reader = command.ExecuteReader();
