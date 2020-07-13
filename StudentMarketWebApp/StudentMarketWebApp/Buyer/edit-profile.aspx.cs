@@ -46,6 +46,8 @@ namespace StudentMarketWebApp.Buyer
             lblGNid.Text = txtGNid.Text = userListModel.GNidNo;
             lblPassword.Text = txtPass.Text = userListModel.Password;
             lblAbout.Text = txtAbout.Text = userListModel.About;
+            lblDivision.Text = userListModel.DivisionName;
+            lblDistrict.Text = userListModel.DistrictName;
             userImage.Src = userListModel.Picture;
         }
         protected void logOut_OnServerClick(object sender, EventArgs e)

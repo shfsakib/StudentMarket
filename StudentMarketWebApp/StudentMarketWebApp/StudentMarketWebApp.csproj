@@ -2580,7 +2580,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63290</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63290/</IISUrl>
+          <IISUrl>http://localhost:55534/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
