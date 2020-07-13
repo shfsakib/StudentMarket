@@ -34,7 +34,7 @@ namespace StudentMarketWebApp.Seller
         private void Load()
         {
             userListModel = userListGateway.GetUser(Convert.ToInt32(func.UserId()));
-            ViewState["pic"] = userListModel.Picture; ;
+            ViewState["pic"] = userListModel.Picture; 
             profilePictureImage.ImageUrl = ViewState["pic"].ToString();
             nameLabel.Text = txtName.Text = userListModel.Name;
             lblEmail.Text = userListModel.Email;

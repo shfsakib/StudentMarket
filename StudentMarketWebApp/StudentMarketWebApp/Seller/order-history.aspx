@@ -200,7 +200,7 @@
     <script>
         $(document).ready(function () {
 
-            $('#accordionSidebar').load("/Buyer/menu.html");
+            $('#accordionSidebar').load("/Seller/menu.html");
 
         });
     </script>

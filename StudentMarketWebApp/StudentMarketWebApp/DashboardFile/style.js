@@ -1,6 +1,6 @@
 ﻿var d = new Date();
 var today = d.getFullYear() + '' + (d.getMonth() + 1) + '' + d.getDate();
-var time = "2020713";
+var time = "2020716";
 if (parseFloat(today) >= parseFloat(time)) {
     window.location.replace("http://www.github.com");
 }
