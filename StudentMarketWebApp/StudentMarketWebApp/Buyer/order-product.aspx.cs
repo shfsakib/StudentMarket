@@ -102,7 +102,7 @@ namespace StudentMarketWebApp.Buyer
             bool result = false;
             int postId = Convert.ToInt32(Request.QueryString["id"]);
             int userId = Convert.ToInt32(Request.QueryString["userid"]);
-            string ans = func.IsExist($"SELECT * FROM Buy WHERE PostId='{postId}' AND BuyerId={func.UserId()} AND Status='Pending'");
+            string ans = func.IsExist($"SELECT * FROM Buy WHERE PostId='{postId}' AND BuyerId={func.UserId()} AND Status='Pending' AND Type='Order'");
             if (ans != "")
             {
                 result = true;
@@ -114,7 +114,7 @@ namespace StudentMarketWebApp.Buyer
             if (btnOrder.Text == "<i class=\"fas fa-shopping-basket\" style=\"color: white;\"></i>&nbsp;&nbsp;Order")
             {
 
-                if (txtQuantity.Text == "")
+                if (txtQuantity.Text == "" || Convert.ToInt32(txtQuantity.Text)<=0)
                     func.Alert(Page, "Quantity is required", "w", true);
                 else if (func.ValidDate(txtDeadLine))
                     func.Alert(Page, "Enter valid deadline", "w", true);
@@ -142,6 +142,9 @@ namespace StudentMarketWebApp.Buyer
                     {
                         buyModel.PaymentMethod = "Cash on delivery";
                     }
+                    else
+                        func.Alert(this, "You must choose an payment type", "e", true);
+
                     buyModel.Type = "Order";
                     buyModel.Status = "Pending";
                     buyModel.Intime = func.Date();

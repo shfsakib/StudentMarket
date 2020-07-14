@@ -168,7 +168,7 @@
                                     <div class="col-md-2"></div>
                                     <div class="col-md-2">Price : </div>
                                     <div class="col-md-6">
-                                        <asp:TextBox ID="txtPrice" class="form-control1 wd" autocomplete="off" style="" ReadOnly="True" placeholder="1000.00" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtPrice" class="form-control1 wd" autocomplete="off" style=""  placeholder="1000.00" runat="server"></asp:TextBox>
                                     </div>
                                     <div class="col-md-2"></div>
                                 </div>

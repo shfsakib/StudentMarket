@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-   <title>Student Market | Seller</title>
+    <title>Student Market | Seller</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -140,7 +140,7 @@
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <h4>
-                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#"You"+" have "+Eval("Status") +Eval("Name")+" request for "+Eval("ProductName")%>'></asp:Label>
+                                                                            <asp:Label ID="titleLabel" runat="server" Text='<%#"You"+" have "+Eval("Status")+" " +Eval("Name")+" request for "+Eval("ProductName")%>'></asp:Label>
                                                                             <asp:LinkButton ID="titleLinkButton" OnClick="titleLinkButton_OnClick" title="View Profile" runat="server"></asp:LinkButton>
                                                                         </h4>
                                                                         <br />
@@ -153,10 +153,12 @@
                                                                         <br />
                                                                         <asp:Label ID="Label4" runat="server" Text="Payment Method : "></asp:Label><span>
                                                                             <asp:Label ID="lblpayment" runat="server" Text='<%#Eval("PaymentMethod")%>'></asp:Label></span>
-                                                                        <br/>
+                                                                        <br />
                                                                         <asp:Label ID="Label3" runat="server" Style="color: green;" Text='<%#"Price : "+"৳"+Eval("Price")%>'></asp:Label>
                                                                         <br />
                                                                         <asp:Label runat="server" Style="color: green; font-size: 18px;" Text='<%#"Total Price : ৳"+Eval("TotalPrice")%>'></asp:Label><br />
+                                                                        <br />
+                                                                        <asp:Label runat="server" Style=" font-size: 18px;" Text='<%#"Buy Type : "+Eval("Type")%>'></asp:Label><br />
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                     </div>

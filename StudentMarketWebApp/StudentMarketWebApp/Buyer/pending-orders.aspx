@@ -160,6 +160,10 @@
                                                                             <asp:Label ID="Label5" runat="server" Text="Total Price : "></asp:Label><span>
                                                                                 <asp:Label ID="lblTotal" runat="server" Text='<%#Eval("TotalPrice")%>'></asp:Label>
                                                                             </span>
+                                                                             <br />
+                                                                            <asp:Label ID="Label6" runat="server" Text="Buy Type : "></asp:Label><span>
+                                                                                <asp:Label ID="Label7" runat="server" Text='<%#Eval("Type")%>'></asp:Label>
+                                                                            </span>
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <asp:LinkButton ID="btnEdit" OnClick="btnEdit_OnClick" class="btn btn-primary wd" runat="server" Style="color: white; width: 100%" title="Edit"><i class="fas fa-pen" style="color: white;"></i>&nbsp;&nbsp;Edit</asp:LinkButton>

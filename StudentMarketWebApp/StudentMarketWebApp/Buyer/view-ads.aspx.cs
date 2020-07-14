@@ -220,7 +220,7 @@ FROM            PostAd INNER JOIN
         private bool IsExecute(int postId)
         {
             bool result = false;
-            string has = func.IsExist($"SELECT Invoice FROM Buy WHERE BuyerId='{func.UserId()}' AND  PostId='{postId}' AND Status='Pending'");
+            string has = func.IsExist($"SELECT Invoice FROM Buy WHERE BuyerId='{func.UserId()}' AND  PostId='{postId}' AND Status='Pending' AND Type='Hire'");
             if (has != "")
             {
                 result = true;
@@ -248,8 +248,8 @@ FROM            PostAd INNER JOIN
             dataRow["PostId"] = postId;
             dataRow["SellerId"] = userId;
             dataRow["Picture"] = func.IsExist($"SELECT MIN(Picture) FROM PostPic WHERE PostId='{postId}'");
-            dataRow["ProductName"] = func.IsExist($"SELECT ProductName FROM PostAd WHERE PostId='{postId}'");
             dataRow["Price"] = HiddenField3.Value;
+            dataRow["ProductName"] = func.IsExist($"SELECT ProductName FROM PostAd WHERE PostId='{postId}'");
             if (chkPay.Checked)
             {
                 dataRow["PaymentMethod"] = "Pay Online";
@@ -258,6 +258,9 @@ FROM            PostAd INNER JOIN
             {
                 dataRow["PaymentMethod"] = "Cash on delivery";
             }
+            else
+                func.Alert(this, "You must choose an payment type", "e", true);
+
             dataTable.Rows.Add(dataRow);
             Session["dataGrid"] = dataTable;
             func.Alert(this, "Product added to cart successfully", "s", false);

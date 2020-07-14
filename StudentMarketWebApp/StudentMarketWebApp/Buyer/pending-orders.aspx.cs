@@ -44,7 +44,7 @@ namespace StudentMarketWebApp.Buyer
             string query =
                 @"SELECT DISTINCT A.*,(SELECT MIN(Picture) FROM PostPic WHERE PostPic.PostId=A.PostId) AS Picture FROM (SELECT    DISTINCT    PostAd.PostId, PostAd.CategoryId,Userlist.UserId,Division.ID AS DivisionId,
 District.DISTRICTID AS DistrictId, PostAd.ProductName, PostAd.Description, PostAd.Price, Division.DIVISION AS DivisionName, District.DISTRICTNM As DistrictName, UserList.Name,
-Buy.BuyId,Buy.Quantity,Buy.DeadLine,Buy.BuyerId,Buy.SellerId,Buy.TotalPrice,Buy.Status
+Buy.BuyId,Buy.Quantity,Buy.DeadLine,Buy.BuyerId,Buy.SellerId,Buy.TotalPrice,Buy.Status,Buy.Type
 FROM            PostAd INNER JOIN
 Buy ON Buy.PostId=PostAd.PostId INNER JOIN
                          Category ON PostAd.CategoryId = Category.CategoryId INNER JOIN
