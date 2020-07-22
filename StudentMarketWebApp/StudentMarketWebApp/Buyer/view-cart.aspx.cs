@@ -50,11 +50,11 @@ namespace StudentMarketWebApp.Buyer
             {
                 dataTable = new DataTable();
                 dataTable.Columns.Add("PostId", typeof(int));
-
                 dataTable.Columns.Add("SellerId", typeof(int));
                 dataTable.Columns.Add("Picture", typeof(string));
                 dataTable.Columns.Add("Price", typeof(string));
                 dataTable.Columns.Add("ProductName", typeof(string));
+                dataTable.Columns.Add("PaymentMethod", typeof(string));
                 Session["dataGrid"] = dataTable;
             }
             else

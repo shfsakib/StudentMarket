@@ -82,7 +82,7 @@ FROM            UserList INNER JOIN
             GridViewRow row = (GridViewRow)cell.Parent;
             HiddenField empIdHiddenField = (HiddenField)row.FindControl("idHiddenField");
             int id = Convert.ToInt32(empIdHiddenField.Value);
-            Response.Redirect("/Buyer/view-profile.aspx?id='" + id + "'");
+            Response.Redirect("/Buyer/view-profile.aspx?id=" + id + "");
         }
 
         protected void logOut_OnServerClick(object sender, EventArgs e)
