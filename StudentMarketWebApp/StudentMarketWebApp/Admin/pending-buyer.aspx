@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="buyer-info.aspx.cs" Inherits="StudentMarketWebApp.Admin.buyer_info" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pending-buyer.aspx.cs" Inherits="StudentMarketWebApp.Admin.pending_buyer" %>
 
 <!DOCTYPE html>
 
@@ -114,12 +114,6 @@
                             <hr />
                             <div class="col-md-12 card-body bc">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <asp:DropDownList ID="ddlStatus" AutoPostBack="True" OnSelectedIndexChanged="ddlStatus_OnSelectedIndexChanged" class="form-control1 wd" runat="server">
-                                            <asp:ListItem Value="A">Active</asp:ListItem>
-                                            <asp:ListItem Value="I">Inactive</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
                                     <div class="col-md-5">
                                         <asp:TextBox ID="txtSearch" class="form-control1 wd" placeholder="Search Profile" AutoPostBack="True" OnTextChanged="txtSearch_OnTextChanged" runat="server"></asp:TextBox>
                                     </div>
@@ -128,7 +122,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="table-responsive" style="border: none;">
-                                            <asp:GridView ID="profileGridView" class="table table-bordered table-striped " runat="server" OnRowDataBound="profileGridView_OnRowDataBound" OnPageIndexChanging="profileGridView_OnPageIndexChanging" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
+                                            <asp:GridView ID="profileGridView" class="table table-bordered table-striped " runat="server" OnPageIndexChanging="profileGridView_OnPageIndexChanging" AutoGenerateColumns="False" ShowHeader="False" EmptyDataText="No Profile Found" ShowHeaderWhenEmpty="True" AllowPaging="True" PageSize="10">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Serial" Visible="False">
                                                         <ItemTemplate>
@@ -153,12 +147,13 @@
                                                                         <br />
                                                                         <i class="fa fa-map-marker text-primary"></i>
                                                                         <asp:Label runat="server" Text='<%#Eval("DistrictName")+","+Eval("DivisionName")%>'></asp:Label>
-                                                                       
+
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <a class="btn btn-success wd" style="color: white; width: 100%" title="Call" href='tel:<%#Eval("MobileNo") %>'><i class="fas fa-phone" style="color: white;"></i>&nbsp;&nbsp;Call</a><br />
                                                                         <a class="btn wd" style="color: white; width: 100%; background: brown;" title="Mail" href='mailto:<%#Eval("Email") %>'><i class="fas fa-mail-bulk" style="color: white;"></i>&nbsp;&nbsp;Mail</a><br />
-                                                                        <asp:LinkButton ID="statusButton" OnClick="statusButton_OnClick" runat="server" class="btn btn-primary" Style="color: white; width: 100%;"><i class="fas fa-check" style="color: white;"></i>&nbsp;&nbsp;Inactive</asp:LinkButton>
+                                                                        <asp:LinkButton ID="lnkApprove" OnClick="lnkApprove_OnClick" runat="server" class="btn btn-success wd" Style="color: white; width: 100%;"><i class="fas fa-check" style="color: white;"></i>&nbsp;&nbsp;Approve</asp:LinkButton><br />
+                                                                        <asp:LinkButton ID="lnkReject" OnClick="lnkReject_OnClick" runat="server" class="btn btn-danger" Style="color: white; width: 100%;"><i class="fas fa-trash-alt" style="color: white;"></i>&nbsp;&nbsp;Reject</asp:LinkButton>
                                                                     </div>
                                                                 </div>
                                                             </div>

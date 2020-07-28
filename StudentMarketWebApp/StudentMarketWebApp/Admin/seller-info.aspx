@@ -118,7 +118,6 @@
                                         <asp:DropDownList ID="ddlStatus" AutoPostBack="True" OnSelectedIndexChanged="ddlStatus_OnSelectedIndexChanged" class="form-control1 wd" runat="server">
                                             <asp:ListItem Value="A">Active</asp:ListItem>
                                             <asp:ListItem Value="I">Inactive</asp:ListItem>
-                                            <asp:ListItem Value="W">Waiting</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                     <div class="col-md-5">

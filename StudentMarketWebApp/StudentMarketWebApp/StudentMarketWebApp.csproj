@@ -102,6 +102,8 @@
     <Content Include="Admin\create-admin.aspx" />
     <Content Include="Admin\edit-profile.aspx" />
     <Content Include="Admin\menu.html" />
+    <Content Include="Admin\pending-buyer.aspx" />
+    <Content Include="Admin\pending-seller.aspx" />
     <Content Include="Admin\post-approval.aspx" />
     <Content Include="Admin\restricted-admin.aspx" />
     <Content Include="Admin\seller-info.aspx" />
@@ -2336,6 +2338,20 @@
     </Compile>
     <Compile Include="Admin\edit-profile.aspx.designer.cs">
       <DependentUpon>edit-profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\pending-buyer.aspx.cs">
+      <DependentUpon>pending-buyer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\pending-buyer.aspx.designer.cs">
+      <DependentUpon>pending-buyer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\pending-seller.aspx.cs">
+      <DependentUpon>pending-seller.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\pending-seller.aspx.designer.cs">
+      <DependentUpon>pending-seller.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\post-approval.aspx.cs">
       <DependentUpon>post-approval.aspx</DependentUpon>

@@ -50,11 +50,20 @@ FROM            UserList INNER JOIN
 
         protected void txtSearch_OnTextChanged(object sender, EventArgs e)
         {
-            string query = @"SELECT        UserList.*, Division.DIVISION AS DivisionName, District.DISTRICTNM AS DistrictName
+            if (txtSearch.Text != "")
+            {
+                string query = @"SELECT        UserList.*, Division.DIVISION AS DivisionName, District.DISTRICTNM AS DistrictName
 FROM            UserList INNER JOIN
                          Division ON UserList.Division=Division.ID INNER JOIN
-                         District ON UserList.District=District.DISTRICTID  WHERE UserList.Status='" + ddlStatus.SelectedValue + "' AND UserList.Type='Seller' AND UserList.NAME LIKE '%" + txtSearch.Text + "%'  ORDER BY UserList.UserId ASC";
-            func.LoadGrid(profileGridView, query);
+                         District ON UserList.District=District.DISTRICTID  WHERE UserList.Status='" +
+                               ddlStatus.SelectedValue + "' AND UserList.Type='Seller' AND UserList.NAME LIKE '%" +
+                               txtSearch.Text + "%'  ORDER BY UserList.UserId ASC";
+                func.LoadGrid(profileGridView, query);
+            }
+            else
+            {
+                Load();
+            }
         }
 
         protected void profileGridView_OnRowDataBound(object sender, GridViewRowEventArgs e)
