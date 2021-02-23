@@ -30,7 +30,7 @@ namespace BitsSoftware
             DataSource = ".\\local",
             InitialCatalog = "StuMarketDb",
             UserID = "sa",
-            Password = "ShfS@kib2016",
+            Password = "ShfS@kib16",
             MultipleActiveResultSets = true,
             Pooling = true,
             MinPoolSize = 0,

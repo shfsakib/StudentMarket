@@ -58,8 +58,8 @@
                         <button class="login100-form-btn" id="btnLogin" runat="server" onserverclick="btnLogin_OnServerClick">Login</button>
                     </div>
                     <br />
-                    <span style="margin-left: 30px">Don't have an account?<a href="/Web/sign-up.aspx">Sign up</a></span><br />
-                    <span style="margin-left: 30px">Back to<a href="/Web/sign-up.aspx">Home</a></span>
+                    <span style="margin-left: 30px">Don't have an account?<a href="/Web/sign-up.aspx">&nbsp;Sign up</a></span><br />
+                    <span style="margin-left: 30px">Back to<a href="/Web/sign-up.aspx">&nbsp;Home</a></span>
                 </form>
             </div>
         </div>
