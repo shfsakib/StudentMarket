@@ -51,6 +51,6 @@ namespace StudentMarketWebApp.Admin
         {
             func.Logout();
         }
-
+        
     }
 }
